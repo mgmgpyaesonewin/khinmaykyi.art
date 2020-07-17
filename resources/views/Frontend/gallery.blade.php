@@ -18,8 +18,8 @@
     <div class="col-lg-12">
         <div class="pull-right">
             <div class="filter-buttons">
-                <div class="list-view-button" id="list"><i class="fa fa-bars" aria-hidden="true"></i> List view</div>
-                <div class="grid-view-button" id="grid"><i class="fa fa-th-large" aria-hidden="true"></i> Grid view</div>
+                <div class="list-view-button d-none d-sm-block" id="list"><i class="fa fa-bars" aria-hidden="true"></i> List view</div>
+                <div class="grid-view-button d-none d-sm-block d-md-block" id="grid"><i class="fa fa-th-large" aria-hidden="true"></i> Grid view</div>
             </div>
         </div>
     </div>

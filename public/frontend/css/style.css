@@ -524,7 +524,7 @@ a.recent-image-title{
     margin-left: 2rem;
     position: relative;
     top: -.25em;
-    border-bottom: 1px solid yellow;
+    border-bottom: 1px solid orange;
 }
 .exhibition_image{
     max-width: 100%;
@@ -640,7 +640,10 @@ img.group{
 .site-section{
   background-color: #f7f7f7;
 }
-
+.site-section1{
+  background-color: white;
+  margin-top:2em;
+}
 
 
 
