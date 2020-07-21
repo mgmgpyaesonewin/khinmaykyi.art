@@ -33,6 +33,11 @@ Route::get('/detail', function () {
 
 Auth::routes();
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/home', function() {
+        return view('backend.home');
+    });
+    Route::get('/gallery', function() {
+        return view('backend.gallery.index');
+    });
+});
