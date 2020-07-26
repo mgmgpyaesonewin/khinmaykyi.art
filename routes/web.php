@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', function () {
-    return view('Frontend.index');
+    return view('frontend.index');
 });
 Route::get('/about', function () {
-    return view('Frontend.about');
+    return view('frontend.about');
 });
-Route::get('/gallery', function () {
-    return view('Frontend.gallery');
-});
+
+Route::get('/gallery','FrontController@gallery');
+
 Route::get('/detail', function () {
-    return view('Frontend.detail');
+    return view('frontend.detail');
 });
 
 Auth::routes();
@@ -37,7 +37,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/home', function() {
         return view('backend.home');
     });
-    Route::get('/gallery', function() {
-        return view('backend.gallery.index');
-    });
+    Route::resource('gallery','GalleryController');
 });

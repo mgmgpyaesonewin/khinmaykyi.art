@@ -1,4 +1,6 @@
-
+.site-section{
+  padding-top:30px;
+}
 h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
   font-family: "Playfair Display", sans-serif;
@@ -86,6 +88,11 @@ html{
 }
 
 /*navbar*/
+@media (max-width: 991.98px)
+.site-navbar {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
 .site-navbar {
   margin-bottom: 0px;
   z-index: 1999;
@@ -375,15 +382,15 @@ a:hover{
 
 
 .footer-suscribe-form .btn:hover {
-  border: 1px solid gold;
+  border: 1px solid orange;
 }
 
 .icon-twitter:hover,  .icon-facebook:hover, .icon-instagram:hover ,.icon-linkedin:hover{
-       color: yellow;
+       color: orange;
      }
 
 a.features:hover{
-      color: yellow;
+      color: orange;
 }
 
 .contact{
@@ -447,6 +454,9 @@ a.recent-image-title{
     letter-spacing: 0;
     text-align: center;
     margin-top: 3rem!important;
+}
+h2.recent{
+text-align:center;
 }
 
 
@@ -642,8 +652,28 @@ img.group{
 }
 .site-section1{
   background-color: white;
-  margin-top:2em;
 }
 
+/*pagination*/
+.transbox{
+    background-color: #F6F6F6;
 
-
+}
+.pagination>li>a, .pagination>li>span { 
+    border-radius: 100% !important; 
+    margin: 0 5px;
+    border:none;
+}
+a.page-link:hover{
+    background-color: orange;
+    color:#ffffff;
+}
+.page-item.active .page-link{
+    background-color: orange;
+    color: #ffffff;
+    
+}
+.page-link{
+    background-color: #F6F6F6;
+    color: #323232;   
+}

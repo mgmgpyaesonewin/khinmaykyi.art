@@ -1,9 +1,18 @@
-@extends('Layout.app')
+@extends('layout.app')
 
 @section('title','Khin May Kyi - Art Gallery')
 @section('content')
+<style>
+.carousel-inner img{
+ width:100%;
+ height:100%;
+ padding-left: 7%;
+ padding-right: 7%;
+}
 
-<section id="testimonials">
+  </style>
+
+{{-- <section id="testimonials">
   <div id="testimonial-carousel" class="carousel slide" data-interval="5000" data-ride="carousel" >  
     
     <ol class="carousel-indicators">
@@ -42,8 +51,29 @@
         </div>
       </div>
   </div>
-</section>
+</section> --}}
 
+<div id="slides" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#slides" data-slide-to="0" class="active"></li>
+    <li data-target="#slides" data-slide-to="1"></li>
+    <li data-target="#slides" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="./frontend/images/IMG_7753.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="./frontend/images/IMG_5516.JPG">
+    </div>
+    <div class="carousel-item">
+      <img src="./frontend/images/IMG_0586.JPG">
+    </div>
+  </div>
+</div>
+
+
+ 
 
     
     <div class="site-section" id="blog-section">

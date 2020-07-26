@@ -1,4 +1,4 @@
-@extends('Layout.app')
+@extends('layout.app')
 
 @section('title','About')
 @section('content')
@@ -11,11 +11,11 @@
              
             </div>
           <div class="row d-flex no-gutters align-items-stretch">
-            <div class="col-12 col-lg-6 block__73422 aos-init aos-animate" style="background-image: url('./frontend/images/IMG_2658.jpg');height="621px;"" data-aos="fade-right" data-aos-delay="">
+            <div class="col-lg-6 block__73422 aos-init aos-animate" style="background-image: url('./frontend/images/IMG_2658.jpg');" data-aos="fade-right" data-aos-delay="">
             </div>
            
 
-            <div class="col-lg-5 ml-auto p-lg-5 mt-4 mt-lg-0" data-aos="fade-left" data-aos-delay="">
+            <div class="col-lg-6 ml-auto p-lg-5 mt-4 mt-lg-0" data-aos="fade-left" data-aos-delay="">
               <h2 class="mb-3 text">Khin May Kyi</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus id dignissimos nemo minus perspiciatis ullam itaque voluptas iure vero, nesciunt unde odit aspernatur distinctio, maiores facere officiis. Cum, esse, iusto?</p>
 
