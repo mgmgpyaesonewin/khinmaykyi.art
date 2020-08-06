@@ -24,6 +24,9 @@
   .list-group-item {
     background-color: #f7f7f7;
   }
+  .site-section{
+    padding:40px;
+  }
 </style>
 
 <div class="site-section">
@@ -45,7 +48,8 @@
         <div class="img-event">
           <div class="frame">
             <div class="grid">
-              <a href="./frontend/images/IMG_8128-3.jpg">
+            {{--   <a href="{{url('productDetail',$product->id)}}"> --}}
+              <a href="{{url('gallery_detail',$gallery->id)}}">
                 {{--  <img class="group list-group-image img-fluid" src="{{URL::to('/')}}/images/{{ $gallery->image }}"alt=""/>
                 --}}
                 <img class="class=" card img-responsive" src="{{URL::to('/')}}/images/{{ $gallery->image }}" alt="" />
@@ -59,7 +63,7 @@
     </div>{{-- row view-group --}}
 
     <div class="background" style="float:right;">
-      <div class="transbox">
+      <div class="transbox" style="margin-bottom: 40px;">
         <ul class="pagination">
           <li>{{$galleries->links()}}</li>
         </ul>

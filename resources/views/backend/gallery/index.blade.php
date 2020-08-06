@@ -7,6 +7,18 @@
 @stop
 
 @section('content')
+<style>
+ .card-footer {
+     background: none;
+}
+a{
+  text-decoration:none;
+  color:black;
+}
+a:hover{
+  color:white;
+}
+  </style>
 
   	   <a class="btn btn-success" style="margin-bottom:10px;" href="{{ route('gallery.create') }}"> Create New Gallery</a>
 
@@ -27,8 +39,35 @@
         	<div class="card" style="width: 18rem;">
         		<img class="card-img-top" src="{{URL::to('/')}}/images/{{ $gallery->image }}"alt="Card image">
   				<div class="card-body">
-    				<h5 class="card-tttle">{{ $gallery->title}}</h5>
-     			<div class="card-footer1 " style="display: inline-block">
+            <h5>{{$gallery->title}}</h5>
+    				<div class="card-footer2" style="display: inline-block">
+                @if($gallery->sold_out == 1)
+                <td>
+                  <label class="badge-success">Unsold</label>
+                </td>
+                @else
+                <td>
+                  <label class="badge-danger">Sold Out</label>
+                </td>
+                @endif
+            </div>
+             <div class="card-footer" style="display: inline-block">
+                @if($gallery->sold_out == 1)
+              
+                  <button class="btn btn-outline-danger">
+                    <a href="{{URL::to('admin/sold_out/gallery/'.$gallery->id)}}">
+                  Sold Out
+                </a>
+                </button>
+
+               
+                @else
+              {{--   <td>
+                  <button class="btn btn-outline-success">Unsold</button>
+                </td> --}}
+                @endif
+            </div>
+     			<div class="card-footer" style="display: inline-block">
             		<a href="{{ route('gallery.edit',$gallery->id) }}" class="btn btn-success">
             		<i class="fas fa-edit"></i>
             		</a>

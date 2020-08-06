@@ -64,7 +64,8 @@
       <img src="./frontend/images/IMG_7753.jpg">
     </div>
     <div class="carousel-item">
-      <img src="./frontend/images/IMG_5516.JPG">
+      <img src="./frontend/images/IMG_7753.jpg
+      ">
     </div>
     <div class="carousel-item">
       <img src="./frontend/images/IMG_0586.JPG">

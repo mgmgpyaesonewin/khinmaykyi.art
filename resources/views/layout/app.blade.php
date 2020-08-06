@@ -82,14 +82,64 @@
                 <li><a href="/about" class="nav-link">About</a></li>
                 <li><a href="/gallery" class="nav-link">Gallery</a></li>
                 <li><a href="/detail" class="nav-link">Contact</a></li>
+                
+            <li class="nav-item submenu dropdown">
+              @guest
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fas fa-user-circle"></i>
+              @else
+               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false"><i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+              @endguest
+              </a>
               
-                </ul>
+              <ul class="dropdown-menu">
+                <li class="nav-item">
+                  <!-- Authentication Links -->
+                  @guest
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                  </li>
+                  @if (Route::has('register'))
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                  </li>
+                 @endif
+                  @else
+                  <li class="nav-item">
+                  <a class="nav-link"href="{{ route('logout') }}">Logout</a>
+                 </li>
+                  @endguest
+                </li>
+                
+              </ul>
+            </li>
+            @auth
+            <li>
+              <a class="nav-link" href="{{url("cart")}}" >
+              <i class="Shopping-icon fa fa-shopping-cart"></i>
+              <span class="shopping-text">Cart</span>
+              <span style="color:black; font-weight:bold;">
+                @php
+                  $auth_user = Auth::user();
+                @endphp
+    
+                @isset($auth_user)
+                  ({{ App\Cart::where('user_id', Auth::user()->id)->count() }}) 
+                @endisset
+    
+                @empty($auth_user)
+                  ( 0 )
+                @endempty
+              </span>
+            </a>
+            @endauth
+              </li>
+          </ul>
+        </nav>  
+      </div>
 
-              </nav>
-          
-            </div>
-
-          <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+      <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
 
         </div>
       </div>

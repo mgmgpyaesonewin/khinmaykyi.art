@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Auth::routes();
+/*Auth::routes();*/
 
 Route::get('/', function () {
     return view('frontend.index');
@@ -24,18 +22,34 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('frontend.about');
 });
-
-Route::get('/gallery','FrontController@gallery');
-
-Route::get('/detail', function () {
-    return view('frontend.detail');
+Route::get('/shipping_info', function () {
+    return view('frontend.shipping_info');
 });
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/gallery','FrontController@gallery');
+Route::get('/gallery_detail/{id}','FrontController@detailGallery');
+
+
+
+
+/*Frontend middelware*/
+ Route::group(['middleware'=>'auth'],function(){
+	Route::resource('cart','CartController');
+	Route::get('/orderConfirm','FrontController@orderConfirm');
+	Route::get('/addtocart','FrontController@addtocart')->name('addtocart');
+	Route::post('/address','FrontController@address')->name('addtoadresss');
+	Route::get('/order','FrontController@storeOrder')->name('storeOrder');
+});
+
+
 
 Auth::routes();
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+/*Admin Panel*/
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/home', function() {
         return view('backend.home');
     });
     Route::resource('gallery','GalleryController');
+    Route::get('/sold_out/gallery/{id}','GalleryController@sold_out');
 });

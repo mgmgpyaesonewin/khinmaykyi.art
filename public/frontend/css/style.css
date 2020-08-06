@@ -19,7 +19,6 @@ a{
 a:hover {
   text-decoration: none;
 }
-
 .site-footer, .top-bar {
   background: #222428;
 /*  background: -moz-linear-gradient(left, #7a5e86 0%, #a75e67 51%, #f77b2e 100%);
@@ -101,8 +100,8 @@ html{
   padding: 1rem; }
   @media (max-width: 991.98px) {
     .site-navbar {
-      padding-top: 3rem;
-      padding-bottom: 3rem; } }
+      padding-top: 2rem;/*height table-layout: */
+      padding-bottom: 2rem; } }
   .site-navbar .toggle-button {
     position: absolute;
     right: 0px; }
@@ -313,7 +312,7 @@ ile-menu .site-nav-wrap > li > ul > li > a {
       color: #6a197d;
    }
     .sticky-wrapper .site-navbar ul li a {
-      color: rgba(255, 255, 255, 0.7) !important; }
+      color: black; }
       .sticky-wrapper .site-navbar ul li a.active {
         color: #fff !important; }
   .sticky-wrapper.is-sticky .site-navbar {

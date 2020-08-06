@@ -25,6 +25,15 @@
             <label for="recipient-name" class="col-form-label">Title:</label>
             <input type="text" name="title" class="form-control" value="{{$galleries->title}}">
           </div>  
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Price:</label>
+            <input type="text" name="price" class="form-control" value="{{$galleries->price}}">
+          </div> 
+           <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Detail:</label>
+             <textarea id="editor" name="detail" value="{{$galleries->detail}}"></textarea>
+          </div> 
+            <input type="checkbox" name="sold_out" value=1 checked>
         </div>{{-- end modal body --}}
         <div class="modal-footer">
           <a href="{{url('admin/gallery')}}" class="btn btn-secondary">Back</a>

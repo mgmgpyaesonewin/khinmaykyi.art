@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gallery;
+use DB;
 
 class GalleryController extends Controller
 {
@@ -18,14 +19,14 @@ class GalleryController extends Controller
         return view('backend.gallery.index', compact("galleries"));
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-       
+    {      
         return view('backend.gallery.create');
     }
 
@@ -39,7 +40,11 @@ class GalleryController extends Controller
     {
           $request->validate([
             'image' => 'image|mimes:png,jpg,jpeg|max:5000',   
-            'title' => 'required'
+            'title' => 'required',
+            'price'=> 'required',
+            'detail'=>'required',
+            'sold_out'=>'required'
+           
             
         ]);
         $image = $request->file('image');
@@ -47,9 +52,13 @@ class GalleryController extends Controller
         $image->move(public_path('images'), $new_name);
         $form_data = array(
             'image' => $new_name,    
-            'title' => $request->title
+            'title' => $request->title,
+            'price' => $request->price,
+            'detail' => $request->detail,
+            'sold_out'=> $request->sold_out
             
         );
+        
         Gallery::create($form_data);
         return redirect()->route("gallery.index")->with('success', 'Data Added successfuly');
     }
@@ -64,6 +73,16 @@ class GalleryController extends Controller
     {
         //
     }
+
+    public function sold_out($id){
+        $data = array();
+        $data['sold_out'] = 0;
+
+    DB::table('galleries')->where('id',$id)->update($data);
+
+        return redirect()->route("gallery.index")->with('status', 'Data Updated for Gallery');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -91,19 +110,29 @@ class GalleryController extends Controller
         $image = $request->file('image');
         if ($image != '') {
             $request->validate([
-                'image' => 'image|max:2048',
-                'title' => 'required'
+                'image' => 'image|max:5000',
+                'title' => 'required',
+                'price' => 'required',
+                'detail' => 'required',
+                'sold_out' => 'required'
             ]);
             $image_name = rand() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $image_name);
         } else {
             $request->validate([
                 'title' => 'required',
+                'price' => 'required',
+                'detail' => 'required',
+                'sold_out' => 'required'
+
             ]);
         }
         $form_data = array(
             'image' => $image_name,
-            'title' => $request->title
+            'title' => $request->title,
+            'price' => $request->price,
+            'detail' => $request->detail,
+            'sold_out'=> $request->sold_out
             
         );
         Gallery::whereId($id)->update($form_data);
@@ -116,10 +145,17 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+   
+    public function destroy($id) {
+
         $galleries = Gallery::findOrFail($id);
+         $image_path = public_path('images').'/'.$galleries->image;
+        unlink($image_path);
+   
         $galleries->delete();
+
         return redirect()->route("gallery.index")->with('status', 'Data deleted for gallery');
     }
 }
+
+
