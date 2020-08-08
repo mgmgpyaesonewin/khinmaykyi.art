@@ -122,10 +122,17 @@
               <span style="color:black; font-weight:bold;">
                 @php
                   $auth_user = Auth::user();
+                   $cart_item=DB::table('cart_items')
+                ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
+                ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
+                 ->where('carts.user_id',Auth::user()->id)->get();
+                $count = $cart_item->count();
                 @endphp
     
                 @isset($auth_user)
-                  ({{ App\Cart::where('user_id', Auth::user()->id)->count() }}) 
+                ({{$count}})
+        
+                
                 @endisset
     
                 @empty($auth_user)

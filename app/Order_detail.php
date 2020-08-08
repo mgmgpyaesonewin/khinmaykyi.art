@@ -8,13 +8,11 @@ class Order_detail extends Model
 {
     protected $fillable=['id','order_id','gallery_id'];
 
-    public function orders(){
+    public function order(){
         return $this->belongsTo('App\order','order_id');
     }
-    public function user(){
-        return $this->belongsTo('App\User');
-    }
-    public function gallery(){
+    
+    public function galleries(){
         return $this->hasMany('App\Gallery','gallery_id');
     }
 }

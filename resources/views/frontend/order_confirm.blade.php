@@ -4,14 +4,14 @@
 @section('content')
 
 <section class="order_area">
-    <div class="container">
-        <div class="order_inner" >
+    <div class="container" style="margin-bottom: 3em;">
+         <div class="order_inner" >
             <br>
             <h3 style="text-align:center;">
                 <i class="fa fa-check-circle i-check-circle--size"></i>
                 We've recieved your order!
             </h3>
-                <div class="card" style="width: 50rem;margin-top: 3rem;">
+                <div class="card" style="margin-top: 3rem;">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
@@ -28,12 +28,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-     </div>
-              
+            </div>  {{-- order_inner --}}   
 
-        <div class="cart_inner" style="margin-left: 15rem;margin-right: 15rem;">
-            <h5>Order Summary</h5>
+    <div class="cart_inner">
+         <h5>Order Summary</h5>
             <br>
             <div class="table-responsive">
                 <table class="table"> 
@@ -42,36 +40,36 @@
                             <th scope="col">Image</th>
                             <th scope="col">Title</th>
                             <th scope="col">Price</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($carts as $cart)
+
+                         @foreach($carts as $cart)
                         <tr>
-                            <td><img src="{{URL::to('/')}}/images/{{ $cart->image }}"
+                            <td><img src="{{URL::to('/')}}/images/{{ $cart->image}}"
                                     class="img-thumbnail" width="100px" height="100px" alt="Image" /></td>
-                            <td>{{$cart->title}}</td>
-                            <td>{{$cart->price}}</td>
+                            <td>{{ $cart->title}}</td>
+                            <td>{{ $cart->price}}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <p>Total Payment: {{ session('total') }}-kyats</p>
+                 <p>Total Payment: {{ session('total') }}-kyats</p>
                 <p>Total Quantity: {{ session('quantities') }}</p>
                 <h5 class="order-confirm-text">Payment information</h5>
                    <p> Cash on delivery (CDO)</p>
-               {{--   <p> Order-date : {{ Carbon\Carbon::parse($order->created_at)->diffForHumans()}} </p> --}}
+                {{--  <p> Order-date : {{ Carbon\Carbon::parse($order->created_at)->diffForHumans()}} </p> --}}
 
+                <div class="checkout_btn_inner d-flex align-items-center" style="float:right">
+                     <a class="border_button" href="{{route('storeOrder')}}">Order Confirm</a>  
+                </div>
+    
             </div>{{-- table-responsive --}}
-
-        </div>          
-            <div class="checkout_btn_inner d-flex align-items-center" >
-                <a class="border_button" href="{{route('storeOrder')}}">Order Confirm</a>
-            </div>
-        </div>
-    </div>
-    </div>
+        </div>{{-- cart-inner --}}
+    </div>{{-- container --}}
+      
 </section>
+
 @endsection
 
 @section('scripts')

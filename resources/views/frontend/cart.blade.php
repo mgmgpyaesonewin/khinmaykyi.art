@@ -34,10 +34,10 @@
                     <tbody>
                         @foreach($carts as $cart)
                         <tr>
-                            <td><img src="{{URL::to('/')}}/images/{{ $cart->image }}"
+                            <td><img src="{{URL::to('/')}}/images/{{ $cart->image}}"
                                     class="img-thumbnail" width="100px" height="100px" alt="Image" /></td>
-                            <td>{{$cart->title}}</td>
-                            <td>{{$cart->price}}</td>
+                            <td>{{ $cart->title}}</td>
+                            <td>{{ $cart->price}}</td>
                             <td>
                             <form action="{{ route('cart.destroy',$cart->id) }}" method="POST">
                                 @csrf

@@ -36,9 +36,9 @@ Route::get('/gallery_detail/{id}','FrontController@detailGallery');
  Route::group(['middleware'=>'auth'],function(){
 	Route::resource('cart','CartController');
 	Route::get('/orderConfirm','FrontController@orderConfirm');
-	Route::get('/addtocart','FrontController@addtocart')->name('addtocart');
 	Route::post('/address','FrontController@address')->name('addtoadresss');
 	Route::get('/order','FrontController@storeOrder')->name('storeOrder');
+    Route::get('/addtocart','FrontController@storeCart')->name('storeCart');
 });
 
 

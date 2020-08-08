@@ -6,18 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable=['id','user_id','gallery_id'];
+    protected $fillable=['id','user_id'];
 
-    public function user()
+   public function user()
     {
         return $this->belongsTo('App\User');
     }
-    public function galleries()
-    {
-        return $this->hasMany('App\Gallery');
+    public function cart_items(){
+    	return $this->hasMany('App\Cart_item');
     }
-    public function cartitem(){
-        return $this->hasMany('App\Cart_item');
-    }
+   
 }
+
 

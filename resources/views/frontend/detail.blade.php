@@ -36,20 +36,19 @@ img.detail-image{
               <h4> Price : {{ $galleries->price}} kyats</h4>
                 @auth
                 @php
-                $cardData=DB::table('carts')
-                ->rightJoin('galleries','carts.gallery_id',"=",'galleries.id')
-                ->where('carts.gallery_id',"=",$galleries->id)->get();
-                $count=App\Cart::where(['gallery_id'=>$galleries->id])->count();
+               
+
                 @endphp
-              @if( $count == 0)
-                <form action="{{route('addtocart')}}" mehtod="POST" role="form">
+               
+            {{--   @if( $count == 0) --}}
+                <form action="{{route('storeCart')}}" mehtod="POST" role="form">
                     <input type="hidden" name="token" value="{{csrf_token()}}">
                     <input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
-                      <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+                    <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
                     <button type="submit" class="border_button">Add to cart</button>
                 </form>
                 @else
-                    <p>
+                   {{--  <p>
                         The product was successfully added to your cart.
                         <br>
                         Check
@@ -57,12 +56,13 @@ img.detail-image{
                             Here
                         </a>
                     </p>
-                    @endif
+                    @endif --}}
                 @endauth
                 @guest
-                <form action="{{route('addtocart')}}" mehtod="POST" role="form">
-                    <input type="hidden" name="token" value="{{csrf_token()}}"> 
-                    <button class="border_button" type="submit" >Add to cart</button>
+                <form action="{{route('storeCart')}}" mehtod="POST" role="form">
+                    <input type="hidden" name="token" value="{{csrf_token()}}">
+                    <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+                    <button type="submit" class="border_button">Add to cart</button>
                 </form>
                 @endguest
               

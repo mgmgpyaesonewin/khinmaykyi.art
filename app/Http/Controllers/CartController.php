@@ -18,20 +18,17 @@ class CartController extends Controller
      */
     public function index()
     {
-           $carts =  DB::table('galleries')
-            ->leftJoin('carts', 'galleries.id', "=", 'carts.gallery_id')
-            ->where('user_id', Auth::user()->id)
-            ->get();
-            $carts->map(function ($item) {
-            $item->total = $item->price;
-            return $item;
-        });
-        
-        $total = $carts->sum('total');
+      
+        $cart=Cart::where('user_id',Auth::user()->id)->first();
+        $carts = DB::table('cart_items')
+            ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
+            ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
+            ->where('carts.user_id',Auth::user()->id)
+                ->get();
+                 $quantities = $carts->count();
 
-        $quantities = Cart::where('user_id',Auth::user()->id)->count();
-
-        session([ 
+        $total = $carts->sum('price');
+          session([ 
             'total' => $total,
             'quantities' => $quantities,
         ]);
@@ -59,12 +56,19 @@ class CartController extends Controller
     public function store(Request $request)
     {
         
-       /* $cart = new Cart();
-        $cart->user_id = Auth::user()->id;
-        $cart->gallery_id = $request->gallery_id;
-        $cart->save();
+      /*  $cart = Cart::with('user')->where('user_id', Auth::user()->id)->first(); 
+
+        $cart = Cart::create([
+            'user_id' => Auth::user()->id,   
+        ]);
     
-        return redirect('/home');*/
+        Cart_item::create([
+                'gallery_id' => $request->gallery_id,
+                'cart_id' => $cart->id,
+            ]);
+
+       return redirect('/cart');*/
+    
     }   
     /**
      * Display the specified resource.
@@ -108,9 +112,9 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $carts = Cart::FindOrFail($id);
-        $carts->delete();
-     /*   return redirect()->route("product.index")->with('status', 'Data deleted for products');*/
+        $cart = Cart::findOrFail($id);
+        $cart->delete();
+        $cart_item=DB::table('cart_items')->where('cart_id', $cart->id)->delete();
         return back()->with('status', 'Item Removed from cart');
     }
 }

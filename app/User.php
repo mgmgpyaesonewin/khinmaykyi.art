@@ -28,17 +28,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-   /* public function orderdetail(){        
-        return $this->hasMany('App\Order_detail');   
-    }
-
-    public function order() {
+    public function orders(){
         return $this->hasMany('App\Order');
-    }*/
+    }
 
     public function cart(){
         return $this->hasOne('App\Cart');
     }
+
      public function address() {
         return $this->hasMany('App\Address');
     }
