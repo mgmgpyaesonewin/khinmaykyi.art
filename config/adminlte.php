@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Admin',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -230,6 +230,7 @@ return [
     |
     */
 
+
     'menu' => [
         [
             'text' => 'blog',
@@ -241,6 +242,13 @@ return [
             'url'         => 'admin/gallery',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 2,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'order',
+            'url'         => 'admin/order',
+            'icon'        => 'far fa-fw fa-file',
+            'label'       =>  2,
             'label_color' => 'success',
         ],
         ['header' => 'account_settings'],

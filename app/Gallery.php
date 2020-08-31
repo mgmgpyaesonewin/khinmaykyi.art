@@ -14,8 +14,14 @@ class Gallery extends Model
         return $this->belongsTo('App\Order_detail');
     }
 
-    public function cartitem()
+    public function cartitems()
     {
         return $this->hasMany('App\Cart_item');
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany('App\Order');
+    }
+  
 }

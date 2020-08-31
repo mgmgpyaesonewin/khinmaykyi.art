@@ -11,7 +11,7 @@ class Cart_item extends Model
     public function cart(){
         return $this->belongsTo('App\Cart','cart_id');
     }
-    public function galleries()
+    public function gallery()
     {
         return $this->belongsTo('App\Gallery','gallery_id');
     }

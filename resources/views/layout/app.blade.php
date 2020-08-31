@@ -81,7 +81,7 @@
                 <li><a href="/" class="nav-link">Home</a></li>
                 <li><a href="/about" class="nav-link">About</a></li>
                 <li><a href="/gallery" class="nav-link">Gallery</a></li>
-                <li><a href="/detail" class="nav-link">Contact</a></li>
+               {{--  <li><a href="/detail" class="nav-link">Contact</a></li> --}}
                 
             <li class="nav-item submenu dropdown">
               @guest
@@ -217,7 +217,7 @@
           </div>
           
         </div>
-          <a href="#" id="myBtn" class="type1" onvclick="topFunction()" style="display: block;"><span id="myBtn" style="opacity: 0;"></span></a>
+          <a href="#" id="myBtn" class="type1" onclick="topFunction()" style="display: none;"><span id="myBtn" style="opacity: 0;"></span></a>
       </div>
     </footer>
 

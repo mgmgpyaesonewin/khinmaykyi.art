@@ -32,7 +32,8 @@
 <div class="site-section">
   <div class="container">
     <div class="row">
-      <div class="pull-right">
+
+      <div class="pull-left">
         <div class="filter-buttons">
           <div class="list-view-button d-none d-lg-block d-lg-none" id="list"><i class="fa fa-bars"
               aria-hidden="true"></i> List view</div>
@@ -40,18 +41,14 @@
               aria-hidden="true"></i> Grid view</div>
         </div>
       </div>
-    </div>
-
+    
     <div id="products" class="card-columns view-group">
       @foreach($galleries as $gallery)
       <div class="item card card-override">
         <div class="img-event">
           <div class="frame">
             <div class="grid">
-            {{--   <a href="{{url('productDetail',$product->id)}}"> --}}
               <a href="{{url('gallery_detail',$gallery->id)}}">
-                {{--  <img class="group list-group-image img-fluid" src="{{URL::to('/')}}/images/{{ $gallery->image }}"alt=""/>
-                --}}
                 <img class="class=" card img-responsive" src="{{URL::to('/')}}/images/{{ $gallery->image }}" alt="" />
               </a>
             </div>{{-- end grid --}}
@@ -67,12 +64,12 @@
         <ul class="pagination">
           <li>{{$galleries->links()}}</li>
         </ul>
-        {{--  Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} Total:{{$galleries->total()}} --}}
+         Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} Total:{{$galleries->total()}}
       </div>
-    </div>{{-- end background --}}
-
-  </div> {{-- container --}}
-</div>{{-- site-section --}}
+    </div> 
+  </div>
+  </div> 
+</div>
 
 @endsection
 
@@ -93,6 +90,8 @@
               $('#products .item').removeClass('col-lg-4 col-md-6 list-group-item').addClass('card card-override');
             });
         });
+
 </script>
+
 
 @endsection

@@ -33,6 +33,7 @@
                     </thead>
                     <tbody>
                         @foreach($carts as $cart)
+                      
                         <tr>
                             <td><img src="{{URL::to('/')}}/images/{{ $cart->image}}"
                                     class="img-thumbnail" width="100px" height="100px" alt="Image" /></td>
@@ -61,7 +62,7 @@
                     <a class="border_button" href="{{url('/shipping_info')}}">Proceed To Checkout</a>  
                 </div>
                 <div class="checkout_btn_inner d-flex align-items-center" style="float:right">
-                    <a class="border_button" href="{{-- {{url('/shipping_info')}} --}}">Continue Shopping</a>
+                    <a class="border_button" href="{{url('/gallery')}}">Continue Shopping</a>
                 </div>
     @endif
 

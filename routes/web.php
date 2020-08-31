@@ -51,5 +51,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         return view('backend.home');
     });
     Route::resource('gallery','GalleryController');
+    Route::resource('order','OrderController');
     Route::get('/sold_out/gallery/{id}','GalleryController@sold_out');
 });

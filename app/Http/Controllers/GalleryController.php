@@ -126,6 +126,7 @@ class GalleryController extends Controller
                 'sold_out' => 'required'
 
             ]);
+            
         }
         $form_data = array(
             'image' => $image_name,

@@ -17,7 +17,7 @@ class CreateAddressesTable extends Migration
             $table->bigIncrements('id');
             $table->string('phone');
             $table->string('address');
-            $table->integer('payment_method');
+            $table->string('payment_method');
             $table->integer('user_id');
             $table->timestamps();
         });

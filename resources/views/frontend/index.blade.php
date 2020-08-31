@@ -2,56 +2,16 @@
 
 @section('title','Khin May Kyi - Art Gallery')
 @section('content')
+
 <style>
-.carousel-inner img{
- width:100%;
- height:100%;
- padding-left: 7%;
- padding-right: 7%;
+  .carousel-inner img{
+    width:100%;
+    height:100%;
+    padding-left: 7%;
+    padding-right: 7%;
 }
 
-  </style>
-
-{{-- <section id="testimonials">
-  <div id="testimonial-carousel" class="carousel slide" data-interval="5000" data-ride="carousel" >  
-    
-    <ol class="carousel-indicators">
-      <li data-target="#testimonial-carousel" data-slide-to="0" class="active"></li>
-      <li data-target="#testimonial-carousel" data-slide-to="1"></li>
-      <li data-target="#testimonial-carousel" data-slide-to="2"></li>
-    </ol> 
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-            <img class="responsive" style="width:100%;" src="./frontend/images/IMG_7753.jpg">
-            </div> 
-          </div>
-        </div>
-      </div>
-       <div class="carousel-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-            <img class="responsive" style="width:100%;" src="./frontend/images/IMG_0586.JPG">
-                 
-            </div> 
-          </div>
-        </div>
-      </div>
-   <div class="carousel-item">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-            <img class="responsive" style="width:100%;" src="./frontend/images/IMG_9387.jpg">
-                 
-            </div> 
-          </div>
-        </div>
-      </div>
-  </div>
-</section> --}}
+</style>
 
 <div id="slides" class="carousel slide" data-ride="carousel">
   <ul class="carousel-indicators">
@@ -73,10 +33,6 @@
   </div>
 </div>
 
-
- 
-
-    
     <div class="site-section" id="blog-section">
       <div class="container">
         <div class="row">
@@ -175,7 +131,6 @@
               </div>
               <div class="form-group row">
                 <div class="col-md-6 ml-auto">
-                 {{--  <input type="submit" class="border_button py-3 px-3" value="Send Message"> --}}
                   <button class="border_button">Send Message</button>
                 </div>
               </div>
@@ -184,7 +139,6 @@
           <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
             <h2 class="text">Need to know more on details. Get In Touch</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, distinctio! Harum quibusdam nisi, illum nulla aspernatur aut quidem aperiam, quae non tempora recusandae voluptatibus fugit impedit.</p>
-           {{--  <p><a href="#" class="btn btn-primary text-white">Get Started</a></p> --}}
          <button class="border_button">Get Started</button>
           </div>
         </div>

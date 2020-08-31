@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cart;
 use App\Cart_item;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 use DB;
 use Session;
 
@@ -16,18 +17,18 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
       
-        $cart=Cart::where('user_id',Auth::user()->id)->first();
         $carts = DB::table('cart_items')
             ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
             ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
             ->where('carts.user_id',Auth::user()->id)
                 ->get();
-                 $quantities = $carts->count();
 
+        $quantities = $carts->count();
         $total = $carts->sum('price');
+
           session([ 
             'total' => $total,
             'quantities' => $quantities,
@@ -55,6 +56,24 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+
+        $cart = new Cart();
+        $cart->user_id = Auth::user()->id;
+        $cart->save();
+    dd($cart);
+         /*$cart = Cart::with('user')->where('user_id', Auth::user()->id)->first(); 
+
+        $cart = Cart::create([
+            'user_id' => Auth::user()->id, 
+        ]);*/
+    
+        Cart_item::create([
+                'gallery_id' => $request->gallery_id,
+                'cart_id' => $cart->id,
+            ]);
+
+       return redirect('/cart');
+    }
         
       /*  $cart = Cart::with('user')->where('user_id', Auth::user()->id)->first(); 
 
@@ -69,7 +88,7 @@ class CartController extends Controller
 
        return redirect('/cart');*/
     
-    }   
+     
     /**
      * Display the specified resource.
      *
@@ -114,7 +133,7 @@ class CartController extends Controller
     {
         $cart = Cart::findOrFail($id);
         $cart->delete();
-        $cart_item=DB::table('cart_items')->where('cart_id', $cart->id)->delete();
+        $cart_item=Cart_item::where('cart_id', $cart->id)->delete();
         return back()->with('status', 'Item Removed from cart');
     }
 }

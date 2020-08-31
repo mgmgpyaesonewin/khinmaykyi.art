@@ -33,6 +33,7 @@
     <div class="cart_inner">
          <h5>Order Summary</h5>
             <br>
+           
             <div class="table-responsive">
                 <table class="table"> 
                     <thead>

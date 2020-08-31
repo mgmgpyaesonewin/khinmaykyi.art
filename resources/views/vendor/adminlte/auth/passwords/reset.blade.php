@@ -73,5 +73,5 @@
             {{ __('adminlte::adminlte.reset_password') }}
         </button>
 
-    </form>
+    </form> 
 @stop

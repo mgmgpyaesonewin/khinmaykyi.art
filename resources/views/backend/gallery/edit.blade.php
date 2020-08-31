@@ -31,7 +31,7 @@
           </div> 
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Detail:</label>
-             <textarea id="editor" name="detail" value="{{$galleries->detail}}"></textarea>
+             <textarea id="editor" name="detail">{{$galleries->detail}}</textarea>
           </div> 
             <input type="checkbox" name="sold_out" value=1 checked>
         </div>{{-- end modal body --}}
@@ -59,4 +59,15 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+     <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .then(editor => {
+      console.log( editor );
+    })
+    .catch(error => {
+      console.error( error );
+    });
+</script>
 @stop

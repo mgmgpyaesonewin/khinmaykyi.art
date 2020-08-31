@@ -8,95 +8,86 @@
 
 @section('content')
 <style>
- .card-footer {
+
+.card-footer {
      background: none;
 }
 a{
-  text-decoration:none;
   color:black;
 }
-a:hover{
-  color:white;
+a:hover {
+    color: #ffffff !important;
+    text-decoration: none;
 }
   </style>
 
   	   <a class="btn btn-success" style="margin-bottom:10px;" href="{{ route('gallery.create') }}"> Create New Gallery</a>
-
   	   <br>
   
- @if ($message = Session::get('success'))
- <div class="alert alert-success">
- 	<p>{{$message}}</p>
- </div>
- @endif
+      @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+ 	        <p>{{$message}}</p>
+        </div>
+      @endif
 
 
-<div class="container" style="margin-top: 20px;">
-   <div class="row justify-content-center">
-        @foreach($galleries as $gallery)
-        <div class="col-lg-4 col-md-6">
-          <div class="divide">
-        	<div class="card" style="width: 18rem;">
-        		<img class="card-img-top" src="{{URL::to('/')}}/images/{{ $gallery->image }}"alt="Card image">
-  				<div class="card-body">
-            <h5>{{$gallery->title}}</h5>
-    				<div class="card-footer2" style="display: inline-block">
-                @if($gallery->sold_out == 1)
-                <td>
-                  <label class="badge-success">Unsold</label>
-                </td>
-                @else
-                <td>
-                  <label class="badge-danger">Sold Out</label>
-                </td>
-                @endif
-            </div>
-             <div class="card-footer" style="display: inline-block">
-                @if($gallery->sold_out == 1)
-              
-                  <button class="btn btn-outline-danger">
-                    <a href="{{URL::to('admin/sold_out/gallery/'.$gallery->id)}}">
-                  Sold Out
+      <div class="container" style="margin-top: 20px;">
+        <div class="row justify-content-center">
+          @foreach($galleries as $gallery)
+          <div class="card" style="width: 18rem; margin-bottom: 20px;">
+            <img class="card-img-top" src="{{URL::to('/')}}/images/{{ $gallery->image }}"alt="Card image">
+              <div class="card-body">
+                <center><h4>{{$gallery->title}}</h4></center>
+              </div>
+              <div class="card-footer">
+                <div class="stauts">
+                  @if($gallery->sold_out == 1)
+                  <td>
+                    <button class="btn btn-success" style="margin-bottom: 10px;">Unsold</button>
+                  </td>
+                  @else
+                  <td>
+                   <button class="btn btn-danger" style="margin-bottom: 10px;">Sold Out</button>
+                  </td>
+                  @endif
+
+                 {{--  @if($gallery->sold_out == 1)
+                    <button class="btn btn-outline-danger" style="float: right;;">
+                      <a href="{{URL::to('admin/sold_out/gallery/'.$gallery->id)}}">Sold Out</a>
+                    </button>
+                  @endif --}}
+                </div>
+            <br>
+                <div class="button" style="float:right;">
+                <a href="{{ route('gallery.edit',$gallery->id) }}" class="btn btn-success edit" style="display: inline-block;">
+                <i class="fas fa-edit"></i>
                 </a>
-                </button>
+                <form action="{{ route('gallery.destroy',$gallery->id) }}" method="POST" style="display: inline-block;">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" onclick="return confirm('Are you sure?');" class="btn btn-danger" >
+                    <i class="far fa-trash-alt"></i>
+                  </button>
+                </form>
+                </div>
+              </div>
+          </div>
+          @endforeach
+        </div>{{-- end row --}}
 
-               
-                @else
-              {{--   <td>
-                  <button class="btn btn-outline-success">Unsold</button>
-                </td> --}}
-                @endif
-            </div>
-     			<div class="card-footer" style="display: inline-block">
-            		<a href="{{ route('gallery.edit',$gallery->id) }}" class="btn btn-success">
-            		<i class="fas fa-edit"></i>
-            		</a>
-        		</div>{{-- card-footer1 --}}
-        		<div class="card-footer" style="display: inline-block">
-            		<form action="{{ route('gallery.destroy',$gallery->id) }}" method="POST">
-                		@csrf
-                		@method('DELETE')
-                	<button type="submit" onclick="return confirm('Are you sure?');" class="btn btn-danger">
-                  	<i class="far fa-trash-alt"></i>
-                	</button>
-            		</form>
-        		</div>{{-- card-footer --}}
-				</div>{{-- card-body --}}
-      		</div>{{-- end card --}}
-        </div>
-  		</div>{{-- end col --}}
-      @endforeach
-      		
-	</div>{{-- end row --}}
-  <div class="background" style="float:right;">
-        <div class="transbox">
-             <ul class="pagination">
-            <li>{{$galleries->links()}}</li>
-          </ul>
-          Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} Total:{{$galleries->total()}}
-        </div>
-      </div>
+
+{{-- Pagination  --}}
+  
+      <ul class="pagination" style="float:right;">
+        <li>{{$galleries->links()}}</li>
+      </ul>
+        <h6>Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} Total:{{$galleries->total()}}</h6>
+ 
+
+
+
 </div>{{-- end container --}}
+
 @stop
 
 @section('css')
