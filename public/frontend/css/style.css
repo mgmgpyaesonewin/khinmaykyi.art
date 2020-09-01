@@ -41,6 +41,19 @@ button{
   background-color: white;
 }
 
+.frame-2{
+  border-image: url('//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/frame.png') 93 92 87 92 stretch stretch; 
+  border-color: #f4be52;
+  border-style: inset;
+  border-width: 50px;
+  display: block;
+  background-color: #ffe;
+  padding:10px;
+  border-style: solid;
+  box-sizing: border-box;
+  position: relative;
+}
+
 /*GoToTopButton*/
 
 #myBtn:after{
@@ -413,10 +426,16 @@ a.features:hover{
     -webkit-box-shadow: none !important;
     box-shadow: none !important; }
 
-
-
-
 /*index page*/
+.recent_art{
+  margin-top: 1em;
+}
+.carousel-inner img{
+    width:100%;
+    height:100%;
+    padding-left: 7%;
+    padding-right: 7%;
+}
 
 .responsive{
     max-width: 100%;
@@ -523,6 +542,7 @@ text-align:center;
 
 
 /*About Page*/
+
 .exhibition-date:after {
     content: '';
     display: inline-block;
@@ -578,6 +598,15 @@ text-align:center;
 
 
 /*Gallery page list and grid button*/
+
+.card-override {
+    background-color: #f7f7f7;
+    border: none;
+}
+
+.list-group-item {
+    background-color: #f7f7f7;
+}
 
 .filter-buttons {
   display: flex;
@@ -674,3 +703,18 @@ a.page-link:hover{
     color: #323232;   
 }
 
+/*detail*/
+
+.add-to-cart{
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-family: "Roboto",sans-serif;
+    background: #222;
+    border-color: #222;
+    border: none;
+  }
+  .add-to-cart:hover{
+   background-color:orange;
+    outline:0 !important;
+    box-shadow: none !important;
+  }

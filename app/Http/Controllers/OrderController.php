@@ -58,6 +58,7 @@ class OrderController extends Controller
         $order = Order::FindOrFail($id);
 
         $orders = Order::with('user')->where('orders.user_id', $order->user_id)->get();
+     
             
         $order_details =  DB::table('order_details')
             ->leftJoin('galleries', 'order_details.gallery_id', "=", 'galleries.id')

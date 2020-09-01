@@ -17,38 +17,38 @@
         <div class="Input-group">
           <div class="custom-file">
             <label class="custom-file-label">Choose Image</label>
-            <input type="file" name="image" class="custom-file-input" />   
-            @error('image')
-            <p class="help is-danger">{{$errors->first('image')}}</p>
-            @enderror   
+              <input type="file" name="image" class="custom-file-input" />   
+                @error('image')
+                <p class="help is-danger">{{$errors->first('image')}}</p>
+                @enderror   
           </div>
         </div>
-        <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Title:</label>
-          <input type="text" name="title" class="form-control">
-          @error('title')
-          <br>
-          <p class="text-danger">{{$errors->first('title')}}</p>
-          @enderror
-        </div>
-         <div class="form-group">
-          <label for="recipient-name" class="col-form-label">Price:</label>
-          <input type="number" name="price" class="form-control">
-          @error('price')
-          <p class="text-danger">{{$errors->first('price')}}</p>
-          @enderror
-        </div>
-        <div class="form-group">
-          <label for="message-text" class="col-form-label">Detail:</label>
-          <textarea id="editor" name="detail"></textarea>
-          @error('detail')
-          <p class="text-danger">{{$errors->first('detail')}}</p>
-          @enderror
-        </div>
-        <input type="checkbox" name="sold_out" value=1 checked>
-        <br>
-        <a href="{{url('admin/gallery')}}" class="btn btn-secondary">Close</a>
-        <button type="submit" class="btn btn-primary">Save</button>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Title:</label>
+              <input type="text" name="title" class="form-control">
+                @error('title')
+                <p class="text-danger">{{$errors->first('title')}}</p>
+                @enderror
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Price:</label>
+              <input type="number" name="price" class="form-control">
+                @error('price')
+                <p class="text-danger">{{$errors->first('price')}}</p>
+                @enderror
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Detail:</label>
+              <textarea id="editor" name="detail"></textarea>
+                @error('detail')
+                <p class="text-danger">{{$errors->first('detail')}}</p>
+                @enderror
+          </div>
+              <input type="checkbox" name="sold_out" value=1 checked>
+              <br>
+              <a href="{{url('admin/gallery')}}" class="btn btn-secondary">Close</a>
+              <button type="submit" class="btn btn-primary">Save</button>
+        
       </form>
     </div>{{-- col --}}
   </div>{{-- row --}}
@@ -61,8 +61,10 @@
 @stop
 
 @section('js')
+
     <script> console.log('Hi!'); </script>
     <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
+
 <script>
   ClassicEditor
     .create( document.querySelector( '#editor' ) )
@@ -73,4 +75,5 @@
       console.error( error );
     });
 </script>
+
 @stop

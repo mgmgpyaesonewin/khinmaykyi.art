@@ -11,10 +11,12 @@ class Order extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
 	public function order_details(){
         return $this->hasMany('App\Order_detail');
     }
-    public function galleries(){
+    
+    public function gallery(){
     	 return $this->belongsToMany('App\Gallery');
     }
 }

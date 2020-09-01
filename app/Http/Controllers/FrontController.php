@@ -49,8 +49,8 @@ class FrontController extends Controller
     public function orderConfirm(Request $request)
     {
         $shipping_address = Address::where('user_id', Auth::user()->id)
-            ->latest()
-            ->first();
+                            ->latest()
+                            ->first();
 
         $cart=Cart::where('user_id',Auth::user()->id)->first();
       

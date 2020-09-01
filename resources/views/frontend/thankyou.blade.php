@@ -1,10 +1,13 @@
 @extends('layout.app')
 
-@section('title','Cart')
+@section('title','Thank You')
+
 @section('content')
+
 <section id="card_items">
     <div class="container" style="margin-top:5rem;margin-bottom:5rem;">
         <div class="text-center">
+            
             <i class="fa fa-check-circle i-check-circle--size"></i>
                 <h3 style='color: #7a5e86'>Thank {{(Auth::user()->name)}}</h3>
                 <br>
@@ -18,6 +21,7 @@
            
         </div>
     </div>
+</section>
 
 @endsection
 

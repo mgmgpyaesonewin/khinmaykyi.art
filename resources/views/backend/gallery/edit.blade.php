@@ -7,50 +7,47 @@
 @stop
 
 @section('content')
+
 <div class="row">
   <div class="col-md-12">
     <form action="{{route('gallery.update', $galleries->id)}}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PATCH')
-        <div class="modal-body">
-          <img src="{{ URL::to('/')}}/images/{{$galleries->image}}" class="img-thumbnail" width="100" />
-          <div class="input-group">
-            <div class="custom-file">
-              <input type="file" name="image" class="custom-file-input" value="{{$galleries->image}}">
-              <label class="custom-file-label">Select Images</label>                
-              <input type="hidden" name="hidden_image" value="{{$galleries->image}}" />
-            </div>
+        
+      <div class="modal-body">
+        <img src="{{ URL::to('/')}}/images/{{$galleries->image}}" class="img-thumbnail" width="100" />
+        <div class="input-group">
+          <div class="custom-file">
+            <label class="custom-file-label">Select Images</label>
+            <input type="file" name="image" class="custom-file-input" value="{{$galleries->image}}">            
           </div>
+        </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Title:</label>
             <input type="text" name="title" class="form-control" value="{{$galleries->title}}">
-          </div>  
-            <div class="form-group">
+          </div> 
+           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Price:</label>
             <input type="text" name="price" class="form-control" value="{{$galleries->price}}">
           </div> 
-           <div class="form-group">
+          <div class="form-group">
             <label for="recipient-name" class="col-form-label">Detail:</label>
              <textarea id="editor" name="detail">{{$galleries->detail}}</textarea>
           </div> 
             <input type="checkbox" name="sold_out" value=1 checked>
-        </div>{{-- end modal body --}}
-        <div class="modal-footer">
-          <a href="{{url('admin/gallery')}}" class="btn btn-secondary">Back</a>
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-          @if ($errors->any())
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-          @endif
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <a href="{{url('admin/gallery')}}" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+          
+
     </form>
   </div>{{-- end col --}}
 </div>{{-- end row --}}
+
 @stop
 
 @section('css')
@@ -58,8 +55,10 @@
 @stop
 
 @section('js')
+
     <script> console.log('Hi!'); </script>
      <script src="https://cdn.ckeditor.com/ckeditor5/17.0.0/classic/ckeditor.js"></script>
+
 <script>
   ClassicEditor
     .create( document.querySelector( '#editor' ) )
@@ -70,4 +69,5 @@
       console.error( error );
     });
 </script>
+
 @stop

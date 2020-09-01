@@ -9,10 +9,11 @@ class Cart_item extends Model
     protected $fillable=['id','gallery_id','cart_id'];
 
     public function cart(){
-        return $this->belongsTo('App\Cart','cart_id');
+        return $this->belongsTo('App\Cart');
     }
-    public function gallery()
-    {
-        return $this->belongsTo('App\Gallery','gallery_id');
+
+    public function gallery(){
+        return $this->belongsTo('App\Gallery');
     }
+  
 }

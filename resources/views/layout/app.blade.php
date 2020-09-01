@@ -38,206 +38,210 @@
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-   
+
     <div class="top-bar">
       <div class="container">
         <div class="row">
-
           <div class="col-12">
             <a href="#" class="text-white"><span class="mr-2 text-white icon-envelope-open-o"></span> <span class="d-none d-md-inline-block">info@yourdomain.com</span></a>
             <span class="mx-md-2 d-inline-block"></span>
-            <a href="#" class="text-white"><span class="mr-2 text-white icon-phone"></span> <span class="d-none d-md-inline-block">1+ (234) 5678 9101</span></a>
-            
-
+            <a href="#" class="text-white">
+              <span class="mr-2 text-white icon-phone"></span> <span class="d-none d-md-inline-block">1+ (234) 5678 9101</span>
+            </a>
             <div class="float-right">
-              <a href="#" class="text-white"><span class="mr-2 text-white icon-twitter"></span> <span class="d-none d-md-inline-block">Twitter</span></a>
+              <a href="#" class="text-white">
+                <span class="mr-2 text-white icon-twitter"></span> <span class="d-none d-md-inline-block">Twitter</span>
+              </a>
               <span class="mx-md-2 d-inline-block"></span>
-              <a href="#" class="text-white"><span class="mr-2 text-white icon-instagram"></span> <span class="d-none d-md-inline-block">Instagram</span>
+              <a href="#" class="text-white">
+                <span class="mr-2 text-white icon-instagram"></span> <span class="d-none d-md-inline-block">Instagram</span>
               </a>
             </div>
-
-          </div> {{-- col-12 --}}
-          
-        </div> {{-- row --}}
-        
+          </div> {{-- col-12 --}}   
+        </div> {{-- row --}}   
       </div> {{-- container --}}
     </div> {{-- top-bar --}}
-      
-    <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
 
-      <div class="container">
+  <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
+    <div class="container">
         <div class="row align-items-center position-relative">
-          
-            
-            <div class="site-logo">
-              <a href="/" ><span><h4 class="logo">KhinMayKyi</h4></a>
-            </div>
-            
-            <div class="col-12">
-              <nav class="site-navigation text-right ml-auto " role="navigation">
+          <div class="site-logo">
+            <a href="/" >
+              <span><h4 class="logo">KhinMayKyi</h4>
+            </a>
+          </div>
 
-                <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+          <div class="col-12">
 
+            <nav class="site-navigation text-right ml-auto " role="navigation">
+
+              <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                 <li><a href="/" class="nav-link">Home</a></li>
                 <li><a href="/about" class="nav-link">About</a></li>
                 <li><a href="/gallery" class="nav-link">Gallery</a></li>
-               {{--  <li><a href="/detail" class="nav-link">Contact</a></li> --}}
-                
-            <li class="nav-item submenu dropdown">
-              @guest
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false"><i class="fas fa-user-circle"></i>
-              @else
-               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false"><i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
-              @endguest
-              </a>
-              
+
+                <li class="nav-item submenu dropdown">
+                  @guest
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                      aria-expanded="false"><i class="fas fa-user-circle"></i>
+                    </a>
+                  @else
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                      aria-expanded="false"><i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+                    </a>
+                  @endguest
+               
+
               <ul class="dropdown-menu">
                 <li class="nav-item">
-                  <!-- Authentication Links -->
                   @guest
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                  </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
                   @if (Route::has('register'))
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                  </li>
-                 @endif
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                  @endif
                   @else
-                  <li class="nav-item">
-                  <a class="nav-link"href="{{ route('logout') }}">Logout</a>
-                 </li>
+                    <li class="nav-item">
+                    <a class="nav-link"href="{{ route('logout') }}">Logout</a>
+                  </li>
                   @endguest
                 </li>
-                
               </ul>
-            </li>
-            @auth
-            <li>
-              <a class="nav-link" href="{{url("cart")}}" >
-              <i class="Shopping-icon fa fa-shopping-cart"></i>
-              <span class="shopping-text">Cart</span>
-              <span style="color:black; font-weight:bold;">
-                @php
-                  $auth_user = Auth::user();
-                   $cart_item=DB::table('cart_items')
-                ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
-                ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
-                 ->where('carts.user_id',Auth::user()->id)->get();
-                $count = $cart_item->count();
-                @endphp
-    
-                @isset($auth_user)
-                ({{$count}})
-        
-                
-                @endisset
-    
-                @empty($auth_user)
-                  ( 0 )
-                @endempty
-              </span>
-            </a>
-            @endauth
-              </li>
-          </ul>
-        </nav>  
-      </div>
 
-      <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+                @auth
+                  <li>
+                    <a class="nav-link" href="{{url("cart")}}" >
+                      <i class="Shopping-icon fa fa-shopping-cart"></i>
+                      <span class="shopping-text">Cart</span>
+                      <span style="color:black; font-weight:bold;">
 
-        </div>
-      </div>
-      
-    </header>
-    
-    @yield('content')
+                      @php
+                        $auth_user = Auth::user();
+                        $cart_item=DB::table('cart_items')
+                                    ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
+                                    ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
+                                    ->where('carts.user_id',Auth::user()->id)->get();
+                        $count = $cart_item->count();
+                      @endphp
+                      @isset($auth_user)
+                        ({{$count}})
+                      @endisset
+                      @empty($auth_user)
+                        ( 0 )
+                      @endempty
+                      </span>
+                    </a>
+                  @endauth
+                </li>
+              </ul>
 
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-8">
-                <h2 class="footer mb-4">Contacts</h2>
-                 <ul class="list-unstyled contact">
-                  <li>Harvard Art Museums</li>
-                  <li>32 Quincy Street</li>
-                  <li>Testimonials</li>
-                  <li>Cambridge, MA 02138</li>
-                  <li>1 (617) 495-9400</li>
-                </ul>
-              </div>
-              <div class="col-md-4 ml-auto">
-                <h2 class="mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#" class="features">About Us</a></li>
-                  <li><a href="#" class="features">Press Releases</a></li>
-                  <li><a href="#" class="features">Terms of Service</a></li>
-                  <li><a href="#" class="features">Privacy</a></li>
-                  <li><a href="#" class="features">Contact Us</a></li>
-                </ul>
-              </div>
-              
-            </div>
+            </nav>
+
           </div>
-          <div class="col-md-4 ml-auto">
+        </div>
+    </div>
 
-            <div class="mb-5">
-              <h2 class="footer-heading mb-4">Subscribe to Newsletter</h2>
-              <form action="#" method="post" class="footer-suscribe-form">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
+     <div class="toggle-button d-inline-block d-lg-none">
+        <a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black">
+          <span class="icon-menu h3"></span>
+        </a>
+      </div>
+
+  </header>
+
+  @yield('content')
+
+  <footer class="site-footer">
+    <div>
+      <a href="#" id="myBtn" class="type1" onclick="topFunction()" style="display: none;">
+        <span id="myBtn" style="opacity: 0;"></span>
+      </a>
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4">
+          <h2 class="footer mb-4">Contacts</h2>
+            <ul class="list-unstyled contact">
+              <li>Harvard Art Museums</li>
+              <li>32 Quincy Street</li>
+              <li>Testimonials</li>
+              <li>Cambridge, MA 02138</li>
+              <li>1 (617) 495-9400</li>
+            </ul>
+        </div>
+        <div class="col-md-4 ml-auto">
+          <h2 class="mb-4">Features</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="features">About Us</a></li>
+              <li><a href="#" class="features">Press Releases</a></li>
+              <li><a href="#" class="features">Terms of Service</a></li>
+              <li><a href="#" class="features">Privacy</a></li>
+              <li><a href="#" class="features">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="col-md-4 ml-auto">
+          <div class="mb-5">
+            <h2 class="footer-heading mb-4">Subscribe to Newsletter</h2>
+            <form action="#" method="post" class="footer-suscribe-form">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
                   <div class="input-group-append">
                     <button class="btn btn-primary text-white" type="button" id="button-addon2">Subscribe</button>
                   </div>
-                </div>
               </div>
-
-
-              <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#about-section" class="smoothscroll pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+          </div>
+            <h2 class="footer-heading mb-4">Follow Us</h2>
+            <a href="#about-section" class="smoothscroll pl-0 pr-3">
+              <span class="icon-facebook"></span>
+            </a>
+            <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+            <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+            <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
             </form>
-          </div>
-        </div>
-        <div class="row pt-5 text-center">
-          <div class="col-md-12">
-            <div class="border-top pt-3">
-            <p class="copyright"><small>
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with 
-             by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </small></p>
-            </div>
-          </div>
-          
-        </div>
-          <a href="#" id="myBtn" class="type1" onclick="topFunction()" style="display: none;"><span id="myBtn" style="opacity: 0;"></span></a>
       </div>
-    </footer>
 
+    </div>   
+    <div class="row pt-5 text-center">
+      <div class="col-md-12">
+        <div class="border-top pt-3">
+          <p class="copyright">
+            <small>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with 
+             by 
+             <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+             
   </div>
+    
+  </footer>
 
-<script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery.sticky.js')}}"></script>
-<script src="{{asset('frontend/js/aos.js')}}"></script>
-<script src="{{asset('frontend/js/easyzoom.js')}}"></script>
 
-<script src="{{asset('frontend/js/main.js')}}"></script>
 
-@yield('scripts')
+  <script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{asset('frontend/js/popper.min.js')}}"></script>
+  <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('frontend/js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('frontend/js/jquery.sticky.js')}}"></script>
+  <script src="{{asset('frontend/js/aos.js')}}"></script>
+  <script src="{{asset('frontend/js/easyzoom.js')}}"></script>
+
+  <script src="{{asset('frontend/js/main.js')}}"></script>
+
+ @yield('scripts')
 
   <script>
 
-    var mybutton = document.getElementById("myBtn");
+  var mybutton = document.getElementById("myBtn");
 
     // When the user scrolls down 20px from the top of the document, show the button
   window.onscroll = function() {scrollFunction()};
@@ -258,4 +262,5 @@
   </script>
 
   </body>
+
 </html>

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $fillable=['id','user_id'];
+	protected $fillable=['id','user_id'];
 
-   public function user()
-    {
+	public function user(){
         return $this->belongsTo('App\User');
     }
+
     public function cart_items(){
     	return $this->hasMany('App\Cart_item');
     }

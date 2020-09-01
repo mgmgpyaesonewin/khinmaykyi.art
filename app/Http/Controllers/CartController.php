@@ -21,15 +21,15 @@ class CartController extends Controller
     {
       
         $carts = DB::table('cart_items')
-            ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
-            ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
-            ->where('carts.user_id',Auth::user()->id)
+                ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
+                ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
+                ->where('carts.user_id',Auth::user()->id)
                 ->get();
 
         $quantities = $carts->count();
         $total = $carts->sum('price');
 
-          session([ 
+        session([ 
             'total' => $total,
             'quantities' => $quantities,
         ]);
@@ -60,12 +60,6 @@ class CartController extends Controller
         $cart = new Cart();
         $cart->user_id = Auth::user()->id;
         $cart->save();
-    dd($cart);
-         /*$cart = Cart::with('user')->where('user_id', Auth::user()->id)->first(); 
-
-        $cart = Cart::create([
-            'user_id' => Auth::user()->id, 
-        ]);*/
     
         Cart_item::create([
                 'gallery_id' => $request->gallery_id,
@@ -74,20 +68,6 @@ class CartController extends Controller
 
        return redirect('/cart');
     }
-        
-      /*  $cart = Cart::with('user')->where('user_id', Auth::user()->id)->first(); 
-
-        $cart = Cart::create([
-            'user_id' => Auth::user()->id,   
-        ]);
-    
-        Cart_item::create([
-                'gallery_id' => $request->gallery_id,
-                'cart_id' => $cart->id,
-            ]);
-
-       return redirect('/cart');*/
-    
      
     /**
      * Display the specified resource.
@@ -133,7 +113,7 @@ class CartController extends Controller
     {
         $cart = Cart::findOrFail($id);
         $cart->delete();
-        $cart_item=Cart_item::where('cart_id', $cart->id)->delete();
+        
         return back()->with('status', 'Item Removed from cart');
     }
 }
