@@ -11,6 +11,7 @@ use App\Address;
 use App\Order;
 use App\Order_detail;
 use App\Cart_item;
+use App\Wishlist;
 
 class FrontController extends Controller
 {
@@ -115,5 +116,33 @@ class FrontController extends Controller
 
        return redirect('/cart');
     }
+
+    public function storeWishlist(Request $request){
+
+        $wishlists = Wishlist::create([
+                'gallery_id' => $request->gallery_id,
+                'user_id' => Auth::user()->id,
+            ]);
+     
+
+        return redirect('/wishlist');
+    }
     
+    public function wishlist(Request $request){
+
+        $wishlists = Wishlist::with('gallery')
+                    ->get();
+                    
+
+       return view('frontend.wishlist',compact('wishlists'));
+    }
+
+    public function removeWishlist($id){
+
+        $wishlist = Wishlist::findOrFail($id);
+        $wishlist -> delete();
+
+        return back()->with('status', 'Item Removed from wishlist');
+    
+    }
 }

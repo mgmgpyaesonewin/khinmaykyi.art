@@ -78,7 +78,7 @@ class GalleryController extends Controller
         $data = array();
         $data['sold_out'] = 0;
 
-    DB::table('galleries')->where('id',$id)->update($data);
+        DB::table('galleries')->where('id',$id)->update($data);
 
         return redirect()->route("gallery.index")->with('status', 'Data Updated for Gallery');
     }
@@ -92,7 +92,7 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-         $galleries = Gallery::findorFail($id);
+        $galleries = Gallery::findorFail($id);
         return view('backend.gallery.edit')->with('galleries', $galleries);
     }
 
@@ -150,7 +150,7 @@ class GalleryController extends Controller
     public function destroy($id) {
 
         $galleries = Gallery::findOrFail($id);
-         $image_path = public_path('images').'/'.$galleries->image;
+        $image_path = public_path('images').'/'.$galleries->image;
         unlink($image_path);
    
         $galleries->delete();

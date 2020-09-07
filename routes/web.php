@@ -39,6 +39,10 @@ Route::get('/gallery_detail/{id}','FrontController@detailGallery');
 	Route::post('/address','FrontController@address')->name('addtoadresss');
 	Route::get('/order','FrontController@storeOrder')->name('storeOrder');
     Route::get('/addtocart','FrontController@storeCart')->name('storeCart');
+    Route::get('/addtowishlist','FrontController@storeWishlist')->name('storeWishlist');
+    Route::get('/wishlist','FrontController@Wishlist');
+    Route::get('/removeWishlist/{id}','FrontController@removeWishlist');
+    
 });
 
 

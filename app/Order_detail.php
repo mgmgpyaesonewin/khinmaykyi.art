@@ -13,6 +13,6 @@ class Order_detail extends Model
     }
     
     public function galleries(){
-        return $this->hasMany('App\Gallery','gallery_id');
+        return $this->belongsToMany('App\Gallery','gallery_id');
     }
 }

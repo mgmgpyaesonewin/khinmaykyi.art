@@ -8,43 +8,42 @@
 
     <div class="row">
 
-      <div class="pull-left">
+      <div class="pull" style="margin: 0 auto;">
         <div class="filter-buttons">
           <div class="list-view-button d-none d-lg-block d-lg-none" id="list">
-            <i class="fa fa-bars" aria-hidden="true"></i> 
-            List view
+            <i class="fas fa-square"></i> <i class="fas fa-square"></i> view
           </div>   
           <div class="grid-view-button d-none d-lg-block d-lg-none" id="grid">
-            <i class="fa fa-th-large" aria-hidden="true"></i> Grid view
+           <i class="fas fa-square"></i> <i class="fas fa-square"></i> <i class="fas fa-square"></i> view
           </div>
         </div>
       </div>
 
         <div id="products" class="card-columns view-group">
           @foreach($galleries as $gallery)
-          <div class="item card card-override">
+          <div class="item card card-override" style="background:none;">
             <div class="img-event">
               <div class="frame">
                 <div class="grid">
                   <a href="{{url('gallery_detail',$gallery->id)}}">
-                  <img class="class=" card img-responsive" src="{{URL::to('/')}}/images/{{ $gallery->image }}" style="width: 100%; height: 100%;"alt="" />
+                  <img class="img-responsive" src="{{URL::to('/')}}/images/{{ $gallery->image }}" style="width: 100%; height: 100%;" alt="" />
                   </a>
                 </div>{{-- grid --}}
               </div>{{-- frame --}}
             </div>{{-- img-event --}}
-              <h2 class="recent"><a href="single.html" class="recent-image-title">{{$gallery->title}}</a></h2>
+              <p style="font-size: 2rem; margin-bottom: 1rem; text-align: center; margin-top: 1rem;"><a href="single.html" class="gallery_title">{{$gallery->title}}</a></p>
           </div>{{-- item --}}
           @endforeach
         </div>{{-- row view-group --}}
 
-      <div class="background" style="float:right;">
-        <div class="transbox" style="margin-bottom: 40px;">
+        <div class="transbox" style="margin: 0 auto;">
           <ul class="pagination">
             <li>{{$galleries->links()}}</li>
           </ul>
-          Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} Total:{{$galleries->total()}}
+          <p>
+            Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} &nbsp; Total:{{$galleries->total()}}
+          </p>
         </div>
-      </div> 
     
     </div>
 

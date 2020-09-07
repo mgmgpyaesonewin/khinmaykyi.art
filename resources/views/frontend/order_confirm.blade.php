@@ -53,7 +53,7 @@
             <p> Cash on delivery (CDO)</p>
 
             <div class="checkout_btn_inner d-flex align-items-center" style="float:right">
-                <a class="border_button" href="{{route('storeOrder')}}">Order Confirm</a>  
+                <a class="button" href="{{route('storeOrder')}}">Order Confirm</a>  
             </div>
         </div>
 

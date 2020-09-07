@@ -39,7 +39,7 @@
 
             <br>
             <div class="checkout_btn_inner d-flex align-items-center" style="float:right; margin: 0.5em 0;">
-              <button type="submit" class="border_button">Proceed to payment</button>
+              <button type="submit" class="button">Proceed to payment</button>
             </div>
             
         </form>

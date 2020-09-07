@@ -28,16 +28,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function address(){
+        return $this->hasOne('App\Address');
+    }
+
+    public function carts(){
+        return $this->hasMany('App\Cart');
+    }
+
     public function orders(){
         return $this->hasMany('App\Order');
     }
 
-    public function cart(){
-        return $this->hasOne('App\Cart');
-    }
-
-     public function address() {
-        return $this->hasMany('App\Address');
+    public function wishlists(){
+        return $this->hasMany('App\Cart');
     }
 
     /**

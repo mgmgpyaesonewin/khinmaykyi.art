@@ -7,7 +7,7 @@ h1, h2, h3, h4, h5,
 }
 
 p{
-  font-family: playfair display;
+  font-family: 'Open Sans', sans-serif;
 }
 
 a{
@@ -20,7 +20,11 @@ a:hover {
   text-decoration: none;
 }
 .site-footer, .top-bar {
-  background: #222428;
+  background: #343352/*#222428*/;
+}
+
+.site-footer{
+    margin-top: 3em;
 }
 
 span{
@@ -188,7 +192,8 @@ html{
     -ms-transform: translateX(0%);
     transform: translateX(0%); }
   .site-mobile-menu .site-mobile-menu-header {
-    width: 100%;
+   /* width: 100%;*/
+   text-align: left;
     float: left;
     padding-left: 20px;
     padding-right: 20px; }
@@ -380,26 +385,30 @@ a:hover{
 
 
 .footer-suscribe-form .form-control {
-  color: #000; }
+  color: #000;
+  border-color: #fc846b !important;
+   }
   .footer-suscribe-form .form-control:hover, .footer-suscribe-form .form-control:active, .footer-suscribe-form .form-control:focus {
     color: #000 !important; }
 
 .footer-suscribe-form .btn {
-  background: #222428;
-  color: #fff;
-  border-color: #ffffff; }
+  background: #343352;
+  border-color: #fc846b; }
 
 
 .footer-suscribe-form .btn:hover {
-  border: 1px solid orange;
+  background: #fc846b;
+  border: 1px solid #fc846b;
 }
-
+.icon-twitter,  .icon-facebook, .icon-instagram,.icon-linkedin{
+       color: #fc846b;
+     }
 .icon-twitter:hover,  .icon-facebook:hover, .icon-instagram:hover ,.icon-linkedin:hover{
-       color: orange;
+       color: #fff;
      }
 
 a.features:hover{
-      color: orange;
+      color: #fc846b;
 }
 
 .contact{
@@ -427,8 +436,11 @@ a.features:hover{
     box-shadow: none !important; }
 
 /*index page*/
-.recent_art{
-  margin-top: 1em;
+
+.recent::after{
+  content: "";
+  clear: both;
+  display: table;
 }
 .carousel-inner img{
     width:100%;
@@ -443,12 +455,14 @@ a.features:hover{
     display:block;
 }
 .carousel-indicators li {
+    background-color: #fc846b;
     width: 10px;
     height: 10px;
     border-radius: 100%;
-  }
+}
+
 .carousel-indicators .active {
-    background-color: #7a5e86;
+    background-color: #343352;
     width: 15px;
     height: 15px;
     border-radius: 100%;
@@ -470,10 +484,14 @@ a.recent-image-title{
     text-align: center;
     margin-top: 3rem!important;
 }
+
 h2.recent{
 text-align:center;
 }
 
+.recent-image{
+  width: 100%;
+}
 
 .by {
   color: #000;
@@ -493,7 +511,7 @@ text-align:center;
 }
 
 /*button*/
-.border_button {
+/*.border_button {
   font: 14px/1.5;
   font-weight: 600px;
   background: white;
@@ -520,16 +538,16 @@ text-align:center;
   transition: all 0.5s ease-in-out 0s;
   width: 100%;
   z-index: 3;
-}
-.border_button::before {
-  border-bottom: 1px solid  #FFA500;
-  border-left: 1px solid  #FFA500;
+}*/
+/*.border_button::before {
+  border-bottom: 2px solid #7a5e86;;
+  border-left: 2px solid #7a5e86;;
   transform-origin: 0 100% 0;
-}
-
+}*/
+/*
 .border_button::after {
-  border-right: 1px solid #FFA500;
-  border-top: 1px solid   #FFA500;
+  border-right: 2px solid #7a5e86;;
+  border-top: 2px solid #7a5e86;;
   transform-origin: 100% 0 0;
 }
 
@@ -538,9 +556,76 @@ text-align:center;
 }
 .border_button:hover {
   border: 1px solid rgba(0, 160, 80, 0);
+}*/
+
+.button{
+  border-radius: 30px;
+  background:#343352;
+  color: #fc846b;
+  display: inline-block;
+  line-height: 1.6em;
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 15px 40px;
+  margin: 10px 0 0;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  outline:none;
+  border:none;
 }
-
-
+.button:hover{
+  background: #fc846b;
+  color: #fff;
+}
+.small_button{
+  border-radius: 30px;
+  background: #fc846b;
+  color: #fff;
+  display: inline-block;
+  line-height: 1.6em;
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 20px;
+/*  margin: 10px 0 0;*/
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  outline:none;
+  border:none;
+}
+.small_button:hover{
+  background: #343352;
+  color: #fc846b;
+}
+.small_button1{
+  border-radius: 30px;
+  background: #343352;
+  color: #fc846b;
+  display: inline-block;
+  line-height: 1.6em;
+  z-index: 1;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  cursor: pointer;
+  outline:none;
+  border:none;
+}
+.small_button1:hover{
+  background: #fc846b;
+  color: #fff;
+}
 /*About Page*/
 
 .exhibition-date:after {
@@ -550,7 +635,7 @@ text-align:center;
     margin-left: 2rem;
     position: relative;
     top: -.25em;
-    border-bottom: 1px solid orange;
+    border-bottom: 1px solid #fc846b;
 }
 .exhibition_image{
     max-width: 100%;
@@ -598,14 +683,16 @@ text-align:center;
 
 
 /*Gallery page list and grid button*/
-
+.gallery_title{
+  color: #343352;
+}
 .card-override {
     background-color: #f7f7f7;
     border: none;
 }
 
 .list-group-item {
-    background-color: #f7f7f7;
+    background-color: none;
 }
 
 .filter-buttons {
@@ -642,7 +729,6 @@ img.group{
     overflow: hidden;
 }
 
-
 .frame{
     padding:25px;
     border-top: 15px #2e2e2e;
@@ -654,6 +740,33 @@ img.group{
     position: relative;
    
 }
+.frame1{
+  padding:15px;
+  border-top-color:#ddd;
+  border-left-color:#eee;
+   border-right-color:#eee;
+  border-bottom-color:#fff;
+   border-style: solid;
+  background-color:#ddc;
+  border:solid 5vmin #eee;
+  border-radius:2px;
+  box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+  box-sizing:border-box;
+  position:relative;
+  text-align:center;
+}
+
+}
+.grid1{
+   overflow:hidden;
+}
+.grid1 img{
+  transition: all 1.1s ease;
+}
+.grid1:hover img{
+  transform: scale(1.1);
+}
+
 .grid{
    overflow:hidden;
 }
@@ -680,27 +793,24 @@ img.group{
 }
 
 /*pagination*/
-.transbox{
-    background-color: #F6F6F6;
 
-}
 .pagination>li>a, .pagination>li>span { 
-    border-radius: 100% !important; 
+    border-radius: 5px;
     margin: 0 5px;
     border:none;
 }
 a.page-link:hover{
-    background-color: orange;
+    background-color: #fc846b;
     color:#ffffff;
 }
 .page-item.active .page-link{
-    background-color: orange;
+    background-color: #fc846b;
     color: #ffffff;
     
 }
 .page-link{
-    background-color: #F6F6F6;
-    color: #323232;   
+    background-color: #343352;
+    color: #fc846b;   
 }
 
 /*detail*/
@@ -714,7 +824,13 @@ a.page-link:hover{
     border: none;
   }
   .add-to-cart:hover{
-   background-color:orange;
+   background-color: #fc846b;
     outline:0 !important;
     box-shadow: none !important;
+  }
+
+  .recent-image{
+  animation: 1.25s cubic-bezier(.26,.54,.32,1) forwards ani-fadeIn;"
+      transition: opacity .5s,transform 2s cubic-bezier(0,0,.44,1.18),-webkit-transform 2s cubic-bezier(0,0,.44,1.18);
+}
   }

@@ -16,7 +16,4 @@ class Order extends Model
         return $this->hasMany('App\Order_detail');
     }
     
-    public function gallery(){
-    	 return $this->belongsToMany('App\Gallery');
-    }
 }

@@ -11,6 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('frontend/font/icomoon/style.css') }}">
@@ -61,33 +62,37 @@
         </div> {{-- row --}}   
       </div> {{-- container --}}
     </div> {{-- top-bar --}}
-
+    <div class="site-logo" style="text-align: center; margin-top: 1rem;">
+      <a href="/" >
+        <span><h2 class="logo">KhinMayKyi</h2>
+      </a>
+    </div>
   <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
     <div class="container">
         <div class="row align-items-center position-relative">
-          <div class="site-logo">
+          {{-- <div class="site-logo">
             <a href="/" >
               <span><h4 class="logo">KhinMayKyi</h4>
             </a>
-          </div>
+          </div> --}}
 
-          <div class="col-12">
+          <div class="col">
 
-            <nav class="site-navigation text-right ml-auto " role="navigation">
+            <nav class="site-navigation ml-auto " role="navigation">
 
-              <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/about" class="nav-link">About</a></li>
-                <li><a href="/gallery" class="nav-link">Gallery</a></li>
+              <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block" style="text-align: center;"  style="background-color: #FEFBFD;">
+                <li style="padding-right: 4rem;"><a href="/" class="nav-link">HOME</a></li>
+                <li style="padding-right: 4rem;"><a href="/about" class="nav-link">ABOUT</a></li>
+                <li style="padding-right: 4rem;"><a href="/gallery" class="nav-link">GALLERY</a></li>
 
-                <li class="nav-item submenu dropdown">
+                <li class="nav-item submenu dropdown" style="padding-right: 4rem;">
                   @guest
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false"><i class="fas fa-user-circle"></i>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-user-circle" style="color: #7A5E86"></i>
                     </a>
                   @else
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                      aria-expanded="false"><i class="fas fa-user-circle"></i> {{ Auth::user()->name }}
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-user-circle" style="color: #7A5E86"></i> {{ Auth::user()->name }}
                     </a>
                   @endguest
                
@@ -96,16 +101,16 @@
                 <li class="nav-item">
                   @guest
                     <li class="nav-item">
-                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                      <a class="nav-link" href="{{ route('login') }}">{{ __('LOGIN') }}</a>
                     </li>
                   @if (Route::has('register'))
                     <li class="nav-item">
-                      <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                      <a class="nav-link" href="{{ route('register') }}">{{ __('REGISTER') }}</a>
                     </li>
                   @endif
                   @else
                     <li class="nav-item">
-                    <a class="nav-link"href="{{ route('logout') }}">Logout</a>
+                    <a class="nav-link"href="{{ route('logout') }}">LOGOUT</a>
                   </li>
                   @endguest
                 </li>
@@ -114,8 +119,8 @@
                 @auth
                   <li>
                     <a class="nav-link" href="{{url("cart")}}" >
-                      <i class="Shopping-icon fa fa-shopping-cart"></i>
-                      <span class="shopping-text">Cart</span>
+                      <i class="Shopping-icon fa fa-shopping-cart" style="color: #7A5E86"></i>
+                      <span class="shopping-text"></span>
                       <span style="color:black; font-weight:bold;">
 
                       @php
@@ -127,15 +132,40 @@
                         $count = $cart_item->count();
                       @endphp
                       @isset($auth_user)
-                        ({{$count}})
+                        ( {{$count}} )
                       @endisset
                       @empty($auth_user)
                         ( 0 )
                       @endempty
                       </span>
                     </a>
-                  @endauth
                 </li>
+                @endauth
+
+
+                @auth
+                  <li>
+                    <a class="nav-link" href="{{url("wishlist")}}" >
+                      <i class="Shopping-icon fa fa-heart" style="color: #7A5E86"></i>
+                      <span class="shopping-text"></span>
+                      <span style="color:black; font-weight:bold;">
+
+                      @php
+                        $auth_user = Auth::user();
+                        $wishlists = App\Wishlist::with('gallery')
+                                      ->get();
+                        $count = $wishlists->count();
+                      @endphp
+                      @isset($auth_user)
+                        ( {{$count}} )
+                      @endisset
+                      @empty($auth_user)
+                        ( 0 )
+                      @endempty
+                      </span>
+                    </a>
+                </li>
+                @endauth
               </ul>
 
             </nav>
@@ -224,8 +254,6 @@
   </div>
     
   </footer>
-
-
 
   <script src="{{asset('frontend/js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{asset('frontend/js/popper.min.js')}}"></script>

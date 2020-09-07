@@ -58,20 +58,21 @@ class OrderController extends Controller
         $order = Order::FindOrFail($id);
 
         $orders = Order::with('user')->where('orders.user_id', $order->user_id)->get();
-     
             
         $order_details =  DB::table('order_details')
-            ->leftJoin('galleries', 'order_details.gallery_id', "=", 'galleries.id')
-            ->leftJoin('orders', 'order_details.order_id', "=", 'orders.id')
-            ->where('orders.user_id', $order->user_id)
-            ->get();
+                        ->leftJoin('galleries', 'order_details.gallery_id', "=", 'galleries.id')
+                        ->leftJoin('orders', 'order_details.order_id', "=", 'orders.id')
+                        ->where('orders.user_id', $order->user_id)
+                        ->get();
+                        
         $total = $order::where('orders.user_id', $order->user_id)->pluck('total')->first();
         
         $count= Order_detail::where(['order_id'=>$order->id])->count(); 
        
         $shipping_address = Address::where('user_id', $order->user_id)
-            ->latest()
-            ->first();
+                            ->latest()
+                            ->first();
+
         return view('backend.order.show', compact('order_details','count','shipping_address',
             'order','orders','total'));
     }
