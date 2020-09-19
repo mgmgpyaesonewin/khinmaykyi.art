@@ -42,6 +42,7 @@ a:hover {
             <img class="card-img-top" src="{{URL::to('/')}}/images/{{ $gallery->image }}"alt="Card image">
             <div class="card-body">
               <center><h4>{{$gallery->title}}</h4></center>
+              <center><h6>{{ number_format($gallery->price) }} kyats</h6></center>
             </div>
             <div class="card-footer">
               <div class="stauts">

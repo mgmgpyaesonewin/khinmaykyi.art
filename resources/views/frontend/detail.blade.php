@@ -34,15 +34,7 @@
                       		&nbsp;<span>Add to cart</span>
                     	</button>
                 	</form>
-                	<form action="{{route('storeWishlist')}}" mehtod="POST" role="form" style="display: inline-block">
-                    	<input type="hidden" name="token" value="{{csrf_token()}}">
-                    	<input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
-                    	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
-                    	<button class="button" type="submit">
-                      		<i class="fa fa-shopping-basket shopping-icon" style="color:white;"></i>
-                      		<span style="color:white;">Add to wishlist</span>
-                    	</button>
-                	</form>
+
 				 @endauth
 
 				 @guest
@@ -54,15 +46,40 @@
                       		 &nbsp;<span>Add to cart</span>
                     	</button>
                 	</form>
-                	<form action="{{route('storeWishlist')}}" mehtod="POST" role="form" style="display: inline-block;">
-                    	<input type="hidden" name="token" value="{{csrf_token()}}">
-	                  	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
-                    	<button class="button" type="submit">
-                      		<i class="fas fa-heart" style="color:white;"></i>
-                      		&nbsp;<span style="color:white;">Add to wishlist</span>
-                    	</button>
-                	</form>
+                	
 				@endguest
+
+        @auth
+         @if ($wishlist_count == 0)
+                <form action="{{route('storeWishlist')}}" mehtod="POST" role="form" style="display: inline-block;">
+                      <input type="hidden" name="token" value="{{csrf_token()}}">
+                      <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+                      <button class="button" type="submit">
+                          <i class="fas fa-heart" style="color:white;"></i>
+                          &nbsp;<span style="color:white;">Add to wishlist</span>
+                      </button>
+                  </form>
+                @else
+                <p>
+                   The gallery was successfully added to your wishlist.
+                    <br>
+                    Check 
+                    <a href="{{url('/wishlist')}}">
+                       Here
+                    </a>
+                </p>
+                @endif
+                @endauth
+                @guest
+                <form action="{{route('storeWishlist')}}" mehtod="POST" role="form" style="display: inline-block;">
+                      <input type="hidden" name="token" value="{{csrf_token()}}">
+                      <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+                      <button class="button" type="submit">
+                          <i class="fas fa-heart" style="color:white;"></i>
+                          &nbsp;<span style="color:white;">Add to wishlist</span>
+                      </button>
+                  </form>
+                @endguest
 			</div>
 
 		</div>

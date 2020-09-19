@@ -20,5 +20,4 @@ class Gallery extends Model
     public function wishlists(){
         return $this->hasMany('App\Wishlist');
     }
-  
 }

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Gallery;
-use DB;
+use Illuminate\Http\Request;
+use App\Http\Requests\GalleryRequest;
+/*use Illuminate\Http\Requests;
+use Illuminate\Foundation\Http\GalleryRequest;*/
+
 
 class GalleryController extends Controller
 {
@@ -15,19 +18,18 @@ class GalleryController extends Controller
      */
     public function index()
     {
-         $galleries = Gallery::orderBy('created_at', 'desc')->paginate(6);
+        $galleries = Gallery::orderBy('created_at', 'desc')->paginate(6);
         return view('backend.gallery.index', compact("galleries"));
     }
 
-    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {      
-        return view('backend.gallery.create');
+    {
+         return view('backend.gallery.create');
     }
 
     /**
@@ -36,58 +38,47 @@ class GalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-          $request->validate([
-            'image' => 'image|mimes:png,jpg,jpeg|max:5000',   
-            'title' => 'required',
-            'price'=> 'required',
-            'detail'=>'required',
-            'sold_out'=>'required'
-           
-            
-        ]);
-        $image = $request->file('image');
-        $new_name = rand() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $new_name);
-        $form_data = array(
-            'image' => $new_name,    
-            'title' => $request->title,
-            'price' => $request->price,
-            'detail' => $request->detail,
-            'sold_out'=> $request->sold_out
-            
-        );
-        
-        Gallery::create($form_data);
-        return redirect()->route("gallery.index")->with('success', 'Data Added successfuly');
+    public function store(GalleryRequest $request)
+    {   
+        $galleries = new Gallery();
+
+        $galleries->title=$request->input('title');
+        $galleries->price=$request->input('price');
+        $galleries->detail=$request->input('detail');
+        $galleries->sold_out=$request->input('sold_out');
+
+        if ($request->hasfile('image')) {
+            $file = $request->file("image");
+            $extension = $file-> getClientOriginalExtension();
+            $filename = time() . ".".$extension;
+            $file->move(public_path('images'), $filename);
+            $galleries->image =$filename;
+        } else {
+            return $request;
+            $galleries->image ="";
+        }
+
+        $galleries->save();
+        return redirect()->route('gallery.index')
+            ->with('success', 'Category added successfully');
     }
+    
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(GalleryRequest $gallery)
     {
         //
     }
 
-    public function sold_out($id){
-        $data = array();
-        $data['sold_out'] = 0;
-
-        DB::table('galleries')->where('id',$id)->update($data);
-
-        return redirect()->route("gallery.index")->with('status', 'Data Updated for Gallery');
-    }
-
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -100,55 +91,41 @@ class GalleryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GalleryRequest $request,$id)
     {
         
-        $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if ($image != '') {
-            $request->validate([
-                'image' => 'image|max:5000',
-                'title' => 'required',
-                'price' => 'required',
-                'detail' => 'required',
-                'sold_out' => 'required'
-            ]);
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $image_name);
-        } else {
-            $request->validate([
-                'title' => 'required',
-                'price' => 'required',
-                'detail' => 'required',
-                'sold_out' => 'required'
+        $galleries =Gallery::find($id);
 
-            ]);
-            
-        }
-        $form_data = array(
-            'image' => $image_name,
-            'title' => $request->title,
-            'price' => $request->price,
-            'detail' => $request->detail,
-            'sold_out'=> $request->sold_out
-            
-        );
-        Gallery::whereId($id)->update($form_data);
-        return redirect()->route("gallery.index")->with('status', 'Data Updated for Gallery');
+        $galleries->title=$request->input('title');
+        $galleries->price=$request->input('price');
+        $galleries->detail=$request->input('detail');
+        $galleries->sold_out=$request->input('sold_out');
+
+        if ($request->hasfile('image')) {
+            $file = $request->file("image");
+            $extension = $file-> getClientOriginalExtension();
+            $filename = time() . ".".$extension;
+            $file->move(public_path('images'), $filename);
+            $galleries->image =$filename;
+        } 
+        $galleries->save();
+
+        return redirect()->route('gallery.index')
+            ->with('success', 'Category added successfully');
+    
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-   
-    public function destroy($id) {
-
+    public function destroy($id)
+    {
         $galleries = Gallery::findOrFail($id);
         $image_path = public_path('images').'/'.$galleries->image;
         unlink($image_path);
@@ -157,6 +134,16 @@ class GalleryController extends Controller
 
         return redirect()->route("gallery.index")->with('status', 'Data deleted for gallery');
     }
+
+
+    public function sold_out($id){
+        $data = array();
+        $data['sold_out'] = 0;
+
+        DB::table('galleries')->where('id',$id)->update($data);
+
+        return redirect()->route("gallery.index")->with('status', 'Data Updated for Gallery');
+    }
+
+
 }
-
-

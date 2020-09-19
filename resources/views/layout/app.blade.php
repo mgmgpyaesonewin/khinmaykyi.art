@@ -67,58 +67,59 @@
         <span><h2 class="logo">KhinMayKyi</h2>
       </a>
     </div>
-  <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
-    <div class="container">
+
+    <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
+
+      <div class="container">
         <div class="row align-items-center position-relative">
-          {{-- <div class="site-logo">
-            <a href="/" >
-              <span><h4 class="logo">KhinMayKyi</h4>
-            </a>
-          </div> --}}
+          
+            <div class="col-12">
+              <nav class="site-navigation{{--  text-right ml-auto  --}}" style="text-align: center;" role="navigation">
 
-          <div class="col">
+                <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
+                <li><a href="/" class="nav-link" style="padding-right: 4rem;">HOME</a></li>
+                <li><a href="/about" class="nav-link" style="padding-right: 4rem;">ABOUT</a></li>
+                <li><a href="/gallery" class="nav-link" style="padding-right: 4rem;">GALLERY</a></li>
+              
 
-            <nav class="site-navigation ml-auto " role="navigation">
-
-              <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block" style="text-align: center;"  style="background-color: #FEFBFD;">
-                <li style="padding-right: 4rem;"><a href="/" class="nav-link">HOME</a></li>
-                <li style="padding-right: 4rem;"><a href="/about" class="nav-link">ABOUT</a></li>
-                <li style="padding-right: 4rem;"><a href="/gallery" class="nav-link">GALLERY</a></li>
-
-                <li class="nav-item submenu dropdown" style="padding-right: 4rem;">
-                  @guest
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <li class="has-children">
+                   @guest
+                    <a href="#" class="nav-link">
                       <i class="fas fa-user-circle" style="color: #7A5E86"></i>
                     </a>
                   @else
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="nav-link">
                       <i class="fas fa-user-circle" style="color: #7A5E86"></i> {{ Auth::user()->name }}
                     </a>
                   @endguest
-               
-
-              <ul class="dropdown-menu">
-                <li class="nav-item">
-                  @guest
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ route('login') }}">{{ __('LOGIN') }}</a>
-                    </li>
-                  @if (Route::has('register'))
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ route('register') }}">{{ __('REGISTER') }}</a>
+                  <ul class="dropdown arrow-top">
+                    @guest
+                    <li> <a class="nav-link" href="{{ route('login') }}">{{ __('LOGIN') }}</a></li>
+                     @if (Route::has('register'))
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('REGISTER') }}</a>
                     </li>
                   @endif
                   @else
-                    <li class="nav-item">
-                    <a class="nav-link"href="{{ route('logout') }}">LOGOUT</a>
-                  </li>
-                  @endguest
-                </li>
-              </ul>
-
-                @auth
                   <li>
-                    <a class="nav-link" href="{{url("cart")}}" >
+                   <a class="nav-link" href="{{ route('logout') }}">LOGOUT</a>
+                 </li>
+                  @endguest
+                    {{-- <li><a href="#pricing-section" class="nav-link">Pricing</a></li>
+                    <li><a href="#faq-section" class="nav-link">FAQ</a></li>
+                    <li class="has-children">
+                      <a href="#">More Links</a>
+                      <ul class="dropdown">
+                        <li><a href="#">Menu One</a></li>
+                        <li><a href="#">Menu Two</a></li>
+                        <li><a href="#">Menu Three</a></li>
+                      </ul>
+                    </li> --}}
+                  </ul>
+                </li>
+
+                  @auth
+                <li>
+                 <a class="nav-link" href="{{url("cart")}}" >
                       <i class="Shopping-icon fa fa-shopping-cart" style="color: #7A5E86"></i>
                       <span class="shopping-text"></span>
                       <span style="color:black; font-weight:bold;">
@@ -140,11 +141,10 @@
                       </span>
                     </a>
                 </li>
-                @endauth
-
-
-                @auth
-                  <li>
+                  @endauth
+        
+                  @auth
+                <li>
                     <a class="nav-link" href="{{url("wishlist")}}" >
                       <i class="Shopping-icon fa fa-heart" style="color: #7A5E86"></i>
                       <span class="shopping-text"></span>
@@ -153,6 +153,7 @@
                       @php
                         $auth_user = Auth::user();
                         $wishlists = App\Wishlist::with('gallery')
+                                      ->where('user_id', Auth::user()->id)
                                       ->get();
                         $count = $wishlists->count();
                       @endphp
@@ -165,22 +166,25 @@
                       </span>
                     </a>
                 </li>
-                @endauth
+                  @endauth
+
               </ul>
-
             </nav>
+          
+            </div>
 
-          </div>
+          <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
         </div>
-    </div>
+      </div>
+      
+    </header>
 
-     <div class="toggle-button d-inline-block d-lg-none">
+  {{--    <div class="toggle-button d-inline-block d-lg-none">
         <a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black">
           <span class="icon-menu h3"></span>
         </a>
-      </div>
-
-  </header>
+      </div> --}}
 
   @yield('content')
 
@@ -287,6 +291,8 @@
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   } 
+  </script>
+
   </script>
 
   </body>

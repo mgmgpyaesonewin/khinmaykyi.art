@@ -13,7 +13,6 @@
     <form action="{{route('gallery.update', $galleries->id)}}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PATCH')
-        
       <div class="modal-body">
         <img src="{{ URL::to('/')}}/images/{{$galleries->image}}" class="img-thumbnail" width="100" />
         <div class="input-group">

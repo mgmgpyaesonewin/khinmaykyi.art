@@ -36,7 +36,7 @@ Route::get('/gallery_detail/{id}','FrontController@detailGallery');
  Route::group(['middleware'=>'auth'],function(){
 	Route::resource('cart','CartController');
 	Route::get('/orderConfirm','FrontController@orderConfirm');
-	Route::post('/address','FrontController@address')->name('addtoadresss');
+	Route::post('/address/{id}','FrontController@address_update')->name('addtoadresss');
 	Route::get('/order','FrontController@storeOrder')->name('storeOrder');
     Route::get('/addtocart','FrontController@storeCart')->name('storeCart');
     Route::get('/addtowishlist','FrontController@storeWishlist')->name('storeWishlist');
@@ -51,9 +51,10 @@ Auth::routes();
 
 /*Admin Panel*/
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/home', function() {
+    /*Route::get('/home', function() {
         return view('backend.home');
-    });
+    });*/
+    Route::get('/home','AdminHomeController@adminHome');
     Route::resource('gallery','GalleryController');
     Route::resource('order','OrderController');
     Route::get('/sold_out/gallery/{id}','GalleryController@sold_out');

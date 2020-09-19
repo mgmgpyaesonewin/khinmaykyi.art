@@ -12,6 +12,7 @@ use App\Order;
 use App\Order_detail;
 use App\Cart_item;
 use App\Wishlist;
+use App\User;
 
 class FrontController extends Controller
 {
@@ -30,29 +31,28 @@ class FrontController extends Controller
     {
     	$galleries = Gallery::where('id', $id)
                 	->first(); 
-           
-		return view('frontend.detail', compact('galleries'));
+
+        if(\Auth::check()){
+            $wishlist_count = Wishlist::where(['gallery_id' => $galleries->id,'user_id' => \Auth::user()->id])
+                        ->count();
+            }
+		return view('frontend.detail', compact('galleries','wishlist_count'));
     }
     
-    public function address(Request $request)
-    {
-        $validatedData = $request->validate([
-            'phone' => 'required',
-            'address' => 'required',
-            'payment_method' => 'required',
-        ]);
-
-        Auth::user()->address()->create($validatedData);
-
+     public function address_update(Request $request, $id){
+        $profile = Auth::user();
+        $profile->phone = $request->input('phone');
+        $profile->address = $request->input('address');
+        $profile->update();
+        
         return redirect('/orderConfirm');
     }
-    
+
     public function orderConfirm(Request $request)
     {
-        $shipping_address = Address::where('user_id', Auth::user()->id)
-                            ->latest()
-                            ->first();
-
+     
+        $user = auth()->user();
+                            
         $cart=Cart::where('user_id',Auth::user()->id)->first();
       
         $carts = DB::table('cart_items')
@@ -61,7 +61,7 @@ class FrontController extends Controller
                 ->where('carts.user_id',$cart->user_id)
                 ->get();
 
-        return view('frontend.order_confirm', compact('shipping_address','carts'));
+        return view('frontend.order_confirm', compact('user','carts'));
     }
 
     public function storeOrder(Request $request)
@@ -130,9 +130,7 @@ class FrontController extends Controller
     
     public function wishlist(Request $request){
 
-        $wishlists = Wishlist::with('gallery')
-                    ->get();
-                    
+         $wishlists = Wishlist::with('gallery')->where('user_id', Auth::user()->id)->get();     
 
        return view('frontend.wishlist',compact('wishlists'));
     }

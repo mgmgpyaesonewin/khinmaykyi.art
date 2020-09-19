@@ -15,13 +15,13 @@
                 <div class="row">
                     <div class="col-6">
                         <h5 class="card-title"> Your Information : </h5>
-                        <p> {{(Auth::user()->name)}} </p>
-                        <p> {{(Auth::user()->email)}} </p>
+                        <p> {{($user->name)}} </p>
+                        <p> {{($user->email)}} </p>
                     </div>
                     <div class="col-6 border-left">
                         <h5 class="card-title"> Shipping Address : </h5>
-                        <p> {{$shipping_address->address}} </p>
-                        <p>Phone no:{{$shipping_address->phone}}</p>
+                        <p> {{$user->address}} </p>
+                        <p>Phone no:{{$user->phone}}</p>
                     </div>
                 </div>
             </div>

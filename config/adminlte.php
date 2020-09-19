@@ -188,7 +188,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin/home',
 
     'logout_url' => 'logout',
 
@@ -234,7 +234,7 @@ return [
     'menu' => [
         [
             'text' => 'blog',
-            'url'  => 'admin/blog',
+            'url'  => 'admin',
             'can'  => 'manage-blog',
         ],
         [

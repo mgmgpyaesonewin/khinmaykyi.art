@@ -10,14 +10,14 @@
     <div class="row">
       <div class="col-lg-8">
         <h3 class="Shipping-text">Shipping Address</h3>
-
-        <form action="{{route('addtoadresss')}}" method="POST" enctype="multipart/form-data">
+ 
+        <form action="/address/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data">
           @csrf
 
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Phone</label>
               <input class="form-control @error('title') @enderror" 
-              type="text" name="phone" value="{{old ('phone')}}">
+              type="text" name="phone" value="{{Auth::user()->phone}}">
               @error('phone')
               <p class="help is-danger" style="color: red;">{{$errors->first('phone')}}</p>
               @enderror
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Address</label>
               <input class="form-control @error('address') @enderror" 
-              type="text" name="address" value="{{old ('phone')}}">
+              type="text" name="address" value="{{Auth::user()->address}}">
               @error('address')
               <p class="help is-danger" style="color: red;">{{$errors->first('address')}}</p>
               @enderror
