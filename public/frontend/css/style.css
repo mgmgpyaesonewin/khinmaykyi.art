@@ -654,7 +654,7 @@ text-align:center;
   z-index: 1;
   overflow: hidden;
   position: relative;
-  padding: 15px 40px;
+  padding: 15px 30px;
   margin: 10px 0 0;
   text-decoration: none;
   text-align: center;
@@ -942,6 +942,12 @@ img,
 
 
 }
+
+/*order_confirm page*/
+    .order_confirm_tb th{
+        border-top: none;
+  }
+
 
 
 

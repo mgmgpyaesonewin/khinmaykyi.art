@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Gallery;
 use Illuminate\Http\Request;
 use App\Http\Requests\GalleryRequest;
+use Illuminate\Support\Facades\DB;
 /*use Illuminate\Http\Requests;
 use Illuminate\Foundation\Http\GalleryRequest;*/
 
@@ -145,5 +146,12 @@ class GalleryController extends Controller
         return redirect()->route("gallery.index")->with('status', 'Data Updated for Gallery');
     }
 
-
+   public function gallery_search(Request $request)
+    {
+        $searchData = $request->searchData;
+        $galleries = DB::table('galleries')
+            ->where('title', 'like', '%' . $searchData . '%')
+            ->paginate(6);
+        return view('backend.gallery.search',compact('galleries'));
+    }
 }

@@ -35,7 +35,7 @@
                                 <th scope = "col"> Image </th>
                                 <th scope = "col"> Title </th>
                                 <th scope = "col"> Price </th>
-                                <th scope = "col"> Action </th>
+                                <th scope = "col">       </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" onclick="return confirm('Are you sure?');" class="btn btn-danger">
-                                            <i class="far fa-trash-alt"></i>
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form> 
                                 </td>
@@ -59,21 +59,28 @@
                             @endforeach
                         </tbody>
                     </table>
-
+                    <hr>
                     Total Quantity : <strong> {{ $quantities}} </strong>
                     <br>
                     Total Price : <strong> {{ number_format($total) }}-kyats </strong>
-
-                    <div class="checkout_btn_inner align-items-center" style="float:right; margin-top: 1em;">
-                        <a class="button" href="{{url('/shipping_info')}}">Proceed To Checkout</a>  
-                    </div>
-                    <div class="checkout_btn_inner align-items-center" style="float:right; margin-top: 1em;">
-                        <a class="button" href="{{url('/gallery')}}" style="color: white;">Continue Shopping</a>
-                    </div>
+                   
                 </div>
             </div>
             @endif
-        </div>
+
+            <div class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+                <div class="row">
+                       <div class="col-6 text-center">
+                            <a class="button" href="{{url('/gallery')}}" style="color: white;">Continue Shopping</a>
+                       </div>
+                       <div class="col-6 text-center">
+                            <a class="button" href="{{url('/shipping_info')}}">Proceed To Checkout</a> 
+                       </div>
+                   </div>
+            </div>
+            </div>
+             
+
     </section>
 
 @endsection

@@ -9,8 +9,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-        <h3 class="Shipping-text">Shipping Address</h3>
- 
+        <h3 style="text-align: center; color: #343352; margin-top: 1rem;">Shipping Address</h3>
+  
         <form action="/address/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data">
           @csrf
 
@@ -36,13 +36,13 @@
               <input type="checkbox" name="payment_method" value=1 checked>
               Cash on Delivery
             </div>
-
-            <br>
+          
             <div class="checkout_btn_inner d-flex align-items-center" style="float:right; margin: 0.5em 0;">
               <button type="submit" class="button">Proceed to payment</button>
             </div>
             
         </form>
+
       </div>
     </div>
   </div>

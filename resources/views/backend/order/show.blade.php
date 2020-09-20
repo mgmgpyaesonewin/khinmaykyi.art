@@ -11,18 +11,17 @@
   <div class="card" style="margin-top: 1rem; margin-bottom: 1rem;">
     <div class="card-body">
       <div class="row">
-        @foreach($orders as $order)
           <div class="col-6">
             <h5 class="card-title"><strong>Customer Information</strong></h5><br><hr>
             <p> Name : {{($order->user->name)}} </p>
             <p> E-mail : {{($order->user->email)}} </p>
           </div>
-        @endforeach
           <div class="col-6 border-left">
             <h5 class="card-title"><strong>Shipping Address</strong></h5><br><hr>
-            <p> Address : {{$shipping_address->address}} </p>
-            <p>Phone no : {{$shipping_address->phone}}</p>
+            <p> Address : {{$order->user->address}} </p>
+            <p>Phone no : {{$order->user->phone}}</p>
           </div>
+         
       </div>
     </div>
   </div>
@@ -50,8 +49,8 @@
                       </td>
                       <td>{{ number_format($order->price) }} kyats</td>
                       <td>{{$order->status}}
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
-                        <i class="far fa-edit"></i>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" style="outline:none; border:none;background-color: transparent;">
+                        <i class="far fa-edit" style="color:black;"></i>
                         </button>
                       </td>
                       <td>{{ Carbon\Carbon::parse($order->created_at)->format('jS, M, Y')}}
@@ -61,7 +60,7 @@
                   </tbody>
                 </table>
                 <h6>Total Quantity : <strong> {{$count}} </strong> </h6>
-                <h6>Total Price: <strong> {{ number_format($total) }} kyats- kyats </strong> </h6>
+                <h6>Total Price: <strong> {{ number_format($total) }}-kyats </strong> </h6>
                 <h6>Payment Method : <strong> COD </strong> </h6>
               </div>
             </div>

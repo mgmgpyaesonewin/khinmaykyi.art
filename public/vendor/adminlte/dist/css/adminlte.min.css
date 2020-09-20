@@ -20,9 +20,11 @@
     border-radius: 100% !important; 
     margin: 0 5px;
 }
+
 a.page-link:hover{
     background-color: #0090F0;
 }
+
 .page-item.active .page-link{
     background-color: #0090F0;
     color: #ffffff;
@@ -64,3 +66,38 @@ a.page-link:hover{
         right: -5px;
         bottom: -12px;
     }
+
+ /*gallery index page*/
+.btnsearch{
+	padding: 0;
+	border: none;
+	background: none;
+
+}
+.btnsearch:focus { 
+	outline: none; 
+}
+
+div.card {
+  position: relative;
+  float: left;
+  margin: 5px;
+}
+/*
+div.card:hover img {
+  opacity: 0.5;
+}
+
+div.card:hover label {
+  display: block;
+}*/
+
+div.card label {
+  position: absolute;
+  display: block;
+}
+
+div.card label.status {
+  top: 0;
+  left: 0;
+}

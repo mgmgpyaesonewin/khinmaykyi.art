@@ -44,7 +44,7 @@ class FrontController extends Controller
         $profile->phone = $request->input('phone');
         $profile->address = $request->input('address');
         $profile->update();
-        
+  
         return redirect('/orderConfirm');
     }
 

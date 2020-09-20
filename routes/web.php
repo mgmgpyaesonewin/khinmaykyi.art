@@ -56,6 +56,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     });*/
     Route::get('/home','AdminHomeController@adminHome');
     Route::resource('gallery','GalleryController');
+    Route::get('gallery_search','GalleryController@gallery_search');
     Route::resource('order','OrderController');
     Route::get('/sold_out/gallery/{id}','GalleryController@sold_out');
 });
