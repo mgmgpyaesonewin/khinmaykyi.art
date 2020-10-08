@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class GalleryRequest extends FormRequest
+class AddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,14 +14,14 @@ class GalleryRequest extends FormRequest
      */
     public function authorize()
     {
-         if (Auth::user() && Auth::user()->admin == 1) {
+        if (Auth::user()) {
 
             return true;
 
         }
 
         return false;
-    
+
     }
 
     /**
@@ -32,11 +32,9 @@ class GalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => 'image|mimes:png,jpg,jpeg|max:5000',   
-            'title' => 'required',
-            'price'=> 'required',
-            'detail'=>'required',
-            'sold_out'=>'required'
+            'phone' => 'required|min:8|numeric',   
+            'address' => 'required',
+             'township' => 'required'
         ];
     }
 }

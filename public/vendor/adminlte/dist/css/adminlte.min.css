@@ -101,3 +101,16 @@ div.card label.status {
   top: 0;
   left: 0;
 }
+
+.theader th{
+    border-top: none;
+}
+
+.thead{
+    text-align: center;
+}
+
+td.tdata{
+    text-align: center;
+    vertical-align: middle;
+}

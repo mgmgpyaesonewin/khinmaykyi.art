@@ -3,7 +3,31 @@
 @section('title','Gallery')
 
 @section('content')
-  
+<style>
+    .page-header{
+    padding: 2.6rem 0 2.5rem;
+    background-color: #ebebeb;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+</style>
+ {{-- <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Gallery</li>
+      </ol>
+    </nav>
+  </div> --}}
+  <div class="page-header text-center" style="background-image: url('./frontend/images/page-header-bg.jpg')">
+            <div class="container">
+              <h3 class="page-title">List
+              </h3>
+              <span>Gallery</span>
+            </div><!-- End .container -->
+          </div>
+
   <div class="container" style="padding: 40px;">
 
     <div class="row">
@@ -31,7 +55,7 @@
                 </div>{{-- grid --}}
               </div>{{-- frame --}}
             </div>{{-- img-event --}}
-              <p style="font-size: 2rem; margin-bottom: 1rem; text-align: center; margin-top: 1rem;"><a href="single.html" class="gallery_title">{{$gallery->title}}</a></p>
+              <p style="font-size: 16px; margin-bottom: 1rem; text-align: center; margin-top: 1rem;"><a href="single.html" class="gallery_title">{{$gallery->title}}</a></p>
           </div>{{-- item --}}
           @endforeach
         </div>{{-- row view-group --}}

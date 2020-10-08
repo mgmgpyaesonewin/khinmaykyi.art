@@ -4,31 +4,8 @@
 
 @section('content')
 
-{{-- <style>
-  .responsive_image{
-    width: 100%;
-    height: auto;
-  }
-  .slider_content1{
-    .background-image: url('./frontend/images/color.png');
-  }
-  .rounded {
-    border-radius: 0.25rem!important;
-}
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-}
-img {
-    vertical-align: middle;
-    border-style: none;
-    transition: all 300ms linear;
-}
-  </style> --}}
-
-
 <header>
-  <div class="container" style="background-color: whitesmoke; width: 100%; height: 100%;">
+  <div class="container mb-5" style="background-color: whitesmoke; width: 100%; height: 100%;">
     <div class="row">
       <div id="slides" class="carousel slide" data-ride="carousel">
         <ul class="carousel-indicators">
@@ -50,7 +27,7 @@ img {
                 </div>
                 </div>
               <div class="col-8" style="padding-top: 2em; padding-bottom: 2em; padding-right: 2.3em;">
-                <div class="frame1" style="-ms-transform: rotate(5deg); transform: rotate(5deg);">
+                <div class="frame1" {{-- style="-ms-transform: rotate(5deg); transform: rotate(5deg);" --}}>
                 <img class="responsive_image" src="./frontend/images/IMG_7753.jpg">
               </div>
               </div>
@@ -80,7 +57,7 @@ img {
             <div class="carousel-item">
             <div class="row">
               <div class="col-7" style="padding-top: 2em; padding-bottom: 2em; padding-left: 2.5em;">
-                <div class="frame1" style="-ms-transform: rotate(-6deg); transform: rotate(-6deg);">
+                <div class="frame1" {{-- style="-ms-transform: rotate(-6deg); transform: rotate(-6deg);" --}}>
                   <img class="responsive_image" src="./frontend/images/IMG_3532.JPG">
                 </div>
               </div>
@@ -105,91 +82,99 @@ img {
 </header>
 
 <section class="ct-hometabcontent">
-  <div class="site" style="margin-top: 2rem;">
-    <div class="container">
 
-     {{--  <div class="row">
+  <div class="site"{{--  style="margin-top: 2rem;" --}}>
+    <div class="container py-4 bg-light">
+
         <div class="col-12 text-center mb-5">
           <div class="block-heading-1" data-aos="fade-up" data-aos-delay="">
             <span>Recent Artworks</span>
-            <h2>Our Art</h2>
+            <h2 class="our_art">Our Art</h2>
           </div>
-        </div>
-      </div> --}}
+        </div>    
      
-          <div class="card-columns">
+      <div class="row equal align-items-center justify-content-center text-center">       
 
+        <div class="card-deck">
+
+          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
             <div class="card">
-              <img class="card-img-top" src="./frontend/images/IMG_7751.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title that wraps to a new line</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
+              <div class="grid">
+                <img class="card-img-top img-fluid" src="./frontend/images/IMG_6623.JPG" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Yangon Downtown View</h5>
+                 <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">James Cooper</a></p>
+              </div>
             </div>
-
-             <div class="card">
-              <img class="card-img-top" src="./frontend/images/IMG_7751.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title that wraps to a new line</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-
-             <div class="card">
-              <img class="card-img-top" src="./frontend/images/IMG_7751.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">Card title that wraps to a new line</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-            </div>
-  
-
-
-
           </div>
-    
+
+          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
+            <div class="card">
+              <div class="grid">
+                <img class="card-img-top img-fluid" src="./frontend/images/IMG_0586.JPG" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Mountain View</h5>
+                <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">James Cooper</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
+            <div class="card">
+              <div class="grid">
+                <img class="card-img-top img-fluid" src="./frontend/images/IMG_2658.jpg" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card title that wraps to a new line</h5>
+                 <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">James Cooper</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
+            <div class="card">
+              <div class="grid">
+                <img class="card-img-top img-fluid" src="./frontend/images/IMG_9186.JPG" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card title that wraps to a new line</h5>
+                 <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">James Cooper</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
+            <div class="card">
+              <div class="grid">
+                <img class="card-img-top img-fluid" src="./frontend/images/IMG_9387.jpg" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card title that wraps to a new line</h5>
+                 <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">James Cooper</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
+            <div class="card">
+              <div class="grid">
+                <img class="card-img-top img-fluid" src="./frontend/images/IMG_4157.JPG" alt="Card image cap">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Card title that wraps to a new line</h5>
+                 <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">James Cooper</a></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     
     </div>
   </div>
 </section>
-
-
-{{-- 
-        <div class="col-lg-4 col-md-6 mb-4 aos-init aos-animate" data-aos="fade-up">
-            <a href="single.html" class="recent mb-4 d-block"><img src="./frontend/images/IMG_7751.jpg" alt="Image" class="img-fluid rounded"></a>
-            <h2><a href="single.html" class="recent-image-title">Yangon Downtown View</a></h2>
-            <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">Khin May Kyi</a></p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="" style="display: table-cell;">
-            <a href="single.html" class="recent mb-4 d-block"><img src="./frontend/images/IMG_5516.JPG" alt="Image" class="recent-image rounded"></a>
-            <h2><a href="single.html" class="recent-image-title">Monastery</a></h2>
-            <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">Khin May Kyi</a></p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="" style="display: table-cell;">
-            <a href="single.html" class="recent mb-4 d-block"><img src="./frontend/images/IMG_7753.jpg" alt="Image" class="recent-image rounded"></a>
-            <h2><a href="single.html" class="recent-image-title">Yangon Medical University</a></h2>
-            <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">Khin May Kyi</a></p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="">
-            <a href="single.html" class="recent mb-4 d-block"><img src="./frontend/images/IMG_7753.jpg" alt="Image" class="recent-image rounded"></a>
-            <h2><a href="single.html" class="recent-image-title">Yangon Medical University</a></h2>
-            <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">Khin May Kyi</a></p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="">
-            <a href="single.html" class="recent mb-4 d-block"><img src="./frontend/images/IMG_9726.jpg" alt="Image" class="recent-image rounded"></a>
-            <h2><a href="single.html" class="recent-image-title">State Counsellor</a></h2>
-            <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">Khin May Kyi</a></p>
-        </div>
-
-        <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="">
-            <a href="single.html" class="recent mb-4 d-block"><img src="./frontend/images/IMG_3471.jpg" alt="Image" class="recent-image rounded"></a>
-            <h2><a href="single.html" class="recent-image-title">Bagan</a></h2>
-            <p class="text-muted mb-3 text-uppercase small"><span class="mr-2">January 18, 2019</span> By <a href="single.html" class="by">Khin May Kyi</a></p>
-        </div> --}}
 
 
   <div class="site" style="margin-top: 2rem;">

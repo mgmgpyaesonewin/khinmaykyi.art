@@ -8,63 +8,71 @@
 
 @section('content')
 
-  <div class="card" style="margin-top: 1rem; margin-bottom: 1rem;">
-    <div class="card-body">
-      <div class="row">
+
+  <div class="contaier">
+    <div class="row">
+
+      <div class="card" style="width: 100%;">
+        <div class="row">
           <div class="col-6">
-            <h5 class="card-title"><strong>Customer Information</strong></h5><br><hr>
+            <h5 class="title text-center"><strong>Customer Information</strong></h5><hr>
             <p> Name : {{($order->user->name)}} </p>
             <p> E-mail : {{($order->user->email)}} </p>
           </div>
           <div class="col-6 border-left">
-            <h5 class="card-title"><strong>Shipping Address</strong></h5><br><hr>
+            <h5 class="title text-center"><strong>Shipping Address</strong></h5><hr>
             <p> Address : {{$order->user->address}} </p>
             <p>Phone no : {{$order->user->phone}}</p>
           </div>
-         
+        </div>
       </div>
+
     </div>
   </div>
 
-      <div class="row">
-        <div class="col">
-          <div class="card">
+
+ <div class="row">
+          <div class="card" style="width: 100%;">
             <div class="card-body">
               <div class="table-responsive">
                 <table id="dataTable" class="table">
-                  <thead class=" text">
+                  <thead class="theader">
                     <tr>
-                      <th>Gallery Item</th>
-                      <th>Price</td>
-                      <th>Status</th>
-                      <th>Date</th>
+                      <th class="thead">Gallery Item</th>
+                      <th class="thead">Price</td>
+                      <th class="thead">Status</th>
+                      <th class="thead">Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($order_details as $order)
                     <tr>
-                      <td>
-                        <img src="{{URL::to('/')}}/images/{{ $order->image }}" class="img-thumbnail" width="150px"
-                        height="100px" alt="Image" />
+                      <td class="tdata">
+                        <img src="{{URL::to('/')}}/images/{{ $order->gallery->image }}" class="img-thumbnail" width="150px"
+                         alt="Image" style="text-align: center;vertical-align: middle;"/>
                       </td>
-                      <td>{{ number_format($order->price) }} kyats</td>
-                      <td>{{$order->status}}
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" style="outline:none; border:none;background-color: transparent;">
-                        <i class="far fa-edit" style="color:black;"></i>
-                        </button>
+                      <td class="tdata">{{ number_format($order->gallery->price) }} kyats</td>
+                      <td class="tdata">{{$order->order->status}}
                       </td>
-                      <td>{{ Carbon\Carbon::parse($order->created_at)->format('jS, M, Y')}}
+                      <td class="tdata">{{ Carbon\Carbon::parse($order->created_at)->format('jS, M, Y')}}
                       </td>
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
-                <h6>Total Quantity : <strong> {{$count}} </strong> </h6>
-                <h6>Total Price: <strong> {{ number_format($total) }}-kyats </strong> </h6>
-                <h6>Payment Method : <strong> COD </strong> </h6>
+                 
+                  <div class="card" style="width: 18rem;float:right;background-color: #F9F9F9;">
+                    <div class="card-body">
+                        <h6>Total Quantity : <strong> {{ count($order_details) }}  </strong> </h6>
+                      <h6>Total Price: <strong> {{ number_format($total) }}-kyats </strong> </h6>
+                      <h6>Payment Method: <strong> Cash on Delievery</strong></h6>
+                        </div>
+                    </div>
+              
               </div>
             </div>
           </div>
+        </div>
 
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
              <div class="modal-dialog" role="document">
@@ -97,11 +105,15 @@
              </div>
           
             <div class="modal-footer" >
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
+                        <i class="far fa-edit" style="color:white;">Edit</i>
+                        </button>
               <a href="{{url('admin/order')}}" class="btn btn-secondary" >Close
               </a>
             </div>
-        </div>
-      </div>
+            </div>
+          </div>
+
 
 
 @stop

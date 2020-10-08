@@ -4,6 +4,16 @@
 
 @section('content')
 
+ <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/gallery">Gallery</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{$galleries->title}}</li>
+      </ol>
+    </nav>
+  </div>
+
 	<div class="container" style="margin-top: 3em; margin-bottom: 3em;">
 		<div class="row">
 
@@ -25,8 +35,9 @@
 				{{--  <hr style="border: 1px dotted #000000; border-style: none none dotted; color: #fff; background-color: #fff;"> --}}
 
 				 @auth 
-				 	        <form action="{{route('storeCart')}}" mehtod="POST" role="form" style="display: inline-block">
-                    	<input type="hidden" name="token" value="{{csrf_token()}}">
+          @if ($cart_count == 0)
+                    <form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
+                      @csrf    
                     	<input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
                     	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
                     	<button class="button" type="submit">
@@ -34,12 +45,20 @@
                       		&nbsp;<span>Add to cart</span>
                     	</button>
                 	</form>
+          @else
+             <p style="display: inline-block; padding-left: 20px;">
+                  <i class="fas fa-check"></i>
+                    <a href="{{url('/cart')}}">
+                       Browse Cart
+                    </a>
+                </p>
+                @endif
 
 				 @endauth
 
 				 @guest
-                	<form action="{{route('storeCart')}}" mehtod="POST" role="form" style="display: inline-block;">
-                    	<input type="hidden" name="token" value="{{csrf_token()}}">
+                	<form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
+                      @csrf    
                     	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
                     	<button class="button" type="submit">
                       		<i class="fa fa-shopping-basket shopping-icon"></i>
@@ -51,8 +70,8 @@
 
         @auth
          @if ($wishlist_count == 0)
-                <form action="{{route('storeWishlist')}}" mehtod="POST" role="form" style="display: inline-block;">
-                      <input type="hidden" name="token" value="{{csrf_token()}}">
+                <form action="{{ route('wishlist.store') }}" method="POST" role="form" style="display: inline-block">
+                      @csrf    
                       <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
                       <button class="button" type="submit">
                           <i class="fas fa-heart" style="color:white;"></i>
@@ -60,19 +79,17 @@
                       </button>
                   </form>
                 @else
-                <p>
-                   The gallery was successfully added to your wishlist.
-                    <br>
-                    Check 
+                <p style="display: inline-block; padding-left: 20px;">
+                  <i class="fas fa-check"></i>
                     <a href="{{url('/wishlist')}}">
-                       Here
+                       Browse Wishlist
                     </a>
                 </p>
                 @endif
                 @endauth
                 @guest
-                <form action="{{route('storeWishlist')}}" mehtod="POST" role="form" style="display: inline-block;">
-                      <input type="hidden" name="token" value="{{csrf_token()}}">
+                <form action="{{ route('wishlist.store') }}" method="POST" role="form" style="display: inline-block">
+                      @csrf    
                       <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
                       <button class="button" type="submit">
                           <i class="fas fa-heart" style="color:white;"></i>

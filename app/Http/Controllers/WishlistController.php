@@ -3,49 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Wishlist;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Collection;
-use App\Cart;
-use App\Cart_item;
-use App\User;
-use Session;
+use App\Gallery;
+use DB;
 
-
-class CartController extends Controller
+class WishlistController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-      
-        $carts = Cart::with('user')
-                ->where('user_id', Auth::id())
-                ->pluck('id');
+       
+        $wishlists=Gallery::join('wishlists','galleries.id',"=",'wishlists.gallery_id')
+                    ->where('user_id',Auth::user()->id)
+                    ->where('sold_out',1)
+                    ->get();
 
-                    
-       /* $cart_items=Cart_item::with(['gallery','cart'])
-                    ->whereIn('cart_id', $carts)
-                    ->get();*/
-
-        $cart_items = Cart_item::join('galleries','cart_items.gallery_id',"=",'galleries.id')
-                      ->whereIn('cart_id', $carts)
-                      ->where('sold_out',1)
-                      ->get();
-
-                      
-        $quantities = $cart_items->count();
-        $total = $cart_items->sum('gallery.price');
-        
-        session([ 
-            'total' => $total,
-            'quantities' => $quantities,
-        ]);
-
-        return view('frontend.cart', compact('carts','cart_items','total','quantities'));
-        
+       return view('frontend.wishlist',compact('wishlists'));
     }
 
     /**
@@ -66,19 +44,16 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $cart = Cart::create([
-            'user_id' => Auth::user()->id, 
-        ]);
-    
-        $cart_item = Cart_item::create([
-                'gallery_id' => $request->gallery_id,
-                'cart_id' => $cart->id,
-            ]);
 
-       return redirect('/cart');
-       
-    }
+         $wishlists = Wishlist::create([
+                'gallery_id' => $request->gallery_id,
+                'user_id' => Auth::user()->id,
+            ]);
      
+
+        return redirect()->back();
+    }
+
     /**
      * Display the specified resource.
      *
@@ -121,9 +96,10 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $cart_items = Cart::findOrFail($id);
-        $cart_items->delete();
         
-        return back()->with('status', 'Item Removed from cart');
+     $wishlists = Wishlist::findOrFail($id);
+        $wishlists->delete();
+
+         return redirect('/wishlist')->with('status', 'Item Removed from wishlist');
     }
 }

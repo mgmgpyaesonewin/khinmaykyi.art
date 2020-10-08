@@ -12,7 +12,7 @@ class Order_detail extends Model
         return $this->belongsTo('App\order','order_id');
     }
     
-    public function galleries(){
-        return $this->belongsToMany('App\Gallery','gallery_id');
+    public function gallery(){
+        return $this->belongsTo('App\Gallery','gallery_id');
     }
 }

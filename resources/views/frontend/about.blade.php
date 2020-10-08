@@ -4,6 +4,7 @@
 
 @section('content')
 
+
   <div class="container" style="margin-top: 2rem; margin-bottom: 2em;">
 
     <div class="block-heading-1" data-aos="fade-up" data-aos-delay="">
@@ -43,7 +44,7 @@
         <p class="recent-image-paragraph" style="margin-left: 60px; margin-top: 30px; margin-right: 100px;" >The exhibition is made possible by the Laura & C. Arnold Douglas Foundation.</p>
       </div>
     </div>
-    <hr style="border-top: dotted 1.5px #343352; border-width: 5px; width: 30px; ">
+    <hr class="mx-auto" style="border-top: dotted 1.5px #343352; border-width: 5px; width: 30px; ">
 
     <div class="row" style="margin-bottom: 2rem;">
       <div class="col-lg-6 col-md-6  col-sm-12 " data-aos="fade-right" data-aos-delay="">

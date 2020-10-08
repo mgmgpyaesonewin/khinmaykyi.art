@@ -22,9 +22,10 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('frontend.about');
 });
-Route::get('/shipping_info', function () {
+
+/*Route::get('/shipping_info', function () {
     return view('frontend.shipping_info');
-});
+});*/
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/gallery','FrontController@gallery');
 Route::get('/gallery_detail/{id}','FrontController@detailGallery');
@@ -34,17 +35,14 @@ Route::get('/gallery_detail/{id}','FrontController@detailGallery');
 
 /*Frontend middelware*/
  Route::group(['middleware'=>'auth'],function(){
-	Route::resource('cart','CartController');
-	Route::get('/orderConfirm','FrontController@orderConfirm');
-	Route::post('/address/{id}','FrontController@address_update')->name('addtoadresss');
-	Route::get('/order','FrontController@storeOrder')->name('storeOrder');
-    Route::get('/addtocart','FrontController@storeCart')->name('storeCart');
-    Route::get('/addtowishlist','FrontController@storeWishlist')->name('storeWishlist');
-    Route::get('/wishlist','FrontController@Wishlist');
-    Route::get('/removeWishlist/{id}','FrontController@removeWishlist');
-    
+    Route::get('/checkout','FrontController@shipping_info');
+	Route::resource('/cart','CartController');
+    Route::resource('/wishlist','WishlistController');
+	Route::post('/order_confirm','FrontController@order_confirm');
+    Route::get('/thankyou','FrontController@thankyou');
+    Route::get('/download-pdf','FrontController@downloadPDF');
+    Route::get('/profile','ProfileController@index');
 });
-
 
 
 Auth::routes();

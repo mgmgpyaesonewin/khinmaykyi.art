@@ -3,9 +3,16 @@
 @section('title','Wishlist')
 
 @section('content')
-<style>
 
-    </style>
+ <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+      </ol>
+    </nav>
+  </div>
+
 
         @if(session('status'))
             <div class="alert alert-success">
@@ -13,12 +20,12 @@
             </div>
         @endif
 
-        <h3 style="text-align: center; color: #343352; margin-top: 1rem;">View your wishlist products</h3>
+        <h5 style="text-align: center; color: #343352; margin-top: 1rem;">View your wishlist products</h5>
 
             @if($wishlists->isEmpty())
                 <div class="alert" style="margin: 3rem;">
                     <div class="empty_cart_page tc dn" style="display: block;  margin: 0 auto; text-align: center;">
-                        <i class="far fa-heart fa-4x" style="color: grey; margin-bottom: 1rem;"></i>
+                        <i class="fa fa-heart fa-4x" style="color: grey; margin-bottom: 1rem;"></i>
                         <h2 class="cart_page_heading mg__0 mb__20 tu fs__30">WISHLIST IS EMPTY.</h2>
                         <br>
                         <p>You don't have any products in the wishlist yet.<br> You will find a lot of interesting products on our "Shop" page.</p>
@@ -27,50 +34,61 @@
                 </div>
             @else
 
-            <div class="container" style="margin-top: 1rem;">
-                <div class="con row">
-                     @foreach($wishlists as $wishlist)
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                       <div class="card" style="border: none; margin-top: 1rem;">
-                            <div class="frame">
-                                <div class="grid">
-                                    <a href="{{url('gallery_detail',$wishlist->gallery->id)}}">
-                                        <img class="grid1 card-img-top" src="{{URL::to('/')}}/images/{{ $wishlist->gallery->image }}" style="width: 100%; height: auto;" alt="" />
-                                    </a>
-                                </div>
-                            </div>
-                                <div class="card-body" style="text-align: center;">
-                                    <h5 class="card-title" style="color: #343352;">{{ $wishlist->gallery->title }}</h5>
-                                    <p class="card-text" style="color: #fc646b;">{{ number_format ($wishlist->gallery->price) }}-kyat </p>
-                                </div>
 
-                                <div class="wishlist_button_row" style="display: inline-block; margin: auto;">
-                                    <form action="{{route('storeCart')}}" mehtod="POST" role="form" style="display: inline-block">
-                                        <input type="hidden" name="token" value="{{csrf_token()}}">
+             <div class="container">
+                <div class="table-responsive" style="margin-top: 2rem;">
+                    <table class="table">
+                        <thead class="theader">
+                            <tr>
+                                <th scope = "col" class="thead">       </th>
+                                <th scope = "col" class="thead"> Item </th>
+                                <th scope = "col" class="thead"> Title </th>
+                                <th scope = "col" class="thead"> Price </th>
+                                <th scope = "col">       </th>
+                                 <th scope = "col">       </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            @foreach ($wishlists as $wishlist)
+                            <tr>
+                                <td class="tdata" style="vertical-align: center;">
+                                    <form action="{{ route('wishlist.destroy',$wishlist->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Are you sure?');" class="btn"
+                                        >
+                                           <i class="fas fa-times" style="color:black;"></i>
+                                        </button>
+                                    </form> 
+                                </td>
+                                <td class="tdata">
+                                     <a href="{{url('gallery_detail',$wishlist->id)}}" style="color: #fff;">
+                                        <img src="{{URL::to('/')}}/images/{{$wishlist->image}}"  class="img-thumbnail" width="100px" height="100px" alt="Image"/>
+                                    </a>
+                                </td>
+                                <td class="tdata"> {{$wishlist->title}} </td>
+                                <td class="tdata"> {{ number_format($wishlist->price) }}-kyats </td>
+                                <td class="tdata">
+                                    <form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
+                                        @csrf   
                                         <input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
-                                        <input type="hidden" value="{{$wishlist->gallery->id}}" name="gallery_id">
+                                        <input type="hidden" value="{{$wishlist->id}}" name="gallery_id">
                                         <button class="small_button1" type="submit">
                                         <i class="fa fa-shopping-basket shopping-icon"></i>
                                         &nbsp;<span>Add to cart</span>
                                         </button>
                                     </form>
-                                    <button class="small_button1" type="submit">
-                                        <a href="{{url('gallery_detail',$wishlist->gallery->id)}}" style="color: #fff;">Detail</a>
-                                    </button>
-                                    <button class="small_button1" type="submit" style=" background-color: transparent;border-color: transparent; border: none; outline: none;">
-                                        <a href="{{url('/')}}/removeWishlist/{{$wishlist->id}}" onclick="return confirm('Are you sure?');" type="button" style="color: #343352;" class="btn-floating"><i class="fas fa-trash fa-2x" aria-hidden="true"></i>
-                                        </a>
-                                    </button>
-                                </div>
-                        
-
-                        </div>   
-                    </div>
-                     @endforeach
+                                </td>
+                            </tr>
+                            
+                            @endforeach
+                        </tbody>
+                    </table>
+                   
                 </div>
             </div>
+
             @endif
-        
 
 @endsection
 

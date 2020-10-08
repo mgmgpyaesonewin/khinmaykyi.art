@@ -10,8 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('frontend/font/icomoon/style.css') }}">
@@ -64,7 +65,7 @@
     </div> {{-- top-bar --}}
     <div class="site-logo" style="text-align: center; margin-top: 1rem;">
       <a href="/" >
-        <span><h2 class="logo">KhinMayKyi</h2>
+        <span><h2 class="logo d-none d-lg-block d-lg-none">KhinMayKyi</h2>
       </a>
     </div>
 
@@ -72,20 +73,28 @@
 
       <div class="container">
         <div class="row align-items-center position-relative">
+
+            <div class="site-logo d-block d-lg-none" style="left: 10px; top: 10;">
+              <a href="/" >
+                <span class="logo">KhinMayKyi</span>
+              </a>
+
+            </div>
           
             <div class="col-12">
               <nav class="site-navigation{{--  text-right ml-auto  --}}" style="text-align: center;" role="navigation">
 
                 <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
-                <li><a href="/" class="nav-link" style="padding-right: 4rem;">HOME</a></li>
-                <li><a href="/about" class="nav-link" style="padding-right: 4rem;">ABOUT</a></li>
-                <li><a href="/gallery" class="nav-link" style="padding-right: 4rem;">GALLERY</a></li>
+                <li><a href="/" class="nav-link">HOME</a></li>
+                <li><a href="/about" class="nav-link">ABOUT</a></li>
+                <li><a href="/gallery" class="nav-link">GALLERY</a></li>
               
 
                 <li class="has-children">
                    @guest
                     <a href="#" class="nav-link">
                       <i class="fas fa-user-circle" style="color: #7A5E86"></i>
+                      LOGIN/REGISTER
                     </a>
                   @else
                     <a href="#" class="nav-link">
@@ -94,88 +103,76 @@
                   @endguest
                   <ul class="dropdown arrow-top">
                     @guest
-                    <li> <a class="nav-link" href="{{ route('login') }}">{{ __('LOGIN') }}</a></li>
+                    <li> <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                      @if (Route::has('register'))
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('REGISTER') }}</a>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </li>
                   @endif
                   @else
+                   <li>
+                   <a class="nav-link" href="{{ url('/profile') }}">{{ __('Profile') }}</a>
+                 </li>
                   <li>
-                   <a class="nav-link" href="{{ route('logout') }}">LOGOUT</a>
+                   <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
                  </li>
                   @endguest
-                    {{-- <li><a href="#pricing-section" class="nav-link">Pricing</a></li>
-                    <li><a href="#faq-section" class="nav-link">FAQ</a></li>
-                    <li class="has-children">
-                      <a href="#">More Links</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
-                      </ul>
-                    </li> --}}
                   </ul>
-                </li>
-
-                  @auth
-                <li>
-                 <a class="nav-link" href="{{url("cart")}}" >
+                </li>   
+@auth
+                <li style="float:right;">
+                 <a  href="{{url("cart")}}" >
                       <i class="Shopping-icon fa fa-shopping-cart" style="color: #7A5E86"></i>
                       <span class="shopping-text"></span>
-                      <span style="color:black; font-weight:bold;">
+                      <span style="font-weight:bold;">
 
                       @php
-                        $auth_user = Auth::user();
                         $cart_item=DB::table('cart_items')
                                     ->leftJoin('galleries','cart_items.gallery_id',"=",'galleries.id')
                                     ->leftJoin('carts','cart_items.cart_id',"=",'carts.id')
-                                    ->where('carts.user_id',Auth::user()->id)->get();
+                                    ->where('carts.user_id',Auth::user()->id)
+                                    ->where('sold_out',1)
+                                    ->get();
                         $count = $cart_item->count();
                       @endphp
-                      @isset($auth_user)
-                        ( {{$count}} )
-                      @endisset
-                      @empty($auth_user)
-                        ( 0 )
-                      @endempty
+                         {{$count}} 
                       </span>
                     </a>
                 </li>
                   @endauth
         
-                  @auth
-                <li>
-                    <a class="nav-link" href="{{url("wishlist")}}" >
+                   @auth
+                <li class="cart" style="float:right;" >
+                    <a href="{{url("wishlist")}}" >
                       <i class="Shopping-icon fa fa-heart" style="color: #7A5E86"></i>
                       <span class="shopping-text"></span>
-                      <span style="color:black; font-weight:bold;">
+                      <span>
 
                       @php
-                        $auth_user = Auth::user();
-                        $wishlists = App\Wishlist::with('gallery')
-                                      ->where('user_id', Auth::user()->id)
-                                      ->get();
+                        $wishlists=DB::table('wishlists')
+                                  ->leftJoin('galleries','wishlists.gallery_id',"=",'galleries.id')
+                                  ->where('user_id',Auth::user()->id)
+                                  ->where('sold_out',1)
+                                  ->get();
                         $count = $wishlists->count();
-                      @endphp
-                      @isset($auth_user)
-                        ( {{$count}} )
-                      @endisset
-                      @empty($auth_user)
-                        ( 0 )
-                      @endempty
+                      @endphp                   
+                         {{$count}} 
                       </span>
                     </a>
                 </li>
-                  @endauth
+                  @endauth         
 
+            
               </ul>
+
+
             </nav>
           
             </div>
 
-          <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+          <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3" style="margin-bottom: 0px;"></span></a></div>
 
         </div>
+
       </div>
       
     </header>
@@ -199,7 +196,7 @@
 
       <div class="row">
         <div class="col-md-4">
-          <h2 class="footer mb-4">Contacts</h2>
+          <h4 class="footer mb-4">Contacts</h4>
             <ul class="list-unstyled contact">
               <li>Harvard Art Museums</li>
               <li>32 Quincy Street</li>
@@ -209,7 +206,7 @@
             </ul>
         </div>
         <div class="col-md-4 ml-auto">
-          <h2 class="mb-4">Features</h2>
+          <h4 class="mb-4">Features</h4>
             <ul class="list-unstyled">
               <li><a href="#" class="features">About Us</a></li>
               <li><a href="#" class="features">Press Releases</a></li>
@@ -220,7 +217,7 @@
         </div>
         <div class="col-md-4 ml-auto">
           <div class="mb-5">
-            <h2 class="footer-heading mb-4">Subscribe to Newsletter</h2>
+            <h4 class="mb-4">Subscribe to Newsletter</h4>
             <form action="#" method="post" class="footer-suscribe-form">
               <div class="input-group mb-3">
                 <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
@@ -229,7 +226,7 @@
                   </div>
               </div>
           </div>
-            <h2 class="footer-heading mb-4">Follow Us</h2>
+            <h4 class="mb-4">Follow Us</h4>
             <a href="#about-section" class="smoothscroll pl-0 pr-3">
               <span class="icon-facebook"></span>
             </a>
@@ -268,6 +265,7 @@
   <script src="{{asset('frontend/js/easyzoom.js')}}"></script>
 
   <script src="{{asset('frontend/js/main.js')}}"></script>
+  
 
  @yield('scripts')
 

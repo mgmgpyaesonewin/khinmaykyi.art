@@ -9,6 +9,7 @@ use App\Gallery;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Address;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -53,22 +54,15 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $order = Order::FindOrFail($id);
 
-        $order_details =  DB::table('order_details')
-                        ->leftJoin('galleries', 'order_details.gallery_id', "=", 'galleries.id')
-                        ->leftJoin('orders', 'order_details.order_id', "=", 'orders.id')
-                        ->where('orders.user_id', $order->user_id)
-                        ->get();
+        $total = $request->session()->get('total');
+
+        $order_details=Order_detail::with(['gallery','order'])->whereIn('order_id',$order)->get();
         
-        $total = $order::where('orders.user_id', $order->user_id)->sum('total');
-        $count = $order::where('orders.user_id', $order->user_id)->count('id');
-
-
-        return view('backend.order.show', compact('order_details','count',
-            'order','total'));
+        return view('backend.order.show', compact('order_details','order','total'));
     }
 
     /**

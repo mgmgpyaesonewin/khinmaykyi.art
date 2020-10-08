@@ -4,10 +4,19 @@
 
 @section('content')
 
+ <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Cart</li>
+      </ol>
+    </nav>
+  </div>
+
     <section class="cart_area">
 
         @if(session('status'))
-            <div class="alert alert-success">
+            <div class="alert alert-success {{-- mx-auto col-6 --}}">
                 {{session('status')}}
             </div>
         @endif
@@ -30,28 +39,28 @@
             <div class="cart-inner">
                 <div class="table-responsive" style="margin-top: 2rem;">
                     <table class="table">
-                        <thead>
+                        <thead class="theader">
                             <tr>
-                                <th scope = "col"> Image </th>
-                                <th scope = "col"> Title </th>
-                                <th scope = "col"> Price </th>
-                                <th scope = "col">       </th>
+                                <th scope = "col" class="thead"> Image </th>
+                                <th scope = "col" class="thead"> Title </th>
+                                <th scope = "col" class="thead"> Price </th>
+                                <th scope = "col" class="thead">       </th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($carts as $cart)
+                        <tbody class="tbody">
+                            @foreach ($cart_items as $cart_item)
                             <tr>
-                                <td>
-                                    <img src="{{URL::to('/')}}/images/{{$cart->image}}"  class="img-thumbnail" width="100px" height="100px" alt="Image"/>
+                                <td class="tdata" >
+                                    <img src="{{URL::to('/')}}/images/{{$cart_item->gallery->image}}"  class="img-thumbnail" width="100px" height="100px" alt="Image"/>
                                 </td>
-                                <td> {{$cart->title}} </td>
-                                <td> {{ number_format($cart->price) }}-kyats </td>
-                                <td>
-                                    <form action="{{ route('cart.destroy',$cart->id)}}" method="POST">
+                                <td class="tdata" > {{$cart_item->gallery->title}} </td>
+                                <td class="tdata" > {{ number_format($cart_item->gallery->price) }}-kyats </td>
+                                <td class="tdata" >
+                                    <form action="{{ route('cart.destroy',$cart_item->cart_id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Are you sure?');" class="btn btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
+                                        <button type="submit" onclick="return confirm('Are you sure?');" class="btn">
+                                            <i class="fas fa-times" style="color:black;"></i>
                                         </button>
                                     </form> 
                                 </td>
@@ -60,25 +69,30 @@
                         </tbody>
                     </table>
                     <hr>
-                    Total Quantity : <strong> {{ $quantities}} </strong>
-                    <br>
-                    Total Price : <strong> {{ number_format($total) }}-kyats </strong>
-                   
+                    
+                    <div class="card" style="width: 18rem;float:right;background-color: #F9F9F9;">
+                        <div class="card-body">
+                            Total Quantity : <strong style="float: right;"> {{ $quantities}} </strong>
+                            <hr>
+                            Total Price : <strong style="float: right;"> {{ number_format($total) }}-kyats </strong>
+                        </div>
+                    </div>
+                
                 </div>
             </div>
-            @endif
-
-            <div class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+            <div class="container" style="margin-bottom: 0.5rem;">
                 <div class="row">
                        <div class="col-6 text-center">
                             <a class="button" href="{{url('/gallery')}}" style="color: white;">Continue Shopping</a>
                        </div>
                        <div class="col-6 text-center">
-                            <a class="button" href="{{url('/shipping_info')}}">Proceed To Checkout</a> 
+                            <a class="button" href="{{url('/checkout')}}">Proceed To Checkout</a> 
                        </div>
                    </div>
             </div>
             </div>
+            @endif
+          
              
 
     </section>

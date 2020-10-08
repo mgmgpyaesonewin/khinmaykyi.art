@@ -10,7 +10,7 @@ class Gallery extends Model
     
 
 	public function orderdetails(){
-        return $this->belongsToMany('App\Order_detail');
+        return $this->hasMany('App\Order_detail');
     }
 
     public function cartitems(){
