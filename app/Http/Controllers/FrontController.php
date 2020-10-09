@@ -142,6 +142,5 @@ class FrontController extends Controller
          $pdf = PDF::loadView('frontend.thank',compact('user','order_details'));
          return $pdf->download('invoice.pdf');
     }
- 
   
 }

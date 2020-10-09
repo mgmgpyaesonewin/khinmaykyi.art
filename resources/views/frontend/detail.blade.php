@@ -18,7 +18,7 @@
 		<div class="row">
 
 			<div class="col-lg-6 col-md-7 col-sm-12">
-				<div class="frame">
+				<div class="frame" style="margin-bottom: 20px;">
 					 <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
 					 	 <a href="{{URL::to('/')}}/images/{{$galleries->image}}">
 					 	 	<img src="{{URL::to('/')}}/images/{{ $galleries->image }}" alt="" class="detail-image"
@@ -29,10 +29,9 @@
 			</div>
 
 			<div class="col-lg-6 col-md-5 col-sm-12" >
-				<h2 style="color: #343352; font-weight:600; margin-bottom: 1rem;">{{ $galleries->title }}</h2>
-				<p style="font-size: 1.5rem; color: #fc846b; font-weight: 600; line-height: 1;">{{ number_format($galleries->price) }} kyats</p>
-				 <p> {!! $galleries->detail!!} </p>
-				{{--  <hr style="border: 1px dotted #000000; border-style: none none dotted; color: #fff; background-color: #fff;"> --}}
+				<h2 class="detail_image_title" style=" font-size: 25px; font-weight:500; margin-bottom: 1rem;">{{ $galleries->title }}</h2>
+				<h3 style="color: #fc846b; font-size: 22px; font-weight: 500; margin-bottom: 3em;">{{ number_format($galleries->price) }} kyats</h3>
+				 {{-- <p> {!! $galleries->detail!!} </p> --}}
 
 				 @auth 
           @if ($cart_count == 0)
@@ -68,14 +67,19 @@
                 	
 				@endguest
 
+
+
+
+
+
         @auth
          @if ($wishlist_count == 0)
                 <form action="{{ route('wishlist.store') }}" method="POST" role="form" style="display: inline-block">
                       @csrf    
                       <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
-                      <button class="button" type="submit">
-                          <i class="fas fa-heart" style="color:white;"></i>
-                          &nbsp;<span style="color:white;">Add to wishlist</span>
+                      <button class="wishlist_button" type="submit">
+                          <i class="fas fa-heart text-center"></i>
+                          &nbsp;<span> Add to wishlist </span>
                       </button>
                   </form>
                 @else

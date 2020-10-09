@@ -4,14 +4,14 @@
 
 @section('content')
 
- <div class="container">
+{{--  <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">Cart</li>
       </ol>
     </nav>
-  </div>
+  </div> --}}
 
     <section class="cart_area">
 
@@ -21,17 +21,27 @@
             </div>
         @endif
 
+        <div class="page-header text-center" style="background-image: url('./frontend/images/page-header-bg.jpg')">
+            <div class="container">
+              <h3 class="page-title">Shopping Cart
+              </h3>
+              {{-- <span></span> --}}
+            </div><!-- End .container -->
+          </div>
+
+            {{--  <h3 style="text-align: center; color: #343352; margin-top: 1rem;">Shopping Cart</h3> --}}
+
         <div class="container">
-             <h3 style="text-align: center; color: #343352; margin-top: 1rem;">Shopping Cart</h3>
+            
 
             @if($carts->isEmpty())
-                <div class="alert" style="margin: 3rem;">
-                    <div class="empty_cart_page tc dn" style="display: block;  margin: 0 auto; text-align: center;">
+                <div class="alert">
+                    <div class="empty_cart_page tc dn" style="display: block;  margin: 0 10px; text-align: center;">
                         <i class="Shopping-icon fa fa-shopping-cart fa-4x" style="color: grey; margin-bottom: 1rem;"></i>
                         <h2 class="cart_page_heading mg__0 mb__20 tu fs__30">Your cart is empty.</h2>
                         <br>
-                        <p>Before proceed to checkout you must add some products to your shopping cart.<br> You will find a lot of interesting products on our "Shop" page.</p>
-                        <a class="button button_primary tu js_add_ld" href="/gallery">Return To Shop</a>
+                        <p>Before proceed to checkout you must add some products to your shopping cart.<br> You will find a lot of interesting products on our "Gallery" page.</p>
+                        <a class="button button_primary tu js_add_ld" href="/gallery">Return To Gallery</a>
                     </div>
                 </div>
             @else
@@ -70,7 +80,7 @@
                     </table>
                     <hr>
                     
-                    <div class="card" style="width: 18rem;float:right;background-color: #F9F9F9;">
+                    <div class="card mb-4" style="width: 18rem;float:right;background-color: #F9F9F9;">
                         <div class="card-body">
                             Total Quantity : <strong style="float: right;"> {{ $quantities}} </strong>
                             <hr>
@@ -82,10 +92,10 @@
             </div>
             <div class="container" style="margin-bottom: 0.5rem;">
                 <div class="row">
-                       <div class="col-6 text-center">
+                       <div class="col-6 shopping_button text-center" style="padding-left: 0px;">
                             <a class="button" href="{{url('/gallery')}}" style="color: white;">Continue Shopping</a>
                        </div>
-                       <div class="col-6 text-center">
+                       <div class="col-6 shopping_button text-center" style="padding-left: 0px;">
                             <a class="button" href="{{url('/checkout')}}">Proceed To Checkout</a> 
                        </div>
                    </div>

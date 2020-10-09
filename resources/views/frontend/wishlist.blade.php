@@ -4,7 +4,7 @@
 
 @section('content')
 
- <div class="container">
+{{--  <div class="container">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -12,7 +12,7 @@
       </ol>
     </nav>
   </div>
-
+ --}}
 
         @if(session('status'))
             <div class="alert alert-success">
@@ -20,7 +20,18 @@
             </div>
         @endif
 
-        <h5 style="text-align: center; color: #343352; margin-top: 1rem;">View your wishlist products</h5>
+         <div class="page-header text-center" style="background-image: url('./frontend/images/page-header-bg.jpg')">
+            <div class="container">
+              <h3 class="page-title">View your wishlist products
+              </h3>
+              {{-- <span></span> --}}
+            </div><!-- End .container -->
+        </div>
+        {{-- <h5 style="text-align: center; color: #343352; margin-top: 1rem;">View your wishlist products</h5> --}}
+
+
+         <div class="container">
+           
 
             @if($wishlists->isEmpty())
                 <div class="alert" style="margin: 3rem;">
@@ -34,8 +45,6 @@
                 </div>
             @else
 
-
-             <div class="container">
                 <div class="table-responsive" style="margin-top: 2rem;">
                     <table class="table">
                         <thead class="theader">
@@ -63,7 +72,7 @@
                                 </td>
                                 <td class="tdata">
                                      <a href="{{url('gallery_detail',$wishlist->id)}}" style="color: #fff;">
-                                        <img src="{{URL::to('/')}}/images/{{$wishlist->image}}"  class="img-thumbnail" width="100px" height="100px" alt="Image"/>
+                                        <img src="{{URL::to('/')}}/images/{{$wishlist->image}}"  class="img-thumbnail" width="150px" height="150px" alt="Image"/>
                                     </a>
                                 </td>
                                 <td class="tdata"> {{$wishlist->title}} </td>
@@ -72,10 +81,10 @@
                                     <form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
                                         @csrf   
                                         <input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
-                                        <input type="hidden" value="{{$wishlist->id}}" name="gallery_id">
-                                        <button class="small_button1" type="submit">
+                                        <input type="hidden" value="{{$wishlist->gallery_id}}" name="gallery_id">
+                                        <button class="buttom" type="submit">
                                         <i class="fa fa-shopping-basket shopping-icon"></i>
-                                        &nbsp;<span>Add to cart</span>
+                                        &nbsp;<span></span>
                                         </button>
                                     </form>
                                 </td>
@@ -87,6 +96,7 @@
                    
                 </div>
             </div>
+            
 
             @endif
 

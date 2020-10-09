@@ -3,9 +3,15 @@
 @section('title','Khin May Kyi - Art Gallery')
 
 @section('content')
+<style>
+  .recent-card{
+    border: none;
+    background: none;
+  }
+  </style>
 
 <header>
-  <div class="container mb-5" style="background-color: whitesmoke; width: 100%; height: 100%;">
+  <div class="container slider mb-5" style="background-color: whitesmoke; width: 100%; height: 100%;">
     <div class="row">
       <div id="slides" class="carousel slide" data-ride="carousel">
         <ul class="carousel-indicators">
@@ -18,7 +24,7 @@
             <div class="row"{{--   style="background-image: url('./frontend/images/color.png');" --}}>
               <div class="col-4" style="text-align: center; margin: auto; line-height: 2">
                 <div class="slider_content">
-                  <h2>Welcome to our gallery.</h2>
+                  <h2 style="font-size: 24px; font-weight: 400;">Welcome to our gallery.</h2>
                   <button class="small_button">
                     <a href="{{url('/gallery')}}" style="color: #fff;">
                       Shop now
@@ -84,7 +90,7 @@
 <section class="ct-hometabcontent">
 
   <div class="site"{{--  style="margin-top: 2rem;" --}}>
-    <div class="container py-4 bg-light">
+    <div class="container py-4">
 
         <div class="col-12 text-center mb-5">
           <div class="block-heading-1" data-aos="fade-up" data-aos-delay="">
@@ -93,14 +99,14 @@
           </div>
         </div>    
      
-      <div class="row equal align-items-center justify-content-center text-center">       
+      <div class="row equal">       
 
         <div class="card-deck">
 
-          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
-            <div class="card">
+          <div class="col-lg-4 col-md-6 col-6 aos-init aos-animate" data-aos="fade-up">
+            <div class="card recent-card">
               <div class="grid">
-                <img class="card-img-top img-fluid" src="./frontend/images/IMG_6623.JPG" alt="Card image cap">
+                <img class="card-img-top" src="./frontend/images/IMG_6623.JPG" alt="Card image cap">
               </div>
               <div class="card-body">
                 <h5 class="card-title">Yangon Downtown View</h5>
@@ -109,10 +115,10 @@
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
-            <div class="card">
+          <div class="col-lg-4 col-md-6 col-6 aos-init aos-animate" data-aos="fade-up">
+            <div class="card recent-card">
               <div class="grid">
-                <img class="card-img-top img-fluid" src="./frontend/images/IMG_0586.JPG" alt="Card image cap">
+                <img class="card-img-top" src="./frontend/images/IMG_0586.JPG" alt="Card image cap">
               </div>
               <div class="card-body">
                 <h5 class="card-title">Mountain View</h5>
@@ -121,10 +127,10 @@
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
-            <div class="card">
+          <div class="col-lg-4 col-md-6 col-6 aos-init aos-animate" data-aos="fade-up">
+            <div class="card recent-card">
               <div class="grid">
-                <img class="card-img-top img-fluid" src="./frontend/images/IMG_2658.jpg" alt="Card image cap">
+                <img class="card-img-top" src="./frontend/images/IMG_2658.jpg" alt="Card image cap">
               </div>
               <div class="card-body">
                 <h5 class="card-title">Card title that wraps to a new line</h5>
@@ -134,7 +140,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
-            <div class="card">
+            <div class="card recent-card">
               <div class="grid">
                 <img class="card-img-top img-fluid" src="./frontend/images/IMG_9186.JPG" alt="Card image cap">
               </div>
@@ -146,7 +152,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
-            <div class="card">
+            <div class="card recent-card">
               <div class="grid">
                 <img class="card-img-top img-fluid" src="./frontend/images/IMG_9387.jpg" alt="Card image cap">
               </div>
@@ -158,7 +164,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 col-6 d-flex pb-3 aos-init aos-animate" data-aos="fade-up">
-            <div class="card">
+            <div class="card recent-card">
               <div class="grid">
                 <img class="card-img-top img-fluid" src="./frontend/images/IMG_4157.JPG" alt="Card image cap">
               </div>
@@ -177,7 +183,7 @@
 </section>
 
 
-  <div class="site" style="margin-top: 2rem;">
+  <div class="site bg-light" style="margin-top: 2rem;">
     <div class="container">
 
       <div class="row">
@@ -223,7 +229,7 @@
         <div class="col-lg-6 ml-auto" data-aos="fade-up" data-aos-delay="200">
           <h2 class="text">Need to know more on details. Get In Touch</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, distinctio! Harum quibusdam nisi, illum nulla aspernatur aut quidem aperiam, quae non tempora recusandae voluptatibus fugit impedit.</p>
-          <button class="button" style="float: right;">Get Started</button>
+          <button class="button mb-5" style="float: right;">Get Started</button>
         </div>
 
       </div>{{-- row --}}

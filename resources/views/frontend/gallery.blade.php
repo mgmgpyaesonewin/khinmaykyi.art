@@ -3,30 +3,13 @@
 @section('title','Gallery')
 
 @section('content')
-<style>
-    .page-header{
-    padding: 2.6rem 0 2.5rem;
-    background-color: #ebebeb;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-  }
-</style>
- {{-- <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Gallery</li>
-      </ol>
-    </nav>
-  </div> --}}
-  <div class="page-header text-center" style="background-image: url('./frontend/images/page-header-bg.jpg')">
-            <div class="container">
-              <h3 class="page-title">List
-              </h3>
-              <span>Gallery</span>
-            </div><!-- End .container -->
-          </div>
+
+  <div class="page-header text-center" style="background-image: url('./frontend/images/page-header-bg.jpg');">
+    <div class="container">
+      <h3 class="page-title">List</h3>
+      <span>Gallery</span>
+    </div><!-- End .container -->
+  </div>
 
   <div class="container" style="padding: 40px;">
 
@@ -83,13 +66,13 @@
             $('#list').click(function (event) {
               event.preventDefault();
               $('#products').removeClass('card-columns').addClass('row');
-              $('#products .item').removeClass('card card-override').addClass('col-lg-4 col-md-6 list-group-item');
+              $('#products .item').removeClass('card card-override').addClass('col-lg-4 col-md-6 col-sm-6 col-6 list-group-item');
             });
 
             $('#grid').click(function (event) {
               event.preventDefault();
               $('#products').removeClass('row').addClass('card-columns');
-              $('#products .item').removeClass('col-lg-4 col-md-6 list-group-item').addClass('card card-override');
+              $('#products .item').removeClass('col-lg-4 col-md-6 col-sm-6 col-6 list-group-item').addClass('card card-override');
             });
         });
 
