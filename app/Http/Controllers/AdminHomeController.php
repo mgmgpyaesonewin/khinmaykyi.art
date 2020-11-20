@@ -9,13 +9,13 @@ use App\Gallery;
 
 class AdminHomeController extends Controller
 {
-    public function adminHome(){
+    public function adminHome()
+    {
     	$total_customer = User::where('admin')->count();
     	$total_order = Order::count();
     	$total_gallery = Gallery::count();
     	$total_sale = Order::sum('total');
     	/*$order = Order::where('status','=','pending')->count();*/
-    	/*dd($total_customer);*/
     	 return view('backend.home', compact('total_customer','total_order','total_gallery','total_sale'));
     }
 

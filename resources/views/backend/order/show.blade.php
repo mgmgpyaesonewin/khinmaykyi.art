@@ -16,13 +16,13 @@
         <div class="row">
           <div class="col-6">
             <h5 class="title text-center"><strong>Customer Information</strong></h5><hr>
-            <p> Name : {{($order->user->name)}} </p>
-            <p> E-mail : {{($order->user->email)}} </p>
+            <p> Name : {{($orders->user->name)}} </p>
+            <p> E-mail : {{($orders->user->email)}} </p>
           </div>
           <div class="col-6 border-left">
             <h5 class="title text-center"><strong>Shipping Address</strong></h5><hr>
-            <p> Address : {{$order->user->address}} </p>
-            <p>Phone no : {{$order->user->phone}}</p>
+            <p> Address : {{$orders->user->address}} </p>
+            <p>Phone no : {{$orders->user->phone}}</p>
           </div>
         </div>
       </div>
@@ -45,16 +45,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($order_details as $order)
+                    @foreach($order_details as $order_detail)
                     <tr>
                       <td class="tdata">
-                        <img src="{{URL::to('/')}}/images/{{ $order->gallery->image }}" class="img-thumbnail" width="150px"
+                        <img src="{{URL::to('/')}}/images/{{ $order_detail->gallery->image }}" class="img-thumbnail" width="150px"
                          alt="Image" style="text-align: center;vertical-align: middle;"/>
                       </td>
-                      <td class="tdata">{{ number_format($order->gallery->price) }} kyats</td>
-                      <td class="tdata">{{$order->order->status}}
+                      <td class="tdata"> K{{ number_format($order_detail->gallery->price) }} </td>
+                      <td class="tdata">{{$order_detail->order->status}}
                       </td>
-                      <td class="tdata">{{ Carbon\Carbon::parse($order->created_at)->format('jS, M, Y')}}
+                      <td class="tdata">{{ Carbon\Carbon::parse($order_detail->created_at)->format('jS, M, Y')}}
                       </td>
                     </tr>
                     @endforeach
@@ -64,7 +64,7 @@
                   <div class="card" style="width: 18rem;float:right;background-color: #F9F9F9;">
                     <div class="card-body">
                         <h6>Total Quantity : <strong> {{ count($order_details) }}  </strong> </h6>
-                      <h6>Total Price: <strong> {{ number_format($total) }}-kyats </strong> </h6>
+                      <h6>Total Price: <strong> K{{ number_format($orders->total) }} </strong> </h6>
                       <h6>Payment Method: <strong> Cash on Delievery</strong></h6>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form action="{{route('order.update', $order->id)}}" method="POST" class="text-center"> 
+                  <form action="{{route('order.update', $orders->id)}}" method="POST" class="text-center"> 
                     @csrf
                     @method('PUT')
                     <div class="form-group">

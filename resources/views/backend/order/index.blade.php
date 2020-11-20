@@ -20,11 +20,28 @@
 
 </style>
 
+
+  @if ($message = Session::get('success'))
+    <div class="alert alert-success" role="alert">
+      <p class="message" style="color: #117f36;">{{$message}}</p>
+    </div>
+  @endif
+
+  @if ($message = Session::get('error'))
+    <div class="alert alert-danger" role="alert">
+      <p class="message" style="color: #f98e97;">{{$message}}</p>
+    </div>
+  @endif
+
+
 <div class="container">
   <div class="row">
     <div class="col">
       <div class="card" style="width: 100%;">
         <div class="card-body">
+            @if($orders->isEmpty())
+                <h3 style="text-align: center; color: #fc846b;">Our site didn't receive now.</h3>
+                @else
           <div class="table-responsive">
             <table id="dataTable" class="table">
               <thead class=" text">
@@ -41,19 +58,14 @@
                 @foreach($orders as $order)
                 <tr>
                   <td> {{$order->user->name}} </td>
-                  <td> {{ number_format($order->total) }}-kyats </td>
+                  <td> K{{ number_format($order->total) }} </td>
                   <td> {{$order->status}} </td>
                   <td> COD </td>
-                  <td> {{ Carbon\Carbon::parse($order->created_at)->format('jS, M, Y')}} </td>
+                  <td> {{ $order->order_date}} </td>
                   <td>
                     <div class="inner">
                       <a href="{{ route('order.show',$order->id) }}" class="btn btn-primary">
                         <i class="fas fa-eye"></i>
-                      </a>
-                    </div>
-                    <div class="inner">
-                      <a href="{{ route('order.edit',$order->id) }}" class="btn btn-success">
-                        <i class="fas fa-edit"></i>
                       </a>
                     </div>
                     <div class="inner">
@@ -68,6 +80,7 @@
                   </td>
                 </tr>
                 @endforeach
+                @endif
               </tbody>
             </table>
           </div>
@@ -77,10 +90,10 @@
     </div>
   </div>
 </div>
-
-
-
-
+  
+  <div class="d-flex justify-content-center pagination">
+    {{$orders->links()}}
+  </div>
 @stop
 
 @section('css')

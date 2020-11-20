@@ -34,7 +34,8 @@ class AddressRequest extends FormRequest
         return [
             'phone' => 'required|min:8|numeric',   
             'address' => 'required',
-             'township' => 'required'
+            'township' => 'required',
+            'payment_method' => 'required'
         ];
     }
 }

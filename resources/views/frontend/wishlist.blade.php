@@ -4,16 +4,6 @@
 
 @section('content')
 
-{{--  <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
-      </ol>
-    </nav>
-  </div>
- --}}
-
         @if(session('status'))
             <div class="alert alert-success">
                 {{session('status')}}
@@ -24,15 +14,11 @@
             <div class="container">
               <h3 class="page-title">View your wishlist products
               </h3>
-              {{-- <span></span> --}}
             </div><!-- End .container -->
         </div>
-        {{-- <h5 style="text-align: center; color: #343352; margin-top: 1rem;">View your wishlist products</h5> --}}
-
 
          <div class="container">
            
-
             @if($wishlists->isEmpty())
                 <div class="alert" style="margin: 3rem;">
                     <div class="empty_cart_page tc dn" style="display: block;  margin: 0 auto; text-align: center;">
@@ -71,7 +57,7 @@
                                     </form> 
                                 </td>
                                 <td class="tdata">
-                                     <a href="{{url('gallery_detail',$wishlist->id)}}" style="color: #fff;">
+                                     <a href="{{url('gallery_detail',$wishlist->gallery_id)}}" style="color: #fff;">
                                         <img src="{{URL::to('/')}}/images/{{$wishlist->image}}"  class="img-thumbnail" width="150px" height="150px" alt="Image"/>
                                     </a>
                                 </td>
@@ -82,7 +68,7 @@
                                         @csrf   
                                         <input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
                                         <input type="hidden" value="{{$wishlist->gallery_id}}" name="gallery_id">
-                                        <button class="buttom" type="submit">
+                                        <button class="icon-button" type="submit">
                                         <i class="fa fa-shopping-basket shopping-icon"></i>
                                         &nbsp;<span></span>
                                         </button>
@@ -94,12 +80,11 @@
                         </tbody>
                     </table>
                    
-                </div>
-            </div>
-            
+                </div>{{-- teble-responsive --}}
 
             @endif
-
+        </div>{{-- container --}}
+            
 @endsection
 
 @section('scripts')

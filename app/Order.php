@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Order extends Model
 {
@@ -16,4 +17,9 @@ class Order extends Model
         return $this->hasMany('App\Order_detail');
     }
     
+    public function getOrderDateAttribute($value){
+    	 return  Carbon::parse($this->attributes['created_at'])->format('jS, M, Y');
+  
+	}
 }
+

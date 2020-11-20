@@ -28,9 +28,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function address(){
-        return $this->hasOne('App\Address');
-    }
+    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
     public function carts(){
         return $this->hasMany('App\Cart');
@@ -44,12 +50,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Cart');
     }
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst($value);
+    }
 }

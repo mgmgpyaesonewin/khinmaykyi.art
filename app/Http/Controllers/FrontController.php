@@ -39,23 +39,24 @@ class FrontController extends Controller
 
          if (Auth::check())
             {
-            $wishlist_count = Wishlist::where(['gallery_id' => $galleries->id,'user_id' => Auth::user()->id])
-                        ->count();
+                $wishlist_count = Wishlist::where(['gallery_id' => $galleries->id,'user_id' => Auth::user()->id])
+                                ->count();
 
-            $cart_count=Cart_item::with(['gallery','cart'])->whereIn('cart_id', $carts)->where('gallery_id', $galleries->id)
-                        ->count();
+                $cart_count=Cart_item::with(['gallery','cart'])->whereIn('cart_id', $carts)->where('gallery_id', $galleries->id)
+                             ->count();
             }
-            $wishlist_count = Wishlist::where(['gallery_id' => $galleries->id])
-                        ->count();
-            $cart_count=Cart_item::with(['gallery','cart'])->whereIn('cart_id', $carts)->where('gallery_id', $galleries->id)
-                        ->count();
+            else{
+                $wishlist_count = Wishlist::where(['gallery_id' => $galleries->id])
+                                ->count();
+                $cart_count=Cart_item::with(['gallery','cart'])->whereIn('cart_id', $carts)->where('gallery_id', $galleries->id)
+                            ->count();
 
+            }
+        
 		return view('frontend.detail', compact('galleries','wishlist_count','cart_count'));
     }
     
-
-
-    public function shipping_info(Request $request){
+    public function checkout(Request $request){
 
         $carts = Cart::with('user')
                 ->where('user_id', Auth::id())
@@ -69,7 +70,7 @@ class FrontController extends Controller
         $township_names = DB::table('addresses')->get();
         $total = $request->session()->get('total');
 
-        return view('frontend.shipping_info',compact('carts','township_names','total','cart_items'));
+        return view('frontend.checkout',compact('carts','township_names','total','cart_items'));
 
     }
 
@@ -80,7 +81,7 @@ class FrontController extends Controller
         $Address->address = $request->input('address');
         $Address->township = $request->input('township');
         $Address->update();
- 
+
         $carts = Cart::with('user')
                 ->where('user_id', Auth::id())
                 ->pluck('id');
@@ -94,7 +95,7 @@ class FrontController extends Controller
 
         $order = Order::create([
             'user_id' => Auth::user()->id,
-             'total' => $total,
+            'total' => $total,
             'payment_method'=>'COD',
             'status'=>'pending',
         ]);
@@ -106,12 +107,11 @@ class FrontController extends Controller
             ]);
             
         });
-        return redirect('/thankyou');
-      
-        return view('frontend.thankyou',compact('carts','user','total'));
 
-       
+        return redirect('/thankyou');
+
     }
+    
     public function thankyou(Request $request){
 
         $user = auth()->user();
@@ -122,16 +122,14 @@ class FrontController extends Controller
 
         $order_details=Order_detail::with(['gallery','order'])->whereIn('order_id',$order)->get();
 
-
-
-
         $cart_delete = Cart::where('user_id', Auth::user()->id)->delete();  
-        $request->session()->forget(['total', 'quantities']); 
-       
+        $request->session()->forget(['total', 'quantities']);
+
         return view('frontend.thankyou',compact('user','order_details','order'));
 
     } 
-    public function downloadPDF(Request $request){
+
+    /*public function downloadPDF(Request $request){
         $user = auth()->user();
         $order = Order::with(['order_details','user'])
         ->where('user_id',Auth::user()->id)
@@ -139,8 +137,8 @@ class FrontController extends Controller
 
         $order_details=Order_detail::with(['gallery','order'])->whereIn('order_id',$order)->get();
                 $request->session()->forget(['total', 'quantities']); 
-         $pdf = PDF::loadView('frontend.thank',compact('user','order_details'));
-         return $pdf->download('invoice.pdf');
+         $pdf = PDF::loadView('frontend.invoice',compact('user','order_details'));
+         return $pdf->stream('invoice.pdf');
     }
-  
+  */
 }

@@ -30,77 +30,70 @@
 
 			<div class="col-lg-6 col-md-5 col-sm-12" >
 				<h2 class="detail_image_title" style=" font-size: 25px; font-weight:500; margin-bottom: 1rem;">{{ $galleries->title }}</h2>
-				<h3 style="color: #fc846b; font-size: 22px; font-weight: 500; margin-bottom: 3em;">{{ number_format($galleries->price) }} kyats</h3>
-				 {{-- <p> {!! $galleries->detail!!} </p> --}}
+				<h3 style="color: #fc846b; font-size: 22px; font-weight: 500;">K{{ number_format($galleries->price) }}</h3>
+				<p> {!! $galleries->detail!!} </p>
 
 				 @auth 
           @if ($cart_count == 0)
-                    <form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
-                      @csrf    
-                    	<input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
-                    	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
-                    	<button class="button" type="submit">
-                      		<i class="fa fa-shopping-basket shopping-icon"></i>
-                      		&nbsp;<span>Add to cart</span>
-                    	</button>
-                	</form>
+            <form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
+              @csrf    
+            	<input type="hidden" value="{{ Auth::user()->id}}" name="user_id">
+            	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+            	<button class="purple-button" type="submit">
+              		<i class="fa fa-shopping-basket shopping-icon"></i>
+              		&nbsp;<span>Add to cart</span>
+            	</button>
+        	 </form>
           @else
-             <p style="display: inline-block; padding-left: 20px;">
-                  <i class="fas fa-check"></i>
-                    <a href="{{url('/cart')}}">
-                       Browse Cart
-                    </a>
-                </p>
-                @endif
-
+            <p style="display: inline-block; padding-left: 20px;">
+              <i class="fas fa-check"></i>
+                <a href="{{url('/cart')}}">
+                   Browse Cart
+                </a>
+            </p>
+          @endif
 				 @endauth
 
 				 @guest
-                	<form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
-                      @csrf    
-                    	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
-                    	<button class="button" type="submit">
-                      		<i class="fa fa-shopping-basket shopping-icon"></i>
-                      		 &nbsp;<span>Add to cart</span>
-                    	</button>
-                	</form>
-                	
+        	<form action="{{ route('cart.store') }}" method="POST" role="form" style="display: inline-block">
+              @csrf    
+            	<input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+            	<button class="purple-button" type="submit">
+              		<i class="fa fa-shopping-basket shopping-icon"></i>
+              		 &nbsp;<span>Add to cart</span>
+            	</button>
+        	</form>       	
 				@endguest
 
-
-
-
-
-
         @auth
-         @if ($wishlist_count == 0)
-                <form action="{{ route('wishlist.store') }}" method="POST" role="form" style="display: inline-block">
-                      @csrf    
-                      <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
-                      <button class="wishlist_button" type="submit">
-                          <i class="fas fa-heart text-center"></i>
-                          &nbsp;<span> Add to wishlist </span>
-                      </button>
-                  </form>
-                @else
-                <p style="display: inline-block; padding-left: 20px;">
-                  <i class="fas fa-check"></i>
-                    <a href="{{url('/wishlist')}}">
-                       Browse Wishlist
-                    </a>
-                </p>
-                @endif
-                @endauth
-                @guest
-                <form action="{{ route('wishlist.store') }}" method="POST" role="form" style="display: inline-block">
-                      @csrf    
-                      <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
-                      <button class="button" type="submit">
-                          <i class="fas fa-heart" style="color:white;"></i>
-                          &nbsp;<span style="color:white;">Add to wishlist</span>
-                      </button>
-                  </form>
-                @endguest
+          @if ($wishlist_count == 0)
+            <form action="{{ route('wishlist.store') }}" method="POST" role="form" style="display: inline-block">
+              @csrf    
+              <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+              <button class="wishlist_button" type="submit">
+                  <i class="fas fa-heart text-center"></i>
+                  &nbsp;<span> Add to wishlist </span>
+              </button>
+            </form>
+          @else
+            <p style="display: inline-block; padding-left: 20px;">
+              <i class="fas fa-check"></i>
+                <a href="{{url('/wishlist')}}">
+                   Browse Wishlist
+                </a>
+            </p>
+          @endif
+        @endauth
+        @guest
+          <form action="{{ route('wishlist.store') }}" method="POST" role="form" style="display: inline-block">
+            @csrf    
+            <input type="hidden" value="{{$galleries->id}}" name="gallery_id">
+            <button class="pink-button" type="submit">
+                <i class="fas fa-heart" style="color:white;"></i>
+                &nbsp;<span style="color:white;">Add to wishlist</span>
+            </button>
+            </form>
+        @endguest
 			</div>
 
 		</div>

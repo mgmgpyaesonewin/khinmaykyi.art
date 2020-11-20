@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet"> --}}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -63,10 +61,11 @@
         </div> {{-- row --}}   
       </div> {{-- container --}}
     </div> {{-- top-bar --}}
+
     <div class="site-logo" style="text-align: center; margin-top: 1rem;">
       <a href="/" >
         <span><h2 class="logo d-none d-lg-block d-lg-none">KhinMayKyi</h2>
-      </a>
+      </a>{{-- large screen logo --}}
     </div>
 
     <header class="site-navbar js-sticky-header site-navbar-target" role="banner">
@@ -79,12 +78,12 @@
               <a href="/" >
                 <span class="logo">KhinMayKyi</span>
               </a>
-            </div>
+            </div>{{-- logo --}}
           </div>
 
           
             <div class="col-7">
-              <nav class="site-navigation{{--  text-right ml-auto  --}}" style="text-align: center;" role="navigation">
+              <nav class="site-navigation" style="text-align: center;" role="navigation">
 
                 <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                 <li><a href="/" class="nav-link">HOME</a></li>
@@ -93,7 +92,7 @@
               
 
                 <li class="has-children">
-                   @guest
+                  @guest
                     <a href="#" class="nav-link">
                       <i class="fas fa-user-circle" style="color: #7A5E86"></i>
                       LOGIN/REGISTER
@@ -103,7 +102,7 @@
                       <i class="fas fa-user-circle" style="color: #7A5E86"></i> {{ Auth::user()->name }}
                     </a>
                   @endguest
-                  <ul class="dropdown arrow-top">
+                    <ul class="dropdown arrow-top">
                     @guest
                     <li> <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                      @if (Route::has('register'))
@@ -111,53 +110,72 @@
                     </li>
                   @endif
                   @else
-                   <li>
-                   <a class="nav-link" href="{{ url('/profile') }}">{{ __('Profile') }}</a>
-                 </li>
-                  <li>
-                   <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
-                 </li>
+                    <li>
+                      <a class="nav-link" href="{{ url('/profile') }}">{{ __('Profile') }}</a>
+                    </li>
+                    <li>
+                      <a class="nav-link" href="{{ route('logout') }}">{{ __('Logout') }}</a>
+                    </li>
                   @endguest
                   </ul>
                 </li>   
 
-            </nav>
-
-          
+              </nav>
             </div>
 
             <div class="col-3" style=" padding-left: 0px; padding-right: 60px;">
-               <nav class="site-navigation" role="navigation">
+                <nav class="site-navigation" role="navigation">
 
-                <ul class="menu">
-              @auth
-                  <li style="padding-right: 0px; padding-left:20px; float:right;">
-                    <a href="{{url("cart")}}" >
-                      <i class="Shopping-icon fa fa-shopping-cart" style="color: #7A5E86"></i>
-                      <span class="badge badge-pill">
-                          {{$cart_item->count()}}
-                      </span>
-                    </a>
-                </li>
-                  @endauth
+                  <ul class="menu">
+                    @auth
+                      <li style="padding-right: 0px; padding-left:20px; float:right;">
+                        <a href="{{url("cart")}}" >
+                          <i class="Shopping-icon fa fa-shopping-cart" style="color: #7A5E86">
+                            <span class="badge badge-pill">
+                              @php
+                               $carts = App\Cart::with('user')
+                                      ->where('user_id', Auth::id())
+                                      ->pluck('id');
+                              $cart_items = App\Cart_item::join('galleries','cart_items.gallery_id',"=",'galleries.id')
+                                                ->whereIn('cart_id', $carts)
+                                                ->where('sold_out',1)
+                                                ->get();
+                              @endphp
+                                 {{$cart_items->count()}}
+                            </span>
+                          </i>
+                        </a>
+                      </li>
+                    @endauth
         
-                   @auth
-                <li style="float:right;">
-                    <a href="{{url("wishlist")}}" >
-                      <i class="Shopping-icon fa fa-heart" style="color: #7A5E86"></i>
-                      <span class="badge badge-pill">
-                          {{$wishlists->count()}}
-                      </span>
-                    </a>
-                </li>
-                  @endauth   
+                    @auth
+                      <li style="float:right;">
+                        <a href="{{url("wishlist")}}" >
+                          <i class="Shopping-icon fa fa-heart" style="color: #7A5E86">
+                            <span class="badge badge-pill">
+                               @php
+                               $wishlists=App\Gallery::join('wishlists','galleries.id',"=",'wishlists.gallery_id')
+                                        ->where('user_id',Auth::user()->id)
+                                        ->where('sold_out',1)
+                                        ->get();
+                              @endphp
+                              {{$wishlists->count()}}
+                            </span>
+                          </i>
+                        </a>
+                      </li>
+                    @endauth   
                   </ul>
-                  </nav>      
 
+                </nav>      {{-- cart&wishlist --}}
             </div>
 
 
-          <div class="toggle-button d-inline-block d-lg-none"><a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="icon-menu h3" style="margin-bottom: 0px;color: #767676;"></span></a></div>
+          <div class="toggle-button d-inline-block d-lg-none">
+            <a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black">
+              <span class="icon-menu h3" style="margin-bottom: 0px;color: #767676;"></span>
+            </a>{{-- toggle-button --}}
+          </div>
 
         </div>
 
@@ -165,19 +183,13 @@
     
     </header>
 
-    {{--  <div class="toggle-button d-inline-block d-lg-none">
-        <a href="#" class="site-menu-toggle py-5 js-menu-toggle text-black">
-          <span class="icon-menu h3"></span>
-        </a>
-      </div> --}}
-
   @yield('content')
 
   <footer class="site-footer">
     <div>
       <a href="#" id="myBtn" class="type1" onclick="topFunction()" style="display: none;">
         <span id="myBtn" style="opacity: 0;"></span>
-      </a>
+      </a>{{-- topbuttom --}}
     </div>
 
     <div class="container">
@@ -191,7 +203,7 @@
               <li>Testimonials</li>
               <li>Cambridge, MA 02138</li>
               <li>1 (617) 495-9400</li>
-            </ul>
+            </ul> {{-- contact--}}{{-- contact --}}
         </div>
         <div class="col-md-4 ml-auto">
           <h4 class="mb-4">Features</h4>
@@ -201,7 +213,7 @@
               <li><a href="#" class="features">Terms of Service</a></li>
               <li><a href="#" class="features">Privacy</a></li>
               <li><a href="#" class="features">Contact Us</a></li>
-            </ul>
+            </ul>{{-- features --}}
         </div>
         <div class="col-md-4 ml-auto">
           <div class="mb-5">
@@ -210,7 +222,7 @@
               <div class="input-group mb-3">
                 <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
                   <div class="input-group-append">
-                    <button class="btn btn-primary text-white" type="button" id="button-addon2">Subscribe</button>
+                    <button class="btn text-white" type="button" id="button-addon2">Subscribe</button>
                   </div>
               </div>
           </div>
@@ -222,10 +234,10 @@
             <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
             <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
             </form>
-      </div>
+        </div>
+      </div>   
 
-    </div>   
-    <div class="row pt-5 text-center">
+      <div class="row pt-5 text-center">
       <div class="col-md-12">
         <div class="border-top pt-3">
           <p class="copyright">
@@ -237,10 +249,10 @@
             </small>
           </p>
         </div>
+      </div>{{-- copyright --}}
       </div>
-    </div>
              
-  </div>
+    </div>
     
   </footer>
 

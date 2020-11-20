@@ -7,7 +7,7 @@
 
   <div class="container" style="margin-top: 2rem; margin-bottom: 2em;">
 
-    <div class="block-heading-1" data-aos="fade-up" data-aos-delay="">
+    <div class="block-heading" data-aos="fade-up" data-aos-delay="">
         <h2>About</h2> 
     </div>
 

@@ -8,7 +8,6 @@ class Gallery extends Model
 {
     protected $fillable = ['id','title','image','detail','price','sold_out'];
     
-
 	public function orderdetails(){
         return $this->hasMany('App\Order_detail');
     }

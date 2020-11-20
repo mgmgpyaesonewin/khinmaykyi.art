@@ -8,9 +8,22 @@
 
 @section('content')
 
+
   @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-      <p>{{$message}}</p>
+    <div class="alert alert-success" role="alert">
+      <p class="message" style="color: #117f36;">{{$message}}</p>
+    </div>
+  @endif
+
+  @if ($message = Session::get('status'))
+    <div class="alert alert-success" role="alert">
+      <p class="message" style="color: #f98e97;">{{$message}}</p>
+    </div>
+  @endif
+
+  @if ($message = Session::get('error'))
+    <div class="alert alert-danger" role="alert">
+      <p class="message" style="color: #f98e97;">{{$message}}</p>
     </div>
   @endif
 
@@ -33,56 +46,54 @@
         </form>    
       </div>
 
+    </div>{{-- row --}}
+  </div>{{-- container --}}
+
+  <div class="container" style="margin-top: 20px;">
+    <div class="row justify-content-center">
+      @foreach($galleries as $gallery)
+        <div class="card-deck">
+          <div class="card m-3" style="width: 18rem;">
+            <img class="card-img-top" src="{{URL::to('/')}}/images/{{ $gallery->image }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title" style="color: #fc846b; font-size: 1.2rem;"> {{ $gallery->title }} </h5>
+                <p class="card-text"> K{{ number_format($gallery->price) }} </p>
+                {{-- <p class="card-text"> {!! Str::limit($gallery->detail, 50) !!} </p> --}}
+              </div>
+              <div class="card-footer">
+                 <small class="text-muted">
+                    @if($gallery->sold_out == 1)
+                      <label style="color: green; margin-bottom: 10px;">Unsold</label>
+                    @else
+                      <label style="color: red; margin-bottom: 10px;">Sold Out</label>
+                    @endif
+                 </small>
+                <div class="button" style="float:right;">
+                  <a href="{{ route('gallery.edit',$gallery->id) }}" class="btn btn-success edit" style="display: inline-block;">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <form action="{{ route('gallery.destroy',$gallery->id) }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    @method('DELETE')
+                      <button type="submit" onclick="return confirm('Are you sure?');" class="btn btn-danger" >
+                      <i class="far fa-trash-alt"></i>
+                      </button>
+                  </form>
+                </div>
+              </div>
+          </div>
+        </div>
+      @endforeach
     </div>
   </div>
 
-    <div class="container" style="margin-top: 20px;">
-      <div class="row justify-content-center">
-         @foreach($galleries as $gallery)
-          <div class="card" style="width: 18rem; margin-bottom: 20px;">
-            <img class="card-img-top" src="{{URL::to('/')}}/images/{{ $gallery->image }}"alt="Card image">
-                @if($gallery->sold_out == 1)
-                  <label class="stauts" style="color: green; margin-bottom: 10px;">Unsold</label>
-                @else
-                  <label class="status" style="color: red; margin-bottom: 10px;">Sold Out</label>
-                @endif
-            <div class="card-body">
-              <center><h4>{{$gallery->title}}</h4></center>
-              <center><h6>{{ number_format($gallery->price) }} kyats</h6></center>
-            </div>
-            <div class="card-footer" style="background: none">
-              <div class="stauts">
-              {{--   
-                 @if($gallery->sold_out == 1)
-                    <button class="btn btn-outline-danger" style="float: right;;">
-                      <a href="{{URL::to('admin/sold_out/gallery/'.$gallery->id)}}">Sold Out</a>
-                    </button>
-                  @endif --}}
-              </div>
-              <div class="button" style="float:right;">
-                <a href="{{ route('gallery.edit',$gallery->id) }}" class="btn btn-success edit" style="display: inline-block;">
-                  <i class="fas fa-edit"></i>
-                </a>
-                <form action="{{ route('gallery.destroy',$gallery->id) }}" method="POST" style="display: inline-block;">
-                  @csrf
-                  @method('DELETE')
-                    <button type="submit" onclick="return confirm('Are you sure?');" class="btn btn-danger" >
-                    <i class="far fa-trash-alt"></i>
-                    </button>
-                </form>
-              </div>
-            </div>
-
-          </div>
-         @endforeach
-      </div>
-      <ul class="pagination" style="float:right;">
-        <li>{{$galleries->links()}}</li>
-      </ul>
-      <h6>Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} Total:{{$galleries->total()}}</h6>
-      
-    </div>
-
+  <div class="d-flex justify-content-center pagination">
+    {{$galleries->links()}}
+  </div>
+  <div class="d-flex justify-content-center pagination">
+    <h6>Page:{{$galleries->currentpage()}}-{{$galleries->lastpage()}} Total:{{$galleries->total()}}</h6>
+  </div>
+ 
 @stop
 
 @section('css')

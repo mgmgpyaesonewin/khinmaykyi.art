@@ -12,33 +12,18 @@ use Illuminate\Foundation\Http\GalleryRequest;*/
 
 class GalleryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $galleries = Gallery::orderBy('created_at', 'desc')->paginate(6);
         return view('backend.gallery.index', compact("galleries"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
          return view('backend.gallery.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(GalleryRequest $request)
     {   
         $galleries = new Gallery();
@@ -61,40 +46,20 @@ class GalleryController extends Controller
 
         $galleries->save();
         return redirect()->route('gallery.index')
-            ->with('success', 'Category added successfully');
+            ->with('success', 'Gallery added successfully');
     }
     
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
     public function show(GalleryRequest $gallery)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $galleries = Gallery::findorFail($id);
         return view('backend.gallery.edit')->with('galleries', $galleries);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
     public function update(GalleryRequest $request,$id)
     {
         
@@ -115,16 +80,11 @@ class GalleryController extends Controller
         $galleries->save();
 
         return redirect()->route('gallery.index')
-            ->with('success', 'Category added successfully');
+            ->with('success', 'Gallery updated successfully');
     
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         $galleries = Gallery::findOrFail($id);
@@ -133,7 +93,7 @@ class GalleryController extends Controller
    
         $galleries->delete();
 
-        return redirect()->route("gallery.index")->with('status', 'Data deleted for gallery');
+        return redirect()->route("gallery.index")->with('error', 'Data deleted for gallery');
     }
 
 

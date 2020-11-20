@@ -4,19 +4,10 @@
 
 @section('content')
 
-{{--  <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Cart</li>
-      </ol>
-    </nav>
-  </div> --}}
-
     <section class="cart_area">
 
         @if(session('status'))
-            <div class="alert alert-success {{-- mx-auto col-6 --}}">
+            <div class="alert alert-success">
                 {{session('status')}}
             </div>
         @endif
@@ -25,15 +16,11 @@
             <div class="container">
               <h3 class="page-title">Shopping Cart
               </h3>
-              {{-- <span></span> --}}
-            </div><!-- End .container -->
+            </div>
           </div>
-
-            {{--  <h3 style="text-align: center; color: #343352; margin-top: 1rem;">Shopping Cart</h3> --}}
 
         <div class="container">
             
-
             @if($carts->isEmpty())
                 <div class="alert">
                     <div class="empty_cart_page tc dn" style="display: block;  margin: 0 10px; text-align: center;">
@@ -41,7 +28,7 @@
                         <h2 class="cart_page_heading mg__0 mb__20 tu fs__30">Your cart is empty.</h2>
                         <br>
                         <p>Before proceed to checkout you must add some products to your shopping cart.<br> You will find a lot of interesting products on our "Gallery" page.</p>
-                        <a class="button button_primary tu js_add_ld" href="/gallery">Return To Gallery</a>
+                        <a class="purple-button button_primary tu js_add_ld" href="/gallery">Return To Gallery</a>
                     </div>
                 </div>
             @else
@@ -64,7 +51,7 @@
                                     <img src="{{URL::to('/')}}/images/{{$cart_item->gallery->image}}"  class="img-thumbnail" width="100px" height="100px" alt="Image"/>
                                 </td>
                                 <td class="tdata" > {{$cart_item->gallery->title}} </td>
-                                <td class="tdata" > {{ number_format($cart_item->gallery->price) }}-kyats </td>
+                                <td class="tdata" > K{{ number_format($cart_item->gallery->price) }} </td>
                                 <td class="tdata" >
                                     <form action="{{ route('cart.destroy',$cart_item->cart_id)}}" method="POST">
                                         @csrf
@@ -84,7 +71,7 @@
                         <div class="card-body">
                             Total Quantity : <strong style="float: right;"> {{ $quantities}} </strong>
                             <hr>
-                            Total Price : <strong style="float: right;"> {{ number_format($total) }}-kyats </strong>
+                            Total Price : <strong style="float: right;"> K{{ number_format($total) }} </strong>
                         </div>
                     </div>
                 
@@ -93,17 +80,15 @@
             <div class="container" style="margin-bottom: 0.5rem;">
                 <div class="row">
                        <div class="col-6 shopping_button text-center" style="padding-left: 0px;">
-                            <a class="button" href="{{url('/gallery')}}" style="color: white;">Continue Shopping</a>
+                            <a class="purple-button" href="{{url('/gallery')}}" style="color: white;">Continue Shopping</a>
                        </div>
                        <div class="col-6 shopping_button text-center" style="padding-left: 0px;">
-                            <a class="button" href="{{url('/checkout')}}">Proceed To Checkout</a> 
+                            <a class="purple-button" href="{{url('/checkout')}}">Proceed To Checkout</a> 
                        </div>
                    </div>
             </div>
             </div>
-            @endif
-          
-             
+            @endif             
 
     </section>
 

@@ -13,22 +13,12 @@ use Session;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
+    
+    public function index(Request $request){
       
         $carts = Cart::with('user')
                 ->where('user_id', Auth::id())
                 ->pluck('id');
-
-                    
-       /* $cart_items=Cart_item::with(['gallery','cart'])
-                    ->whereIn('cart_id', $carts)
-                    ->get();*/
 
         $cart_items = Cart_item::join('galleries','cart_items.gallery_id',"=",'galleries.id')
                       ->whereIn('cart_id', $carts)
@@ -48,24 +38,15 @@ class CartController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    
+    public function store(Request $request){
+
         $cart = Cart::create([
             'user_id' => Auth::user()->id, 
         ]);
@@ -78,49 +59,26 @@ class CartController extends Controller
        return redirect('/cart');
        
     }
-     
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    public function destroy($id){
+        
         $cart_items = Cart::findOrFail($id);
         $cart_items->delete();
         
