@@ -84,7 +84,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-         $oldPassword = $request->oldPassword;
+        $oldPassword = $request->oldPassword;
         $newPassword = $request->newPassword;
         if (!Hash::check($oldPassword, Auth::user()->password)) {
             return back()->with('msg', 'The specified password does not match to database password');
@@ -94,6 +94,17 @@ class ProfileController extends Controller
             ])->save();
             return redirect('profile/account')->with('success', 'Data Added successfuly');
         }
+    }
+
+    public function updateAddress(Request $request)
+    {
+        $user = Auth::user();
+        $user->address = $request->input('address');
+        $user->township = $request->input('township');
+        $user->update();
+
+        return redirect()->back()
+           ->with('success', 'Address updated successfully');
     }
     
 
@@ -116,3 +127,4 @@ class ProfileController extends Controller
     }
 
 }
+

@@ -81,7 +81,7 @@
 
                         <fieldset style="margin-bottom: 20px; padding: 20px 40px; border: 2px solid #E6E6E6">
                         <legend style="width: inline;">ADDRESS CHANGE</legend>
-                            <form action="{{ url('profile/add') }}" method="POST" role="form">  
+                            <form action="{{ route('change.address') }}" method="POST" role="form">  
                             @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Township</label>

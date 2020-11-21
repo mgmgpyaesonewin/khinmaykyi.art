@@ -25,13 +25,14 @@ Route::get('/gallery_detail/{id}','FrontController@detailGallery');
     Route::get('/profile', function () {
         return view('frontend.profile.dashboard');
     });
-    Route::post('/profile/add', function () {
+    Route::get('/profile/add', function () {
         return view('frontend.profile.add');
     });
     Route::get('/profile/order','ProfileController@show');
     Route::post('/profile/create','ProfileController@store');
     Route::get('/profile/account','ProfileController@profile_account');
     Route::post('/profile/change-password', 'ProfileController@update')->name('change.password');
+    Route::post('/profile/account', 'ProfileController@updateAddress')->name('change.address');
 });
 
 Auth::routes();
