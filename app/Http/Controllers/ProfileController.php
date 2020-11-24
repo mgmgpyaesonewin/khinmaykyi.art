@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $user_id = Auth::user()->id;
@@ -21,22 +17,6 @@ class ProfileController extends Controller
         return view('frontend.profile.address', compact('address'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() /*add address*/
-    {
-       
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user = Auth::user();        
@@ -46,12 +26,6 @@ class ProfileController extends Controller
         return redirect('profile/account')->with('success', 'Data Added successfuly');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
         $user_id = Auth::user()->id;
@@ -64,24 +38,6 @@ class ProfileController extends Controller
         return view('frontend.profile.order', compact('profile_orders', 'sum_order'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-       
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $oldPassword = $request->oldPassword;
@@ -105,18 +61,6 @@ class ProfileController extends Controller
 
         return redirect()->back()
            ->with('success', 'Address updated successfully');
-    }
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
      public function profile_account()

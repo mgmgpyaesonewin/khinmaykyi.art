@@ -30,30 +30,42 @@ class ViewComposerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-       /*if (Auth::check()) 
+
+        view()->composer('layout.app', function ($view)
         {
-                View()->composer('layout.app', function ($view) {
+            if (auth()->user()) {
+                $view->with('wishlists', DB::table('galleries')
+                    ->join('wishlists','galleries.id',"=",'wishlists.gallery_id')
+                    ->where('user_id', Auth::user()->id)
+                    ->where('sold_out',1)
+                    ->get());
+            } else{
                 $view->with('wishlists',DB::table('galleries')
-                    ->Join('wishlists','galleries.id',"=",'wishlists.gallery_id')
-                    ->where('user_id', Auth::user()->id)
+                    ->join('wishlists','galleries.id',"=",'wishlists.gallery_id')
                     ->where('sold_out',1)
                     ->get());
-                });
             }
-            else{
-                View()->composer('layout.app', function ($view) {
-               $view->with('wishlists',DB::table('galleries')
-                    ->Join('wishlists','galleries.id',"=",'wishlists.gallery_id')
+        });
+
+        view()->composer('layout.app', function ($view)
+        {
+
+            if (auth()->user()) {
+                $view->with('cart_items', DB::table('cart_items')
+                    ->join('carts','cart_items.cart_id',"=",'carts.id')
+                    ->join('galleries','cart_items.gallery_id',"=",'galleries.id')
                     ->where('user_id', Auth::user()->id)
                     ->where('sold_out',1)
                     ->get());
-                });
-            }*/
-    }
-           
+            } else{
+                 $view->with('cart_items', DB::table('cart_items')
+                    ->join('galleries','cart_items.gallery_id',"=",'galleries.id')
+                    ->where('sold_out',1)
+                    ->get());
+            }
+        });
+    }     
 }
 
-
-      
 
        

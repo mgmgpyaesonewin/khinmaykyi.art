@@ -20,7 +20,7 @@ Route::get('/gallery_detail/{id}','FrontController@detailGallery');
     Route::resource('/wishlist','WishlistController');
 	Route::post('/order_confirm','FrontController@order_confirm');
     Route::get('/thankyou','FrontController@thankyou');
-    Route::get('/download-pdf','FrontController@downloadPDF');
+    // Route::get('/download-pdf','FrontController@downloadPDF');
     Route::get('/profile','ProfileController@index');
     Route::get('/profile', function () {
         return view('frontend.profile.dashboard');

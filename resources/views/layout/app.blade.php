@@ -132,15 +132,6 @@
                         <a href="{{url("cart")}}" >
                           <i class="Shopping-icon fa fa-shopping-cart" style="color: #7A5E86">
                             <span class="badge badge-pill">
-                              @php
-                               $carts = App\Cart::with('user')
-                                      ->where('user_id', Auth::id())
-                                      ->pluck('id');
-                              $cart_items = App\Cart_item::join('galleries','cart_items.gallery_id',"=",'galleries.id')
-                                                ->whereIn('cart_id', $carts)
-                                                ->where('sold_out',1)
-                                                ->get();
-                              @endphp
                                  {{$cart_items->count()}}
                             </span>
                           </i>
@@ -153,12 +144,6 @@
                         <a href="{{url("wishlist")}}" >
                           <i class="Shopping-icon fa fa-heart" style="color: #7A5E86">
                             <span class="badge badge-pill">
-                               @php
-                               $wishlists=App\Gallery::join('wishlists','galleries.id',"=",'wishlists.gallery_id')
-                                        ->where('user_id',Auth::user()->id)
-                                        ->where('sold_out',1)
-                                        ->get();
-                              @endphp
                               {{$wishlists->count()}}
                             </span>
                           </i>

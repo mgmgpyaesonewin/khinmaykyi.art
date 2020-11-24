@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="page-header text-center" style="background-image: url('./frontend/images/page-header-bg.jpg');">
+    <div class="page-header text-center" style="background-image: url('./frontend/images/page-header-bg.jpg');">
         <div class="container">
           <h3 class="page-title">Account</h3>
         </div><!-- End .container -->
@@ -13,11 +13,11 @@
     <section id="dashboard">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mt-5 d-none d-md-block">
+                <div class="col-lg-4 col-md-4 mt-5 d-none d-md-block">
                     @include('frontend.profile.menu')
                    
                 </div>
-                <div class="col-lg-8 mt-5">
+                <div class="col-lg-8 col-md-8 mt-5">
                     <h6>Hello <span style="color: #343352; font-weight: bold;"> {{Auth::user()->name}}</span> 
                         (not {{Auth::user()->name}} ? 
                         <a  style="color: #343352;" href="{{ route('logout') }}">{{ __('log out') }}</a> )

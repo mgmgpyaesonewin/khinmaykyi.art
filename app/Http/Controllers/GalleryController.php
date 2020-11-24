@@ -84,7 +84,6 @@ class GalleryController extends Controller
     
     }
 
-    
     public function destroy($id)
     {
         $galleries = Gallery::findOrFail($id);
